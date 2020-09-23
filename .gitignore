@@ -10,3 +10,16 @@ Homestead.json
 Homestead.yaml
 npm-debug.log
 yarn-error.log
+public/admin
+public/bg_ormawa
+public/file_sertifikat
+public/file_skpi
+public/fileskpi
+public/filekalbiser
+public/logo
+public/posterkegiatan
+public/posterkompetisi
+public/*.JPG
+public/*.jpg
+public/*.png
+laravel-crud.sql
