@@ -22,6 +22,7 @@ class CreateSiswaTable extends Migration
             $table->string('visi');
             $table->string('misi');
             $table->string('email');
+            $table->string('bg_ormawa');
             $table->timestamps();
         });
     }

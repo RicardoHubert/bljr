@@ -12,7 +12,8 @@ class CreateSkpiTable extends Migration
      * @return void
      */
     public function up()
- {
+    {
+        //['nama_sertifikat','jenis_dokumen','tanggal_dokumen','tahun','judul_sertifikat','user_id','ormawa_id','status','file_skpi'];
         Schema::create('skpi', function (Blueprint $table) {
             $table->id();
             $table->string('user_id')->nullable();
@@ -20,6 +21,12 @@ class CreateSkpiTable extends Migration
             $table->string('kegiatan_id')->nullable();
             $table->string('jenis_dokumen')->nullable();
             $table->string('ormawa_id')->nullable();
+            $table->date('tanggal_dokumen')->nullable();
+            $table->year('tahun')->nullable();
+            $table->string('judul_sertifikat')->nullable();
+            $table->string('nama_sertifikat')->nullable();
+            $table->string('status')->nullable();
+            $table->string('file_skpi')->nullable();
             $table->timestamps();
         });
     }

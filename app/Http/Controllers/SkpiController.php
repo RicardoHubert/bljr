@@ -10,19 +10,19 @@ class SkpiController extends Controller
     public function index(Request $request)
     {
         if($request->has('cari')){
-            $data_kalbiser = \App\kalbiser::where('Prodi','LIKE','%'.$request->cari. '%')->get(); 
+            $data_kalbiser = \App\kalbiser::where('Prodi','LIKE','%'.$request->cari. '%')->get();
                 $data_skpi = \App\Skpi::all();
                $paginate = \App\Skpi::paginate(3);
         }else{
-    	# code...
-    $data_skpi = \App\Skpi::all();
-    $data_kalbiser = \App\kalbiser::all();
+                # code...
+            $data_skpi = \App\Skpi::all();
+            $data_kalbiser = \App\kalbiser::all();
+        }
+
+	    return view('skpi.index',['data_skpi' => $data_skpi,'data_kalbiser' => $data_kalbiser]);
     }
 
-	return view('skpi.index',['data_skpi' => $data_skpi,'data_kalbiser' => $data_kalbiser]);
-    }
-
-      public function create(Request $request)
+    public function create(Request $request)
     {
         # code...
        $Skpi= \App\Skpi::create($request->all());
@@ -43,8 +43,17 @@ class SkpiController extends Controller
         $data_skpi= \App\Skpi::find($id);
         $data_ormawa = \App\Ormawa::all();
         $data_kalbiser = \App\kalbiser::all();
-        return view('skpi/edit',['data_skpi' => $data_skpi,'data_kalbiser' => $data_kalbiser,'data_ormawa' => $data_ormawa]);
+        $data_kegiatan = \App\Kegiatan::all();
+        $data_kompetisi = \App\kompetisiinternal::all();
+        return view('skpi/edit',[
+            'data_skpi' => $data_skpi,
+            'data_kalbiser' => $data_kalbiser,
+            'data_ormawa' => $data_ormawa,
+            'data_kegiatan' => $data_kegiatan,
+            'data_kompetisi' => $data_kompetisi
+        ]);
     }
+
     public function update(Request $request,$id)
     {
         # code...
@@ -55,7 +64,7 @@ class SkpiController extends Controller
         $data_kalbiser = \App\kalbiser::find($id);
         // $data_kompetisi = \App\Kompetisiinternal::find($id);
         // $data_kegiatan = \App\Kegiatan::find($id);
-        
+
 
         $request->validate([
             'user_id' => 'nullable',
@@ -76,13 +85,13 @@ class SkpiController extends Controller
 
         $data_skpi->save();
 
-   return redirect('/skpi')->with('sukses','Data berhasil di updates');
-    
+        return redirect('/skpi')->with('sukses','Data berhasil di updates');
+
     }
 
 
 
-     public function delete(Request $request,$id)
+    public function delete(Request $request,$id)
     {
         # code..
         $Skpi = \App\Skpi::find($id);
@@ -90,39 +99,39 @@ class SkpiController extends Controller
         return redirect('/skpi')->with('sukses','Data berhasil di Hapus');
     }
 
-        public function approveindex(Request $request)
+    public function approveindex(Request $request)
     {
-        # code...
-    $data_skpi = \App\Skpi::all();
-    $data_kalbiser = \App\kalbiser::all();
-    $data_kompetisi = \App\kompetisiinternal::all();
-    $data_ormawa = \App\Ormawa::all();
-    $data_kegiatan = \App\Kegiatan::all();
+            # code...
+        $data_skpi = \App\Skpi::all();
+        $data_kalbiser = \App\kalbiser::all();
+        $data_kompetisi = \App\kompetisiinternal::all();
+        $data_ormawa = \App\Ormawa::all();
+        $data_kegiatan = \App\Kegiatan::all();
 
 
-    return view('approveskpi.index',['data_skpi' => $data_skpi,'data_kalbiser' => $data_kalbiser,'data_kompetisi' => $data_kompetisi,'data_kegiatan' => $data_kegiatan, 'data_ormawa' => $data_ormawa]);
+        return view('approveskpi.index',['data_skpi' => $data_skpi,'data_kalbiser' => $data_kalbiser,'data_kompetisi' => $data_kompetisi,'data_kegiatan' => $data_kegiatan, 'data_ormawa' => $data_ormawa]);
     }
 
-        public function approvestatus($id)
+    public function approvestatus($id)
     {
         $skpi = \App\Skpi::find($id);
         $skpi->status = '1';
         $skpi->save();
 
         return redirect('/approveskpi');
-    }      
+    }
 
     public function approvestatusall()
     {
         $approveId = request('approveId');
         $skpi = \App\Skpi::whereIn('id', $approveId)->get();
-        
+
         foreach ($skpi as $skpirow) {
     // Code Here
          $skpirow->status = '1';
          $skpirow->save();
         }
         return redirect('/approveskpi');
-    }   
+    }
 }
 
