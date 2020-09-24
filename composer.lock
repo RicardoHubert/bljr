@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "dbb24a060bf6d761efc71333001d9247",
+    "content-hash": "b09e3737a4ecafd68457216c07d1606c",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -1541,16 +1541,21 @@
         },
         {
             "name": "mcgalihanggara/sertigenerator",
-            "version": "1.0",
+            "version": "1.1",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:mcgalih-external/sertifikat_generator.git",
-                "reference": "5f1e386cdc0fbd7d60fb3b2bcb177c112d158cef"
+                "reference": "e4ed0b250e435ade07ae2c5129d21662cbaf1b43"
             },
             "require": {
                 "intervention/image": "^2.5"
             },
             "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "MCGalih\\Serti\\": "src"
+                }
+            },
             "authors": [
                 {
                     "name": "galihanggara68",
@@ -1558,7 +1563,7 @@
                 }
             ],
             "description": "Certificate Generator",
-            "time": "2020-09-23T04:55:29+00:00"
+            "time": "2020-09-24T12:56:48+00:00"
         },
         {
             "name": "monolog/monolog",
@@ -1788,16 +1793,16 @@
         },
         {
             "name": "nikic/php-parser",
-            "version": "v4.10.0",
+            "version": "v4.10.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nikic/PHP-Parser.git",
-                "reference": "1c13d05035deff45f1230ca68bd7d74d621762d9"
+                "reference": "1b479e7592812411c20c34d9ed33db3957bde66e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/1c13d05035deff45f1230ca68bd7d74d621762d9",
-                "reference": "1c13d05035deff45f1230ca68bd7d74d621762d9",
+                "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/1b479e7592812411c20c34d9ed33db3957bde66e",
+                "reference": "1b479e7592812411c20c34d9ed33db3957bde66e",
                 "shasum": ""
             },
             "require": {
@@ -1836,7 +1841,7 @@
                 "parser",
                 "php"
             ],
-            "time": "2020-09-19T14:52:48+00:00"
+            "time": "2020-09-23T18:23:49+00:00"
         },
         {
             "name": "opis/closure",
@@ -6259,6 +6264,7 @@
             "keywords": [
                 "tokenizer"
             ],
+            "abandoned": true,
             "time": "2019-09-17T06:23:10+00:00"
         },
         {

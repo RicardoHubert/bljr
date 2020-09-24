@@ -5,6 +5,11 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\pendaftaran_kegiatan_mahasiswa;
+use App\Skpi as Skpi;
+use Carbon\Carbon;
+use Storage;
+use MCGalih\Serti\Sertifikat as Sertifikat;
+
 class KegiatanController extends Controller
 {
     //
@@ -142,17 +147,43 @@ class KegiatanController extends Controller
 
         $kegiatan = \App\Kegiatan::find(request('kegiatan_id'));
         $kalbiser = \App\Kalbiser::find(request('kalbiser_id'));
-        $skpi = \App\Skpi::create([
+
+        // Generate Serifikat
+
+        $carbon = Carbon::parse($kegiatan->tanggal_kegiatan);
+        $tanggal = $carbon->locale("id")->isoFormat("D MMMM YYYY");
+        $no_terakhir = Skpi::where("nomor_urut", "<>", 0)->max("nomor_urut")+1;
+        $prefixed = str_repeat(0, 4-strlen($no_terakhir)).$no_terakhir;
+        $nomor = "$prefixed/CSD-STF/".$this->integerToRoman(Carbon::now()->isoFormat("M"))."/".Carbon::now()->isoFormat("YYYY")."";
+        $normalized = preg_replace("/\/+/", "_", $nomor);
+
+        $data = [
+            "nomor" => "Nomor : $nomor",
+            "nama" => $kalbiser->nama,
+            "nim" => $kalbiser->nim,
+            "sebagai" => "Peserta",
+            "judul acara" => $kegiatan->sertifikat,
+            "tanggal" => "Jakarta,  $tanggal"
+        ];
+
+        $jsonFile = Storage::disk("local")->get("template/mapping.json");
+        $mappings = Sertifikat::MapText($data, $jsonFile);
+        $sertifikat = new Sertifikat(storage_path("app/template/template.jpg"));
+        $sertifikat->json_mapping($mappings);
+        $sertifikat->image()->save(public_path("sertifikat/$normalized.jpg"), 100);
+
+        $skpi = Skpi::create([
             'user_id' => $kalbiser->user_id,
-            'file_skpi' => $kegiatan->file_sertifikat,
+            'file_skpi' => "sertifikat/$normalized.jpg",
             'tanggal_dokumen' => $kegiatan->tanggal_kegiatan,
-            'jenis_dokumen' => $kegiatan->sertifikat,
-            'judul_sertifikat' => $kegiatan->nama_kegiatan,
-            'ormawa_id' => request('ormawa_id')
+            'jenis_dokumen' => request("jenis_dokumen"),
+            'judul_sertifikat' => $kegiatan->sertifikat,
+            'ormawa_id' => request('ormawa_id'),
+            'nomor_urut' => $no_terakhir
         ]);
 
         $skpi->save();
-        
+
         return redirect()->route("kegiatan_anggota.index")->with("message", "Sukses Menambah Data");
     }
 
@@ -160,6 +191,32 @@ class KegiatanController extends Controller
         $kegiatan_anggota=\App\dataanggotaormawa::create($request->all());
         $kegiatan_anggota->save();
         return redirect('/kegiatan_anggota')->with('sukses','Data berhasil diinput');
+    }
+
+    private function integerToRoman($integer)
+    {
+        // Convert the integer into an integer (just to make sure)
+        $integer = intval($integer);
+        $result = '';
+
+        // Create a lookup array that contains all of the Roman numerals.
+        $lookup = array('M' => 1000, 'CM' => 900, 'D' => 500, 'CD' => 400, 'C' => 100,
+        'XC' => 90, 'L' => 50, 'XL' => 40, 'X' => 10, 'IX' => 9, 'V' => 5, 'IV' => 4,
+        'I' => 1);
+
+        foreach($lookup as $roman => $value){
+            // Determine the number of matches
+            $matches = intval($integer/$value);
+
+            // Add the same number of characters to the string
+            $result .= str_repeat($roman,$matches);
+
+            // Set the integer to be the remainder of the integer and the value
+            $integer = $integer % $value;
+        }
+
+        // The Roman numeral should be built, return it
+        return $result;
     }
 }
 

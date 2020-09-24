@@ -10,97 +10,64 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="panel">
-                        <div class="panel-heading">
-                            <h5 class="panel-title" id="exampleModalLabel">Input Data Kegiatan</h5>
-                            <div class="right">
-                                <button type="button" class="btn" data-toggle="modal" data-target="#kegiatan_anggota_modal"><i class="lnr lnr-plus-circle"></i>Create New</button>
-                            </div>
-                        </div>
                         <div class="panel-body">
                             @if($message ?? '')
                                 <span class="alert alert-success">{{$message}}</span>
                             @endif
-                            <div class="table-responsive">
-                                 <table class="table table-hover data" id="tableexcel">
-                                     <thead>
-                                            <tr>
-                                                <th>Gambar</th>
-                                                <th>Nim</th>
-                                                <th>Nama Mahasiswa</th>
-                                                <th>Prodi</th>
-                                                <th>Jenis Dokumen</th>
-                                                <th>Tanggal Dokumen</th>
-                                                <th>Tahun Dokumen</th>
-                                                <th>Judul Sertifikat</th>
-                                                <th>Status</th>
-                                                <th>Aksi</th>
-                                            </tr>
-                                    </thead>
-                                    <tbody>
-                                    </tbody>
-                                </table>
-                            </div>
                         </div>
-
-
-                        <div class="modal fade" id="kegiatan_anggota_modal" role="dialog" aria-labelledby="kegiatan_anggota_modal_label" aria-hidden="true">
-                            <form enctype="multipart/form-data" action="{{route('kegiatan_anggota.post')}}" method="POST">
-                                @csrf
-                                <div class="modal-dialog" role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-body">
-                                            <div class="form-group">
-                                                <label for="exampleInputEmail1">Nama Ormawa</label>
-                                                <select class="form-control" id="ormawa_id" name="ormawa_id">
-                                                    <option value="">"------Pilih-------"</option>
-                                                    @foreach($ormawas as $ormawa)
-                                                    <option value="{{$ormawa->id}}" {{ request('ormawa_id') == $ormawa->id ? 'selected' : null }}>{{$ormawa->nama_ormawa}}</option>
-                                                    @endforeach
-                                                </select>
-                                            </div>
-
-                                            <div class="form-group">
-                                                <label for="exampleInputEmail1">Nama Kegiatan</label>
-                                                <select class="form-control select2" ajax="kegiatan" id="kegiatan_id" name="kegiatan_id" style="width:100%" />
-
-                                                </select>
-                                            </div>
-
-                                            <div class="form-group">
-                                                <label for="exampleInputEmail1">Nama Mahasiswa</label>
-                                                <select class="form-control select2" ajax="kalbiser" id="kalbiser_id" name="kalbiser_id" style="width:100%" />
-
-                                                </select>
-                                            </div>
-
-                                            <div class="form-group">
-                                                <label for="exampleInputEmail1">Jenis Dokumen</label>
-                                                <select class="form-control" id="jenis_dokumen" name="jenis_dokumen">
-                                                    <option value="">"------Pilih-------"</option>
-                                                    <option value="jkk">JKK</option>
-                                                    <option value="seminar">Seminar</option>
-                                                    <option value="piagam">Piagam</option>
-                                                    <option value="kompetisi eksternal">Kompetisi Eksternal</option>
-                                                </select>
-                                            </div>
-
-                                            <div class="form-group">
-                                                <label for="exampleInputEmail1">Tanggal Dokumen</label>
-                                                <input type="text" name="tanggal_dokumen" class="form-control datepicker date" aria-describedby="emailHelp" placeholder="dd/mm/yyyy" />
-                                            </div>
-
-                                            <div class="form-group">
-                                                <label for="exampleInputEmail1">Tahun Dokumen</label>
-                                                <input type="text" name="tahun" class="form-control datepicker year" aria-describedby="emailHelp" placeholder="Tahun Dokumen" />
-                                                Sesuai dengan tanggal dokumen
-                                            </div>
-                                        </div>
-
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                            <button name="submit" value="submit" type="submit" class="btn btn-primary">Submit</button>
-                                        </div>
+                        <div class="card">
+                            <form enctype="multipart/form-data" action="{{route('kegiatan_anggota.post')}}" method="POST" style="padding: 40px;">
+                                <div class="card-header"><h3>Tambah Data Angota</h3></div>
+                                <div class="card-body">
+                                    @csrf
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">Nama Ormawa</label>
+                                        <select class="form-control" id="ormawa_id" name="ormawa_id">
+                                            <option value="">"------Pilih-------"</option>
+                                            @foreach($ormawas as $ormawa)
+                                            <option value="{{$ormawa->id}}" {{ request('ormawa_id') == $ormawa->id ? 'selected' : null }}>{{$ormawa->nama_ormawa}}</option>
+                                            @endforeach
+                                        </select>
                                     </div>
+
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">Nama Kegiatan</label>
+                                        <select class="form-control select2" ajax="kegiatan" id="kegiatan_id" name="kegiatan_id" style="width:100%" />
+
+                                        </select>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">Nama Mahasiswa</label>
+                                        <select class="form-control select2" ajax="kalbiser" id="kalbiser_id" name="kalbiser_id" style="width:100%" />
+
+                                        </select>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">Jenis Dokumen</label>
+                                        <select class="form-control" id="jenis_dokumen" name="jenis_dokumen">
+                                            <option value="">"------Pilih-------"</option>
+                                            <option value="jkk">JKK</option>
+                                            <option value="seminar">Seminar</option>
+                                            <option value="piagam">Piagam</option>
+                                            <option value="kompetisi eksternal">Kompetisi Eksternal</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">Tanggal Dokumen</label>
+                                        <input readonly type="text" name="tanggal_dokumen" class="form-control datepicker date" aria-describedby="emailHelp" placeholder="dd/mm/yyyy" />
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">Tahun Dokumen</label>
+                                        <input type="number" min="2000" max="{{Carbon\Carbon::now()->isoFormat("YYYY")}}" value="{{Carbon\Carbon::now()->isoFormat("YYYY")}}" name="tahun" class="form-control" aria-describedby="emailHelp" placeholder="Tahun Dokumen" />
+                                        Sesuai dengan tanggal dokumen
+                                    </div>
+                                </div>
+                                <div class="card-footer">
+                                    <button name="submit" value="submit" type="submit" class="btn btn-primary">Submit</button>
                                 </div>
                             </form>
                         </div>
