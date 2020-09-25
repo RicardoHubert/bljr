@@ -8,6 +8,6 @@ class skpi extends Model
 {
     //
     protected $table = 'skpi';
-    protected $fillable = ['nama_sertifikat','jenis_dokumen','tanggal_dokumen','tahun','judul_sertifikat','user_id','ormawa_id','status','file_skpi'];
+    protected $fillable = ['nomor_urut','jenis_dokumen','tanggal_dokumen','tahun','judul_sertifikat','user_id','ormawa_id','status','file_skpi'];
 
 }

@@ -20,7 +20,7 @@ class CreateKegiatansTable extends Migration
             $table->string('ormawa_id');
             $table->string('deskripsi_kegiatan');
             $table->string('tanggal_kegiatan');
-            $table->sting('sertifikat')->nullable();
+            $table->string('sertifikat')->nullable();
             $table->timestamps();
         });
     }
@@ -32,6 +32,6 @@ class CreateKegiatansTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('kegiatans');
+        Schema::dropIfExists('kegiatan');
     }
 }

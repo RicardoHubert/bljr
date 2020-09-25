@@ -31,8 +31,10 @@ Route::get('/pendaftaran_kegiatan/{id}', 'KegiatanController@pendaftaran_kegiata
 Route::post('/pendaftaran_kegiatan/create', 'KegiatanController@pendaftaran_kegiatan_create');
 Route::get('/pendaftaran_kegiatan/ricardo/export_excel', 'ExportController@export_excel');
 
-Route::get('/kegiatan_anggota', 'KegiatanController@data_anggota_ormawa_index');
+Route::get('/kegiatan_anggota', 'KegiatanController@data_anggota_ormawa_index')->name("kegiatan_anggota.index");
 Route::get('/kegiatan_anggota/create', 'KegiatanController@data_anggota_ormawa_create');
+
+Route::post('/kegiatan_anggota/post', 'KegiatanController@data_anggota_ormawa_post')->name("kegiatan_anggota.post");
 
 Route::get('/kompetisiinternal', 'KompetisiinternalController@index');
 Route::get('/kompetisiinternal/create', 'KompetisiinternalController@create');
@@ -63,7 +65,7 @@ Route::post('/kalbiser/create', 'KalbiserController@create');
 Route::get('/kalbiser/{kalbiser}/edit', 'KalbiserController@edit');
 Route::post('/kalbiser/{id}/update', 'KalbiserController@update');
 Route::get('/kalbiser/{id}/delete', 'KalbiserController@delete');
-Route::get('/kalbiser/{id}/profile', 'KalbiserController@profile'); 
+Route::get('/kalbiser/{id}/profile', 'KalbiserController@profile');
 
 Route::get('/skpi','SkpiController@index');
 Route::post('/skpi/create','SkpiController@create');
@@ -72,16 +74,18 @@ Route::get('/skpi/{skpi}/edit', 'SkpiController@edit');
 Route::post('/skpi/{id}/update', 'SkpiController@update');
 
 Route::group(['middleware' => 'auth'], function(){
-	Route::get('/dashboard','DashboardController@index');
-	Route::get('/ormawa','OrmawaController@index');
-	Route::post('/ormawa/create', 'OrmawaController@create');
-	Route::get('/ormawa/{id}/edit', 'OrmawaController@edit');
-	Route::post('/ormawa/{id}/update', 'OrmawaController@update');
-	Route::get('/ormawa/{id}/delete', 'OrmawaController@delete');
-	Route::get('/ormawa/{id}/profile', 'OrmawaController@profile');
-	Route::get('/logout','AuthController@logout');
-}
-);
-	
+        Route::get('/dashboard','DashboardController@index');
+        Route::get('/ormawa','OrmawaController@index');
+        Route::post('/ormawa/create', 'OrmawaController@create');
+        Route::get('/ormawa/{id}/edit', 'OrmawaController@edit');
+        Route::post('/ormawa/{id}/update', 'OrmawaController@update');
+        Route::get('/ormawa/{id}/delete', 'OrmawaController@delete');
+        Route::get('/ormawa/{id}/profile', 'OrmawaController@profile');
+        Route::get('/logout','AuthController@logout');
+});
+
+Route::group(["middleware" => "auth"], function(){
+    Route::get("/ajax/datas", "AjaxRequestController@getDatas")->name("ajax.datas");
+});
 
 Route::get('/ormawa/{id}','hmjController@index');

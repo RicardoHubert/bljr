@@ -10,3 +10,9 @@ Homestead.json
 Homestead.yaml
 npm-debug.log
 yarn-error.log
+public/**
+!public/.htaccess
+!public/robots.txt
+!public/favicon.ico
+!public/index.php
+laravel-crud.sql

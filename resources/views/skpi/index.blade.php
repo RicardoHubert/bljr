@@ -10,14 +10,6 @@
 								<div class="panel-heading">
 									<h3 class="panel-title">SKPI</h3>
 									<div class="left">
-							<!-- 			<form method="Get" action="/skpi">
-										<label for="prodi">Program Studi</label>
-										<input type="search" name="cari">
-										<button class="btn btn-outline-success my-2 my-sm-0" type="submit">search</button>
-										<label for="status">Status</label>
-										<input type="search" name="cari2">
-										<button class="btn btn-outline-success my-2 my-sm-0" type="submit">search</button>
-										</form> -->
 									</div>
 									<div class="right">
 									<button type="button" class="btn" data-toggle="modal" data-target="#exampleModal"><i class="lnr lnr-plus-circle"></i></button>
@@ -30,29 +22,29 @@
 												<tr>
 													<th>Gambar</th>
 													<th>Nim</th>
-													<th>Nama Mahasiswa</th>	
-													<th>Prodi</th>					
+													<th>Nama Mahasiswa</th>
+													<th>Prodi</th>
 													<th>Jenis Dokumen</th>
 													<th>Tanggal Dokumen</th>
 													<th>Tahun Dokumen</th>
 													<th>Judul Sertifikat</th>
-													<th>Status</th>		
+													<th>Status</th>
 													<th>Aksi</th>
 												</tr>
 										</thead>
 										<tbody>
 
 
-												<tr>										
+												<tr>
 												@foreach($data_skpi as $skpi)
 												@foreach($data_kalbiser as $kalbiser)
-														@if($kalbiser->user_id == $skpi->user_id && $skpi->user_id == auth()->user()->id || auth()->user()->role == 'admin' && $kalbiser->user_id == $skpi->user_id)	
-												<td><img style="height: 50px;" src="fileskpi/{{$skpi->file_skpi}}" /></td>
-														
+														@if($kalbiser->user_id == $skpi->user_id && $skpi->user_id == auth()->user()->id || auth()->user()->role == 'admin' && $kalbiser->user_id == $skpi->user_id)
+												<td><img style="height: 50px;" src="{{$skpi->file_skpi}}" /></td>
+
 															<td>{{$kalbiser->nim}}</td>
 															<td>{{$kalbiser->nama}}</td>
 															<td>{{$kalbiser->prodi}}</td>
-														
+
 
 
 													<td>{{$skpi->jenis_dokumen}}</td>
@@ -60,17 +52,17 @@
 													<th>{{$skpi->tahun}}</th>
 													<th>{{$skpi->judul_sertifikat}}</th>
 
-													<td>@if($skpi->status == '0' && $skpi->user_id == auth()->user()->id || $skpi->status == null && $skpi->user_id == auth()->user()->id || $skpi->status == '0' && auth()->user()->role == 'admin' || $skpi->status == null && auth()->user()->role == 'admin')	
+													<td>@if($skpi->status == '0' && $skpi->user_id == auth()->user()->id || $skpi->status == null && $skpi->user_id == auth()->user()->id || $skpi->status == '0' && auth()->user()->role == 'admin' || $skpi->status == null && auth()->user()->role == 'admin')
 															<span class="badge badge-danger">Belum Di Approve</span>
 														@elseif($skpi->status == '1' && $skpi->user_id == auth()->user()->id || $skpi->status == null && $skpi->user_id == auth()->user()->id || $skpi->status == '1' && auth()->user()->role == 'admin')
 															<span class="badge badge-success">Sudah Di Approve</span>
 														@endif
-														
+
 													</td>
 
 													@if(auth()->user()->role == 'admin' && $skpi->user_id == auth()->user()->id|| auth()->user()->role == 'student'&& $skpi->user_id == auth()->user()->id || auth()->user()->role == 'admin')
 													<td>
-														<button id="buttonViewModal" type="button" class="btn btn-primary" data-toggle="modal" data-id="{{ asset('fileskpi/' . $skpi->file_skpi) }}" data-target="#viewModal">
+														<button id="buttonViewModal" type="button" class="btn btn-primary" data-toggle="modal" data-id="{{ asset($skpi->file_skpi) }}" data-target="#viewModal">
 														  View file
 														</button>
 
@@ -79,7 +71,7 @@
 													</td>
 													@endif
 													</tr>
-													
+
 												</tr>
 												@endif
 													@endforeach
@@ -89,12 +81,12 @@
 													<td></td>
 													<th></th>
 													<th></th>
-													<th></th>	
-													<th></th>					
 													<th></th>
 													<th></th>
 													<th></th>
-													<th></th>		
+													<th></th>
+													<th></th>
+													<th></th>
 													<td></td>
 										</tfoot>
 									</table>
@@ -106,7 +98,7 @@
 					</div>
 				</div>
 			</div>
-	
+
 	<!-- Modal -->
 	<div class="modal fade" id="viewModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 	  <div class="modal-dialog" role="document">
@@ -144,7 +136,7 @@
         var title = $(this).text();
         $(this).html( '<input type="text" placeholder="Search '+title+'" />' );
     } );
- 
+
     // DataTable
     	$('#tableexcel').DataTable({
     	dom:'Bfrtip',
@@ -155,7 +147,7 @@
             // Apply the search
             this.api().columns().every( function () {
                 var that = this;
- 
+
                 $( 'input', this.footer() ).on( 'keyup change clear', function () {
                     if ( that.search() !== this.value ) {
                         that
@@ -212,7 +204,7 @@
     //  	}
 
     //  });
- 
+
 });
 	</script>
 
@@ -240,15 +232,15 @@
 							  </div>
 							 (Maksimal dokumen 5 MB & format JPEG)
 
-				      		  <div class="form-group">									   	
+				      		  <div class="form-group">
 							   <label for="exampleInputEmail1">Nama Mahasiswa</label>
 							    <select class="form-control" id="exampleFormControlSelect1" name="user_id">
 							      <option value="">"------Pilih-------"</option>
-				  					
+
 									@foreach($data_kalbiser as $kalbiser)
-									@if($kalbiser->user_id == auth()->user()->id|| auth()->user()->role == 'admin')	
+									@if($kalbiser->user_id == auth()->user()->id|| auth()->user()->role == 'admin')
 							      <option value="{{$kalbiser->user_id}}">{{$kalbiser->nama}} <span>{{$kalbiser->nim}}</span></option>
-	
+
 							      	@endif
 							     	@endforeach
 							     </select>
@@ -256,7 +248,7 @@
 
 
 
-					  
+
 						 	<div class="form-group">
 							    <label for="exampleInputEmail1">Jenis Dokumen</label>
 							    <select class="form-control" id="exampleFormControlSelect1" name="jenis_dokumen">
@@ -285,7 +277,7 @@
 							  </div>
 
 
-				
+
 					  <input type="hidden" name="status" value="0">
 				      <div class="modal-footer">
 				        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -298,7 +290,7 @@
 
 
 
-			
+
 
 
 <script>
