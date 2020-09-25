@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "b09e3737a4ecafd68457216c07d1606c",
+    "content-hash": "ddec57e7b447de110d70a007b240c5f1",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -1544,7 +1544,7 @@
             "version": "1.1",
             "source": {
                 "type": "git",
-                "url": "git@bitbucket.org:mcgalih-external/sertifikat_generator.git",
+                "url": "https://github.com/galihanggara68/serti_generator.git",
                 "reference": "e4ed0b250e435ade07ae2c5129d21662cbaf1b43"
             },
             "require": {
