@@ -15,4 +15,5 @@ public/**
 !public/robots.txt
 !public/favicon.ico
 !public/index.php
+!public/.gitignore
 laravel-crud.sql
