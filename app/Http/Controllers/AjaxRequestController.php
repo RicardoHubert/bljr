@@ -28,7 +28,7 @@ class AjaxRequestController extends Controller
 
     private function getKegiatan(Request $request){
         return response()->json(
-            Kegiatan::where("nama_kegiatan", "LIKE", "%".$request->query("q")."%")
+            Kegiatan::where("sertifikat", "LIKE", "%".$request->query("q")."%")
                 ->orWhere("id", "LIKE", "%".$request->query("q")."%")
                 ->get()
         );

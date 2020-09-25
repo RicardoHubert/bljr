@@ -126,7 +126,7 @@
             kegiatans: (data) => {
                 return {
                     results: data.map(k => {
-                        return {id: k.id, text: k.nama_kegiatan};
+                        return {id: k.id, text: k.sertifikat};
                     })
                 };
             }
