@@ -147,6 +147,7 @@ class KegiatanController extends Controller
 
         $kegiatan = \App\Kegiatan::find(request('kegiatan_id'));
         $kalbiser = \App\Kalbiser::find(request('kalbiser_id'));
+        $ormawa = \App\Ormawa::find(request('ormawa_id'));
 
         // Generate Serifikat
 
@@ -154,7 +155,7 @@ class KegiatanController extends Controller
         $tanggal = $carbon->locale("id")->isoFormat("D MMMM YYYY");
         $no_terakhir = Skpi::where("nomor_urut", "<>", 0)->max("nomor_urut")+1;
         $prefixed = str_repeat(0, 4-strlen($no_terakhir)).$no_terakhir;
-        $nomor = "$prefixed/CSD-STF/".$this->integerToRoman(Carbon::now()->isoFormat("M"))."/".Carbon::now()->isoFormat("YYYY")."";
+        $nomor = "$prefixed/CSD-STF/".$this->integerToRoman($carbon->isoFormat("M"))."/".$carbon->isoFormat("YYYY")."";
         $normalized = preg_replace("/\/+/", "_", $nomor);
 
         $data = [
@@ -163,6 +164,7 @@ class KegiatanController extends Controller
             "nim" => $kalbiser->nim,
             "sebagai" => "Peserta",
             "judul acara" => $kegiatan->sertifikat,
+            "judul acara 2" => "Diselenggarakan oleh ".$ormawa->nama_ormawa,
             "tanggal" => "Jakarta,  $tanggal"
         ];
 
@@ -175,7 +177,7 @@ class KegiatanController extends Controller
         $skpi = Skpi::create([
             'user_id' => $kalbiser->user_id,
             'file_skpi' => "sertifikat/$normalized.jpg",
-            'tanggal_dokumen' => $kegiatan->tanggal_kegiatan,
+            'tanggal_dokumen' => request("tanggal_dokumen"),
             'jenis_dokumen' => request("jenis_dokumen"),
             'judul_sertifikat' => $kegiatan->sertifikat,
             'ormawa_id' => request('ormawa_id'),

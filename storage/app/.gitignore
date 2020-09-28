@@ -1,5 +1,7 @@
 *
-!public/
+!public
 !.gitignore
-!fonts/
-!template/
+!fonts
+!template
+!template/**
+!fonts/**
