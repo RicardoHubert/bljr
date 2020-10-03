@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Carbon\Carbon;
+use Exception;
 
 class SkpiController extends Controller
 {
@@ -25,11 +27,15 @@ class SkpiController extends Controller
     public function create(Request $request)
     {
         # code...
-       $Skpi= \App\Skpi::create($request->all());
-
+        $carbon = Carbon::parse($request->tanggal_dokumen);
+        $Skpi = \App\Skpi::create(array_merge($request->all(), ['nomor_urut' => 0, 'tanggal_dokumen' => $carbon->isoFormat('Y/MM/DD')]));
+        
         if($request->hasfile('file_skpi')){
-            $request->file('file_skpi')->move('fileskpi/',$request->file('file_skpi')->getClientOriginalName());
-            $Skpi->file_skpi = $request->file('file_skpi')->getClientOriginalName();
+            $file = $request->file('file_skpi');
+            $filename = $file->getClientOriginalName();
+            $file->move('fileskpi/', $filename);
+
+            $Skpi->file_skpi = 'fileskpi/' . $filename;
             $Skpi->save();
         }
         return redirect('/skpi')->with('sukses','Data berhasil diinput');
@@ -40,18 +46,10 @@ class SkpiController extends Controller
     public function edit($id)
     {
         # code...
+
         $data_skpi= \App\Skpi::find($id);
-        $data_ormawa = \App\Ormawa::all();
-        $data_kalbiser = \App\kalbiser::all();
-        $data_kegiatan = \App\Kegiatan::all();
-        $data_kompetisi = \App\kompetisiinternal::all();
-        return view('skpi/edit',[
-            'data_skpi' => $data_skpi,
-            'data_kalbiser' => $data_kalbiser,
-            'data_ormawa' => $data_ormawa,
-            'data_kegiatan' => $data_kegiatan,
-            'data_kompetisi' => $data_kompetisi
-        ]);
+            $data_kalbiser = \App\kalbiser::all();
+         return view('skpi/edit',['data_skpi' => $data_skpi,'data_kalbiser' => $data_kalbiser]);
     }
 
     public function update(Request $request,$id)
@@ -60,8 +58,8 @@ class SkpiController extends Controller
         //dd($request->all());
 
         $data_skpi = \App\Skpi::find($id);
-        $data_ormawa = \App\Ormawa::find($id);
-        $data_kalbiser = \App\kalbiser::find($id);
+        // $data_ormawa = \App\Ormawa::find($id);
+        $data_kalbiser = \App\kalbiser::all();
         // $data_kompetisi = \App\Kompetisiinternal::find($id);
         // $data_kegiatan = \App\Kegiatan::find($id);
 
@@ -73,6 +71,8 @@ class SkpiController extends Controller
             'jenis_dokumen' => 'nullable',
             'tanggal_dokumen' => 'nullable',
             'judul_sertifikat' => 'nullable',
+            'penyelenggara' => 'nullable',
+            'tahun' => 'nullable',
             'ormawa_id' => 'nullable',
         ]);
 
@@ -118,7 +118,8 @@ class SkpiController extends Controller
         $skpi->status = '1';
         $skpi->save();
 
-        return redirect('/approveskpi');
+        noty()->flash('Yay!', 'Your data has been approved');
+        return redirect()->back();
     }
 
     public function approvestatusall()
@@ -131,7 +132,11 @@ class SkpiController extends Controller
          $skpirow->status = '1';
          $skpirow->save();
         }
-        return redirect('/approveskpi');
+        
+        noty()->flash('Yay!', 'Your data has been approved');
+        return redirect()->back();
     }
+    
+
 }
 

@@ -27,6 +27,7 @@ class CreateSkpiTable extends Migration
             $table->string('nama_sertifikat')->nullable();
             $table->string('status')->nullable();
             $table->string('file_skpi')->nullable();
+            $table->string('penyelenggara')->nullable();
             $table->timestamps();
         });
     }

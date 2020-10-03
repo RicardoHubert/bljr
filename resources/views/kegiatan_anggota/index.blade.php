@@ -56,6 +56,11 @@
                                     </div>
 
                                     <div class="form-group">
+                                        <label for="exampleInputEmail1">Penyelenggara</label>
+                                        <input type="text" name="penyelenggara" class="form-control" />
+                                    </div>
+
+                                    <div class="form-group">
                                         <label for="exampleInputEmail1">Tanggal Dokumen</label>
                                         <input readonly type="text" name="tanggal_dokumen" class="form-control datepicker date" aria-describedby="emailHelp" placeholder="dd/mm/yyyy" />
                                     </div>
@@ -87,6 +92,7 @@
         });
         $(".datepicker.year").datepicker({dateFormat: "yy"});
 
+        //UNTUK SELECT 2
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')

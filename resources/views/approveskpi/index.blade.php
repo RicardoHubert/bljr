@@ -41,12 +41,12 @@
 
 												<tr>										
 												@foreach($data_skpi as $skpi)
-												@foreach($data_kalbiser as $kalbiser)
+													@foreach($data_kalbiser as $kalbiser)
 														@if($kalbiser->user_id == $skpi->user_id && $skpi->user_id == auth()->user()->id || auth()->user()->role == 'admin' && $kalbiser->user_id == $skpi->user_id)	
 															<td>
 																<input form="form" type="checkbox" name="approveId[]" value="{{ $skpi->id }}">
 															</td>
-															<td><img style="height: 50px;" src="fileskpi/{{$skpi->file_skpi}}" /></td>
+															<td><img style="height: 50px;" src="{{$skpi->file_skpi}}" /></td>
 														
 															<td>{{$kalbiser->nim}}</td>
 															<td>{{$kalbiser->nama}}</td>
@@ -54,21 +54,21 @@
 														
 
 
-													<td>{{$skpi->jenis_dokumen}}</td>
-													<td>{{$skpi->tanggal_dokumen}}</th>
-													<th>{{$skpi->judul_sertifikat}}</th>
-													<td>
-													@if($skpi->status != '1')
-														<a href="/approveskpi/{{$skpi->id}}" class="btn btn-sm btn-warning">approve</a>
-													@else
-														<span>Sudah di approve</span>
-													@endif
-													</td>
+															<td>{{$skpi->jenis_dokumen}}</td>
+															<td>{{$skpi->tanggal_dokumen}}</th>
+															<th>{{$skpi->judul_sertifikat}}</th>
+															<td>
+															@if($skpi->status != '1')
+																<a href="/approveskpi/{{$skpi->id}}" class="btn btn-sm btn-warning">approve</a>
+															@else
+																<span>Sudah di approve</span>
+															@endif
+															</td>
 													</tr>
 													
-												</tr>
-												@endif
+														@endif
 													@endforeach
+
 												@endforeach
 										</tbody>
 									</table>

@@ -72,6 +72,7 @@ Route::post('/skpi/create','SkpiController@create');
 Route::get('/skpi/{id}/delete','SkpiController@delete');
 Route::get('/skpi/{skpi}/edit', 'SkpiController@edit');
 Route::post('/skpi/{id}/update', 'SkpiController@update');
+Route::post('/skpi/downloadword', 'DokumenController@worddownload');
 
 Route::group(['middleware' => 'auth'], function(){
         Route::get('/dashboard','DashboardController@index');
@@ -81,6 +82,15 @@ Route::group(['middleware' => 'auth'], function(){
         Route::post('/ormawa/{id}/update', 'OrmawaController@update');
         Route::get('/ormawa/{id}/delete', 'OrmawaController@delete');
         Route::get('/ormawa/{id}/profile', 'OrmawaController@profile');
+
+
+        Route::get('/prodi','ProdiController@index');
+        Route::post('/prodi/create', 'ProdiController@create');
+        Route::get('/approveprodi', 'ProdiController@approve');
+        Route::get('/prodi/{id}/edit', 'ProdiController@edit');
+        Route::post('/prodi/{id}/update', 'ProdiController@update');
+        Route::get('/prodi/{id}/delete', 'ProdiController@delete');
+
         Route::get('/logout','AuthController@logout');
 });
 
@@ -89,3 +99,4 @@ Route::group(["middleware" => "auth"], function(){
 });
 
 Route::get('/ormawa/{id}','hmjController@index');
+Route::get('generate-docx','SkpiController@generate-docx');

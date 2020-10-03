@@ -62,7 +62,8 @@
 
 
 
-    
+	<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
+	<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>    
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     	<!-- Sampai disini SCRIPT untuk autocomplete -->
@@ -111,5 +112,8 @@
       });
     });
     </script>
+<!-- laravel notif package -->
+    {{ noty_assets() }}
+
 </body>
 </html>

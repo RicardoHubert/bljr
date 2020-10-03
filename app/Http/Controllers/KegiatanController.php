@@ -181,10 +181,14 @@ class KegiatanController extends Controller
             'jenis_dokumen' => request("jenis_dokumen"),
             'judul_sertifikat' => $kegiatan->sertifikat,
             'ormawa_id' => request('ormawa_id'),
+            'penyelenggara' => request('penyelenggara'),
+            'tahun' => request('tahun'),
             'nomor_urut' => $no_terakhir
         ]);
 
         $skpi->save();
+
+        noty()->success('Hey!', "Data berhasil disimpan");
 
         return redirect()->route("kegiatan_anggota.index")->with("message", "Sukses Menambah Data");
     }

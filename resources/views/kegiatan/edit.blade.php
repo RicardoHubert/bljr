@@ -32,7 +32,7 @@
 
 					   <div class="form-group">
 					    <label for="exampleInputEmail1">Deskripsi Kegiatan</label>
-					    <textarea id="konten" class="form-control" name="deskripsi_kegiatan" valie="{{$kegiatan->deskripsi_kegiatan}}" rows="10" cols="50"></textarea>
+					    <textarea id="konten" class="form-control" name="deskripsi_kegiatan"rows="10" cols="50"> {{$kegiatan->deskripsi_kegiatan}} </textarea>
 						</div>
 
 						<div class="form-group">

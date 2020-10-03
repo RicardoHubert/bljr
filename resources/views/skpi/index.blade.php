@@ -10,6 +10,10 @@
 								<div class="panel-heading">
 									<h3 class="panel-title">SKPI</h3>
 									<div class="left">
+										<form action="skpi/downloadword" method="POST">
+											@csrf
+											<button type="submit" style="background-color: indigo; color: white; padding: 15px; border-radius: 10px;">Word</button>
+										</form>
 									</div>
 									<div class="right">
 									<button type="button" class="btn" data-toggle="modal" data-target="#exampleModal"><i class="lnr lnr-plus-circle"></i></button>
@@ -28,6 +32,7 @@
 													<th>Tanggal Dokumen</th>
 													<th>Tahun Dokumen</th>
 													<th>Judul Sertifikat</th>
+													<th>Penyelenggara</th>
 													<th>Status</th>
 													<th>Aksi</th>
 												</tr>
@@ -51,7 +56,7 @@
 													<td>{{$skpi->tanggal_dokumen}}</th>
 													<th>{{$skpi->tahun}}</th>
 													<th>{{$skpi->judul_sertifikat}}</th>
-
+													<th>{{$skpi->penyelenggara}}</th>
 													<td>@if($skpi->status == '0' && $skpi->user_id == auth()->user()->id || $skpi->status == null && $skpi->user_id == auth()->user()->id || $skpi->status == '0' && auth()->user()->role == 'admin' || $skpi->status == null && auth()->user()->role == 'admin')
 															<span class="badge badge-danger">Belum Di Approve</span>
 														@elseif($skpi->status == '1' && $skpi->user_id == auth()->user()->id || $skpi->status == null && $skpi->user_id == auth()->user()->id || $skpi->status == '1' && auth()->user()->role == 'admin')
@@ -234,7 +239,7 @@
 
 				      		  <div class="form-group">
 							   <label for="exampleInputEmail1">Nama Mahasiswa</label>
-							    <select class="form-control" id="exampleFormControlSelect1" name="user_id">
+							    <select class="form-control" id="mySelect2" name="user_id">
 							      <option value="">"------Pilih-------"</option>
 
 									@foreach($data_kalbiser as $kalbiser)
@@ -260,10 +265,10 @@
 							    </select>
 							</div>
 
-							  <div class="form-group">
-							    <label for="exampleInputEmail1">Tanggal Dokumen</label>
-							    <input type="text" name="tanggal_dokumen" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="dd/mm/yyyy">
-							  </div>
+							<div class="form-group">
+								<label for="exampleInputEmail1">Tanggal Dokumen</label>
+								<input readonly type="text" name="tanggal_dokumen" class="form-control datepicker date" id="tanggaldokumen" aria-describedby="emailHelp" placeholder="dd/mm/yyyy" />
+							</div>
 
 							   <div class="form-group">
 							    <label for="exampleInputEmail1">Tahun Dokumen</label>
@@ -274,6 +279,11 @@
 							  <div class="form-group">
 							    <label for="exampleInputEmail1">Judul Sertifikat</label>
 							    <input type="text" name="judul_sertifikat" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="">
+							  </div>
+
+							  <div class="form-group">
+							    <label for="exampleInputEmail1">Penyelenggara</label>
+							    <input type="text" name="penyelenggara" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="">
 							  </div>
 
 
@@ -314,6 +324,15 @@
 				});
 			}
 		});
+		
+		$('#mySelect2').select2({
+        dropdownParent: $('#sexampleModal')
+    });
+
+		$(".datepicker.date").datepicker({
+			dateFormat: "yy-mm-dd"
+		});
+
 	});
 </script>
 @stop

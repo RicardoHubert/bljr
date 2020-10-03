@@ -4,15 +4,14 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class skpi extends Model
+class prodi extends Model
 {
-    //
-    protected $table = 'skpi';
     protected $guarded = [];
+
+    protected $table = 'prodi';
 
     public function user()
     {
     	return $this->belongsTo(User::class);
     }
-
 }

@@ -18,7 +18,7 @@
                               <ul class="nav">
                                 <li><a href="/ormawa" class="">Ormawa</a></li>
                                 <li><a href="/kegiatan" class="">Kegiatan</a></li>
-                                <li><a href="/kegiatan_anggota" class="">Anggota Ormawa</a></li>                              </ul>
+                                <li><a href="/kegiatan_anggota" class="">Input Data Kegiatan</a></li>                              </ul>
                             </div>
                         </li>
             @elseif(auth()->user()->role == 'student')
@@ -38,11 +38,14 @@
                   <div id="subPages" class="collapse ">
                     <ul class="nav">
                       <li><a href="/ormawa" class="">Data Ormawa</a></li>
+                    
                       <li><a href="/kegiatan" class="">Data Kegiatan</a></li>
-                      <li><a href="/kegiatan_anggota" class="">Anggota Ormawa</a></li>
+                      <li><a href="/kegiatan_anggota" class="">Input Data Kegiatan</a></li>
                     </ul>
                   </div>
               </li>
+
+
 
               <li>
                 <a href="#subPages2" data-toggle="collapse" class="collapsed"><i class="lnr lnr-users"></i> <span>Kalbiser</span> <i class="icon-submenu lnr lnr-chevron-left"></i></a>
@@ -62,6 +65,26 @@
                     <li><a href="/approvekompetisi" class="">Approval Kompetisi</a></li>
                     <li><a href="/approvekegiatan" class="">Approval Kegiatan</a></li>
                     <li><a href="/approveskpi" class="">Approval SKPI</a></li>
+
+                  </ul>
+                </div>
+            </li>
+            
+            <li><a href="#subPages4" data-toggle="collapse" class="collapsed"><i class="lnr lnr-users"></i> <span>Prodi</span> <i class="icon-submenu lnr lnr-chevron-left"></i></a>
+                <div id="subPages4" class="collapse ">
+                  <ul class="nav">
+                  <li><a href="/prodi" class="">Data Prodi</a></li>
+                  </ul>
+                </div>
+            </li>
+
+             @elseif(auth()->user()->role == 'Prodi')
+             <li>
+                <a href="#subPages3" data-toggle="collapse" class="collapsed"><i class="lnr lnr-users"></i> <span>Approval CSD</span> <i class="icon-submenu lnr lnr-chevron-left"></i></a>
+                <div id="subPages3" class="collapse ">
+                  <ul class="nav">
+                    
+                    <li><a href="/approveprodi" class="">Approval SKPI</a></li>
 
                   </ul>
                 </div>

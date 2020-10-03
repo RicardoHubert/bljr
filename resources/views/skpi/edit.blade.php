@@ -1,6 +1,7 @@
 @extends('layout.master')
 
 @section('content')
+
 <div class="main">
 	<div class="main-control">
 		<div class="container-fluid">
@@ -17,19 +18,20 @@
 
 							
 				      		  <div class="form-group">
-													   	
 							   <label for="exampleInputEmail1">Nama Mahasiswa</label>
-							    <select class="form-control" id="exampleFormControlSelect1" name="user_id">
+							    <select class="form-control select2" id="exampleFormControlSelect1" name="user_id">
 							      <option value="">"------Pilih-------"</option>
-				  					
+
 									@foreach($data_kalbiser as $kalbiser)
-									@if($kalbiser->user_id == auth()->user()->id|| auth()->user()->role == 'admin')	
+									@if($kalbiser->user_id == auth()->user()->id|| auth()->user()->role == 'admin')
 							      <option value="{{$kalbiser->user_id}}">{{$kalbiser->nama}} <span>{{$kalbiser->nim}}</span></option>
-	
+
 							      	@endif
 							     	@endforeach
 							     </select>
 							 </div>
+
+
 
 							 
 						 <div class="form-group">
@@ -43,41 +45,27 @@
 							    </select>
 						</div>
 
-						<br>
-					  	<div class="form-check form-check-inline">
-						  <input class="form-check-input " type="radio" name="kegiatan_id" id="kegiatan_radio" value="kegiatan">
-						  <label class="form-check-labl" for="inlineRadio1">Kegiatan</label>
-						  &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
-						  <input class="form-check-input " type="radio" name="kegiatan_id" id="kompetisi_radio" value="kompetisi">
-						  <label class="form-check-label" for="inlineRadio1">Kompetisi</label>
+						<div class="form-group">
+								<label for="exampleInputEmail1">Tanggal Dokumen</label>
+								<input readonly type="text" name="tanggal_dokumen" class="form-control datepicker date" id="tanggaldokumen" aria-describedby="emailHelp" placeholder="dd/mm/yyyy" />
 						</div>
-						<br>
 
-						
+						<div class="form-group">
+							    <label for="exampleInputEmail1">Tahun Dokumen</label>
+							    <input type="text" name="tahun" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Tahun Dokumen">
+							    Sesuai dengan tanggal dokumen
+						</div>
 
-					  <div class="form-group kegiatan_radio_hasil">
-				
-					    	<label for="exampleInputEmail1">Kegiatan</label>
-							     <select class="form-control" id="exampleFormControlSelect1" name="kegiatan_id">
-							      <option value="">"------Pilih-------"</option>
-							    @foreach($data_kegiatan as $kegiatan)
-							      <option value="{{$kegiatan->id}}">{{$kegiatan->id}}</option>
-							    @endforeach
-							    </select>
-					    
-					  </div>
+						<div class="form-group">
+							    <label for="exampleInputEmail1">Judul Sertifikat</label>
+							    <input type="text" name="judul_sertifikat" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="" value="{{$data_skpi->judul_sertifikat}}">
+							  </div>
 
-  					  <div class="form-group kompetisi_radio_hasil">
-				
-					    	<label for="exampleInputEmail1">Kompetisi</label>
-							     <select class="form-control" id="exampleFormControlSelect1" name="kompetisi_id">
-							      <option value="">"------Pilih-------"</option>
-							      @foreach($data_kompetisi as $kompetisi)
-							      <option value="{{$kompetisi->id}}">{{$kompetisi->id}}</option>
-							      @endforeach
-							    </select>
-					    
-					  </div>
+						<div class="form-group">
+							    <label for="exampleInputEmail1">Penyelenggara</label>
+							    <input type="text" name="penyelenggara" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="" value="{{$data_skpi->penyelenggara}}">
+						</div>
+
 					
 
 					 <input type="hidden" name="status" value="0">
@@ -88,72 +76,15 @@
 				      </div>
 				    </div>
 				  </div>
-
-				  	<div class="modal-dialog">
-				  		<div class="col-md-4">
-				  		<div class="modal-content">
-					  		<div class="modal-header">
-					  		<h5 class="modal-title" id="exampleModalLabel">Search List Kegiatan Data SKPI</h5>
-					        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-					          <span aria-hidden="true">&times;</span>
-					        </button>
-				  		<div class="form-group">
-						    <label for="exampleInputEmail1">Kegiatan</label>
-						    <input type="text" name="kegiatan_id" id="kegiatan_id" list="datalistkegiatan" class="form-control" aria-describedby="emailHelp" placeholder="">
-						    <datalist id="datalistkegiatan">
-						    	@foreach($data_kegiatan as $kegiatan)
-						    	<select name="{{$kegiatan->nama_kegiatan}}" id="kegiatan_id">
-						    	<option value="{{$kegiatan->id}}">{{$kegiatan->nama_kegiatan}}</option>
-						    	@endforeach
-						    	</select>
-						    </datalist>
-						 </div>
-						</div>
-					</div>
-					</div>
-						
-					<div class="col-md-4">
-				  		<div class="modal-content">
-					  		<div class="modal-header">
-					  		<h5 class="modal-title" id="exampleModalLabel">Search List Kompetisi Data SKPI</h5>
-					        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-					          <span aria-hidden="true">&times;</span>
-					        </button>
-				  		<div class="form-group ">
-						    <label for="exampleInputEmail1">Kompetisi</label>
-						    <input type="text" name="kompetisi_id" list="datalistkompetisi" class="form-control" aria-describedby="emailHelp" placeholder="">
-						    <datalist id="datalistkompetisi">
-						    	@foreach($data_kompetisi as $kompetisi)
-						    	<select name="{{$kompetisi->nama_kompetisi}}">
-						    	<option value="{{$kompetisi->id}}">{{$kompetisi->nama_kompetisi}}</option>
-						    	@endforeach
-						    	</select>
-						    </datalist>
-						 </div>
-						</div>
-					</div>
-					</div>
-
-					<div class="col-md-4">
-				  		<div class="modal-content">
-					  		<div class="modal-header">
-					  		<h5 class="modal-title" id="exampleModalLabel">Search List Mahasiswa Data SKPI</h5>
-					        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-					          <span aria-hidden="true">&times;</span>
-					        </button>
-				  		<div class="form-group ">
-						    <label for="exampleInputEmail1">Mahasiswa</label>
-						    <input type="text" name="" list="datalistkalbiser" class="form-control" aria-describedby="emailHelp" placeholder="">
-						    <datalist id="datalistkalbiser">
-						    	@foreach($data_kalbiser as $kalbiser)
-						    	<select name="{{$kalbiser->nama}}">
-						    	<option value="{{$kalbiser->user_id}}">{{$kalbiser->nama}}</option>
-						    	@endforeach
-						    	</select>
-						    </datalist>
-						 </div>
-						</div>
-					</div>
-					</div>
 				</div>
+<script>
+		$(document).ready(function() {
+    	$('.select2').select2();
+		});
+
+		$(".datepicker.date").datepicker({
+			dateFormat: "yy-mm-dd"
+		});
+
+</script>
 @stop
