@@ -84,6 +84,8 @@ Route::group(['middleware' => 'auth'], function(){
         Route::get('/ormawa/{id}/profile', 'OrmawaController@profile');
 
 
+        Route::get("/approveskpi/printlist/{nim}", "SkpiController@print_skpi_list")->name("skpi.printlist");
+
         Route::get('/prodi','ProdiController@index');
         Route::post('/prodi/create', 'ProdiController@create');
         Route::get('/approveprodi', 'ProdiController@approve');
