@@ -74,6 +74,7 @@ Route::get('/skpi/{skpi}/edit', 'SkpiController@edit');
 Route::post('/skpi/{id}/update', 'SkpiController@update');
 Route::post('/skpi/downloadword', 'DokumenController@worddownload');
 
+
 Route::group(['middleware' => 'auth'], function(){
         Route::get('/dashboard','DashboardController@index');
         Route::get('/ormawa','OrmawaController@index');
@@ -100,3 +101,5 @@ Route::group(["middleware" => "auth"], function(){
 
 Route::get('/ormawa/{id}','hmjController@index');
 Route::get('generate-docx','SkpiController@generate-docx');
+
+Route::post('/kalbiser/profile/{id}/downloadword', 'KalbiserController@wordkalbiser');

@@ -11,7 +11,7 @@
 									<h3 class="panel-title">Kompetisi</h3>
 								
 									<div class="right">
-									<button type="button" class="btn" data-toggle="modal" data-target="#exampleModal"><i class="lnr lnr-plus-circle"></i></button>
+									<button type="button" class="btn" data-toggle="modal" data-target="#exampleModal"><i class="lnr lnr-plus-circle"></i> Create New Kompetisi 	</button>
 									</div>
 								</div>
 							<div class="panel-body">
@@ -120,19 +120,18 @@
 
 							  <div class="form-group">
 							    <label for="exampleInputEmail1">Nama kompetisi</label>
-							    <input type="text" name="nama_kompetisi" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+							    <input type="text" name="nama_kompetisi" class="form-control" aria-describedby="emailHelp">
 							  </div>
 
-							   <div class="form-group">
-													   	
+ 							 <div class="form-group">
 							   <label for="exampleInputEmail1">Nama Mahasiswa</label>
-							    <select class="form-control" id="exampleFormControlSelect1" name="user_id">
+							    <select class="form-control" id="mySelect2" name="user_id">
 							      <option value="">"------Pilih-------"</option>
-				  					
+
 									@foreach($kalbisers as $kalbiser)
-									@if($kalbiser->user_id == auth()->user()->id|| auth()->user()->role == 'admin')	
+									@if($kalbiser->user_id == auth()->user()->id|| auth()->user()->role == 'admin')
 							      <option value="{{$kalbiser->user_id}}">{{$kalbiser->nama}} <span>{{$kalbiser->nim}}</span></option>
-	
+
 							      	@endif
 							     	@endforeach
 							     </select>
@@ -140,7 +139,7 @@
 
 							 <div class="form-group">
 							    <label for="exampleInputEmail1">Nama Ormawa</label>
-							    <select class="form-control" id="exampleFormControlSelect1" name="ormawa_id">
+							    <select class="form-control" name="ormawa_id">
 							      <option value="">"------Pilih-------"</option>
 							      @foreach($ormawas as $ormawa)
 							      <option value="{{$ormawa->id}}">{{$ormawa->nama_ormawa}}</option>
@@ -150,7 +149,7 @@
 
 							  <div class="form-group">
 							    <label for="exampleInputEmail1">Jenis kompetisi</label>
-							    <select class="form-control" id="exampleFormControlSelect1" name="jenis_kompetisi">
+							    <select class="form-control" name="jenis_kompetisi">
 							      <option value="">"------Pilih Jenis kompetisi-------"</option>
 							      <option value="Internal">Internal</option>
 							      <option value="Eksternal">Eksternal</option>
@@ -159,12 +158,12 @@
 
 							   <div class="form-group">
 							    <label for="exampleInputEmail1">URL</label>
-							    <textarea id="konten" class="form-control" name="url" rows="10" cols="50"></textarea>		  
+							    <input type="text" name="url" class="form-control">	  
 							</div>
 
 							<div class="form-group">
 							    <label for="exampleInputEmail1">Judul Sertifikat</label>
-							    <input type="text" name="sertifikat" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+							    <input type="text" name="sertifikat" class="form-control" aria-describedby="emailHelp">
 							 </div>
 
 
@@ -185,22 +184,22 @@
 
 							 <div class="form-group">
 							    <label for="exampleInputEmail1">Pencapaian</label>
-							    <input type="text" name="pencapaian" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+							    <input type="text" name="pencapaian" class="form-control" aria-describedby="emailHelp">
 							 </div>
 
 							<div class="form-group">
 							    <label for="exampleInputEmail1">Nama Kegiatan</label>
-							    <input type="text" name="nama_kegiatan" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+							    <input type="text" name="nama_kegiatan" class="form-control" aria-describedby="emailHelp">
 							 </div>
 
 							 <div class="form-group">
 							    <label for="exampleInputEmail1">Tanggal Kegiatan</label>
-							    <input type="date" name="tanggal_kegiatan" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+							    <input type="date" name="tanggal_kegiatan" class="form-control" aria-describedby="emailHelp">
 							 </div>
 
 							 <div class="form-group">
 							    <label for="exampleInputEmail1">Penyelenggara</label>
-							    <input type="text" name="penyelenggara" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+							    <input type="text" name="penyelenggara" class="form-control" aria-describedby="emailHelp">
 							 </div>
 
 				      </div>
@@ -213,10 +212,13 @@
 				    </div>
 				  </div>
 				</div>
-				<script src="{{asset('assets/ckeditor/ckeditor.js')}}"></script>
+					
+
 					<script>
- 						var konten = document.getElementById("konten");
-    					CKEDITOR.replace(konten,{language:'en-gb'});
- 						CKEDITOR.config.allowedContent = true;
+ 	$(document).ready(function() {
+    $('mySelect2').select2();
+    dropdownParent: $('#exampleModal')
+	});
+
  					</script>		
 @stop

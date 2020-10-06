@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use\App\Ormawa;
+use\App\User;
 class OrmawaController extends Controller
 {
     //
@@ -83,7 +84,7 @@ class OrmawaController extends Controller
 
         $ormawa = Ormawa::find($id);
         $ormawa->delete($ormawa->id);
-        $ormawa->delete($ormawa->$user);
+        User::find($ormawa->user_id)->delete();
         return redirect('/ormawa')->with('sukses','Data berhasil di Hapus');
     } 
     public function profile($id){
