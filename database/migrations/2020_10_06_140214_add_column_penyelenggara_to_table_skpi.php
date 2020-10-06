@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateDokumenkalbiserTable extends Migration
+class AddColumnPenyelenggaraToTableSkpi extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,8 @@ class CreateDokumenkalbiserTable extends Migration
      */
     public function up()
     {
-        Schema::create('dokumenkalbiser', function (Blueprint $table) {
-            $table->id();
-            $table->string('kalbiser_id')->nullable();
-            $table->string('skpi_id')->nullable();
-            $table->timestamps();
+        Schema::table('skpi', function (Blueprint $table) {
+            $table->string("penyelenggara", 125);
         });
     }
 
@@ -28,6 +25,8 @@ class CreateDokumenkalbiserTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('dokumenkalbiser');
+        Schema::table('skpi', function (Blueprint $table) {
+            $table->dropColumn("penyelenggara");
+        });
     }
 }

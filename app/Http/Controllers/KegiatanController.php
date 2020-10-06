@@ -153,7 +153,8 @@ class KegiatanController extends Controller
 
         $carbon = Carbon::parse($kegiatan->tanggal_kegiatan);
         $tanggal = $carbon->locale("id")->isoFormat("D MMMM YYYY");
-        $no_terakhir = Skpi::where("nomor_urut", "<>", 0)->max("nomor_urut")+1;
+        $no_urut = Skpi::where("nomor_urut", "<>", 0)->max("nomor_urut");
+        $no_terakhir = ($no_urut == null ? 999 : $no_urut )+1;
         $prefixed = str_repeat(0, 4-strlen($no_terakhir)).$no_terakhir;
         $nomor = "$prefixed/CSD-STF/".$this->integerToRoman($carbon->isoFormat("M"))."/".$carbon->isoFormat("YYYY")."";
         $normalized = preg_replace("/\/+/", "_", $nomor);
@@ -187,13 +188,6 @@ class KegiatanController extends Controller
         ]);
 
         $skpi->save();
-
-        // Insert ke table Dokumen Kalbiuser
-        
-       $request->request->add(['skpi_id' => $skpi->id]);
-       $request->request->add(['kalbiser_id' => $skpi->user_id]);
-       $dokumenkalbiser=\App\dokumenkalbiser::create($request->all());
-       $dokumenkalbiser->save();
 
         noty()->success('Hey!', "Data berhasil disimpan");
 
