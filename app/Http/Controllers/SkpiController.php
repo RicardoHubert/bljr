@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Carbon\Carbon;
+
 use Exception;
 
 class SkpiController extends Controller
@@ -27,6 +28,7 @@ class SkpiController extends Controller
     public function create(Request $request)
     {
         # code...
+        // Insert ke table Skpi
         $carbon = Carbon::parse($request->tanggal_dokumen);
         $Skpi = \App\Skpi::create(array_merge($request->all(), ['nomor_urut' => 0, 'tanggal_dokumen' => $carbon->isoFormat('Y/MM/DD')]));
         
@@ -37,6 +39,14 @@ class SkpiController extends Controller
 
             $Skpi->file_skpi = 'fileskpi/' . $filename;
             $Skpi->save();
+
+         // Insert ke table Dokumen Kalbiuser
+        
+       $request->request->add(['skpi_id' => $Skpi->id]);
+       $request->request->add(['kalbiser_id' => $Skpi->user_id]);
+       $dokumenkalbiser=\App\dokumenkalbiser::create($request->all());
+       $dokumenkalbiser->save();
+
         }
         return redirect('/skpi')->with('sukses','Data berhasil diinput');
     }

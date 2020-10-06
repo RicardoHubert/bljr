@@ -4,6 +4,12 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use App\Skpi;
+use Jenssegers\Date\Date;
+use App\User;
+use MCGalih\Serti\Sertifikat;
+use Carbon\Carbon;
+
 class KalbiserController extends Controller
 {
     //
@@ -60,10 +66,77 @@ class KalbiserController extends Controller
         # code..
         $kalbiser = \App\kalbiser::find($id);
         $kalbiser->delete($kalbiser);
+       User::find($kalbiser->user_id)->delete();
+
         return redirect('/kalbiser')->with('sukses','Data berhasil di Hapus');
     }
-     public function profile($id){
+
+    public function profile($id){
         $kalbiser = \App\kalbiser::find($id);
-        return view('kalbiser.profile',['kalbiser' => $kalbiser]);
-    }                   
+        return view('kalbiser.profile', ['kalbiser' => $kalbiser]);
+    }
+
+
+      public function wordkalbiser()
+    {
+    $phpWord = new \PhpOffice\PhpWord\PhpWord();
+
+    $section = $phpWord->addSection();
+
+    $data = $this->dataBasedOnPermission();
+    Date::setLocale('id');
+
+        foreach($data as $index => $skpi) {
+          $dateFormat = Date::parse($skpi->tanggal_dokumen)->format('d F Y');
+            $glue = $index + 1 . '.'. ' '. $skpi->user->name . ' - ' . $skpi->judul_sertifikat . ', '. $dateFormat. ', ' . $skpi->penyelenggara;
+            $section->addText($glue);
+    }
+
+    // Saving the document as OOXML file...
+    $objWriter = \PhpOffice\PhpWord\IOFactory::createWriter($phpWord, 'Word2007');
+    $objWriter->save('helloWorld.docx');
+
+        return response()->download(public_path('helloWorld.docx'));
+
+    }
+
+    private function dataBasedOnPermission()
+    {
+    $data = [];
+    $role = auth()->user()->role;
+
+    // Admin
+    if($role == 'admin') {
+      $data = Skpi::all();
+    } else if($role == 'Ormawa') {
+      $ormawaId = Ormawa::where('user_id', auth()->user()->id)->first();
+      $data = Skpi::where('ormawa_id', $ormawaId->id)->get();
+    } else {
+      $data = Skpi::where('user_id', auth()->user()->id)->get();
+    }
+
+    return $data;
+    }
+
+    public function print_skpi_list($id){
+        $skpis = \App\kalbiser::find($id)
+                    ->skpi()
+                    ->where("status", "<>", null)
+                    ->get();
+        $sertifikat = new Sertifikat(storage_path("app/template/blangko.jpg"));
+        $initialYLoc = 500; // X Location
+        $xLoc = 1240/5; // Y Location
+        $idx = 1;
+        foreach($skpis as $skpi){
+            $sertifikat->text($idx++.". ".$skpi->judul_sertifikat.", ". Carbon::make($skpi->tanggal_dokumen)->locale("id")->isoFormat("DD MMMM YYYY"), [$xLoc, $initialYLoc], [
+                "file" => "@app/fonts/arial.ttf",
+                "size" => 46,
+                "align" => "left"
+            ]);
+            $initialYLoc += 60; // Increment per lists
+        }
+
+        return response($sertifikat->image()->encode("jpg"))
+                    ->header("Content-Type", "image/jpg");
+	}
 }

@@ -10,7 +10,7 @@
 								<div class="panel-heading">
 									<h3 class="panel-title">Data Ormawa</h3>
 									<div class="right">
-									<button type="button" class="btn" data-toggle="modal" data-target="#exampleModal"><i class="lnr lnr-plus-circle"></i></button>
+									<button type="button" class="btn" data-toggle="modal" data-target="#exampleModal"><i class="lnr lnr-plus-circle"></i>Create New Kegiatan</button>
 									</div>
 								</div>
 							<div class="panel-body">

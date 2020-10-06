@@ -9,7 +9,7 @@
     <link rel="apple-touch-icon" href="{{asset('admin/assets_frontend/material-kit-pro-master./assets/img/apple-icon.png')}}">
     <link rel="icon" href="{{asset('admin/assets_frontend/material-kit-pro-master./assets/img/favicon.png')}}">
     <title>
-        Career Student Development
+        Center Of Students Develioment
     </title>
     <!--     Fonts and icons     -->
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
@@ -47,12 +47,12 @@
 
                       <li class="dropdown nav-item">
                         <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
-                            <i class="material-icons">apps</i> Ormawa HMJ
+                            <i class="material-icons">apps</i> Himpunan Mahasiswa
                         </a>
                         <div class="dropdown-menu dropdown-with-icons">
                           
                             <a href="#" class="dropdown-item">
-                                <i class="material-icons">content_paste</i> HMJ
+                                <i class="material-icons">content_paste</i> HM
                             </a>
                            
                             @foreach(App\ormawa::all() as $ormawa)
@@ -67,7 +67,7 @@
 
                     <li class="dropdown nav-item">
                         <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
-                            <i class="material-icons">apps</i> Ormawa UKM
+                            <i class="material-icons">apps</i>  Unit Kegiatan Mahasiswa
                         </a>
                         <div class="dropdown-menu dropdown-with-icons">
                           
@@ -87,7 +87,7 @@
 
                     <li class="dropdown nav-item">
                         <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
-                            <i class="material-icons">apps</i> Ormawa UKR
+                            <i class="material-icons">apps</i> Unit Kegiatan Rohani
                         </a>
                         <div class="dropdown-menu dropdown-with-icons">
                           

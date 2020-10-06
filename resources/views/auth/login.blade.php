@@ -54,7 +54,7 @@
 						<div class="overlay"></div>
 						<div class="content text">
 							<h1 class="heading">Aplikasi Pengelolaan Data Ormawa</h1>
-							<p>Career Student Development</p>
+							<p> Center Of Students Development </p>
 						</div>
 					</div>
 					<div class="clearfix"></div>

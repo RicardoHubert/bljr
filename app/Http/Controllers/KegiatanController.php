@@ -188,6 +188,13 @@ class KegiatanController extends Controller
 
         $skpi->save();
 
+        // Insert ke table Dokumen Kalbiuser
+        
+       $request->request->add(['skpi_id' => $skpi->id]);
+       $request->request->add(['kalbiser_id' => $skpi->user_id]);
+       $dokumenkalbiser=\App\dokumenkalbiser::create($request->all());
+       $dokumenkalbiser->save();
+
         noty()->success('Hey!', "Data berhasil disimpan");
 
         return redirect()->route("kegiatan_anggota.index")->with("message", "Sukses Menambah Data");

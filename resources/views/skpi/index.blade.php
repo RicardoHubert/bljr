@@ -16,7 +16,7 @@
 										</form>
 									</div>
 									<div class="right">
-									<button type="button" class="btn" data-toggle="modal" data-target="#exampleModal"><i class="lnr lnr-plus-circle"></i></button>
+									<button type="button" class="btn" data-toggle="modal" data-target="#exampleModal"><i class="lnr lnr-plus-circle"></i> Create New SKPI </button>
 									</div>
 								</div>
 							<div class="panel-body">
@@ -24,7 +24,6 @@
 									 <table class="table table-hover data" id="tableexcel">
 									 	<thead>
 												<tr>
-													<th>Gambar</th>
 													<th>Nim</th>
 													<th>Nama Mahasiswa</th>
 													<th>Prodi</th>
@@ -44,7 +43,6 @@
 												@foreach($data_skpi as $skpi)
 												@foreach($data_kalbiser as $kalbiser)
 														@if($kalbiser->user_id == $skpi->user_id && $skpi->user_id == auth()->user()->id || auth()->user()->role == 'admin' && $kalbiser->user_id == $skpi->user_id)
-												<td><img style="height: 50px;" src="{{$skpi->file_skpi}}" /></td>
 
 															<td>{{$kalbiser->nim}}</td>
 															<td>{{$kalbiser->nama}}</td>
@@ -146,7 +144,7 @@
     	$('#tableexcel').DataTable({
     	dom:'Bfrtip',
     	buttons: [
-            'excel',
+            'excel'	
         ],
         initComplete: function () {
             // Apply the search
@@ -272,18 +270,18 @@
 
 							   <div class="form-group">
 							    <label for="exampleInputEmail1">Tahun Dokumen</label>
-							    <input type="text" name="tahun" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Tahun Dokumen">
+							    <input type="text" name="tahun" class="form-control" aria-describedby="emailHelp" placeholder="Tahun Dokumen">
 							    Sesuai dengan tanggal dokumen
 							  </div>
 
 							  <div class="form-group">
 							    <label for="exampleInputEmail1">Judul Sertifikat</label>
-							    <input type="text" name="judul_sertifikat" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="">
+							    <input type="text" name="judul_sertifikat" class="form-control" aria-describedby="emailHelp" placeholder="">
 							  </div>
 
 							  <div class="form-group">
 							    <label for="exampleInputEmail1">Penyelenggara</label>
-							    <input type="text" name="penyelenggara" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="">
+							    <input type="text" name="penyelenggara" class="form-control" aria-describedby="emailHelp" placeholder="">
 							  </div>
 
 
@@ -326,7 +324,7 @@
 		});
 		
 		$('#mySelect2').select2({
-        dropdownParent: $('#sexampleModal')
+        dropdownParent: $('#exampleModal')
     });
 
 		$(".datepicker.date").datepicker({
