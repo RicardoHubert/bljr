@@ -22,7 +22,7 @@
 </head>
 
 @yield('content')
-<nav class="navbar navbar-color-on-scroll navbar-transparent fixed-top  navbar-expand-lg " color-on-scroll="100" id="sectionsNav">
+<nav class="navbar fixed-top  navbar-expand-lg " color-on-scroll="100" id="sectionsNav">
         <div class="container-fluid">
             <div class="navbar-translate">
                 <img src="{{asset('admin/assets/img/logokalbis.png')}}" style="max-width: 30%">
@@ -39,9 +39,9 @@
                             <i class="material-icons">apps</i> Home
                         </a>
                       &nbsp  &nbsp 
-                    <a href="/frontend/visimisi" >
+                <!--     <a href="/frontend/visimisi" >
                             <i class="material-icons">apps</i> Visi & Misi
-                        </a>
+                        </a> -->
                     </li>
 
 
@@ -58,7 +58,7 @@
                             @foreach(App\ormawa::all() as $ormawa)
                             @if($ormawa->kategori_ormawa == 'HMJ')
                                 <a href="{{url('/ormawa/'.$ormawa->id)}}" class="dropdown-item">
-                                    <i class="material-icons">call</i> {{$ormawa->nama_ormawa}}
+                                    <i class="material-icons">how_to_reg</i> {{$ormawa->nama_ormawa}}
                                 </a>
                             @endif
                             @endforeach
@@ -78,7 +78,7 @@
                             @foreach(App\ormawa::all() as $ormawa)
                             @if($ormawa->kategori_ormawa == 'UKM')
                                 <a href="{{url('/ormawa/'.$ormawa->id)}}" class="dropdown-item">
-                                    <i class="material-icons">call</i> {{$ormawa->nama_ormawa}}
+                                    <i class="material-icons">how_to_reg</i> {{$ormawa->nama_ormawa}}
                                 </a>
                             @endif
                             @endforeach
@@ -98,7 +98,7 @@
                             @foreach(App\ormawa::all() as $ormawa)
                             @if($ormawa->kategori_ormawa == 'UKR')
                                 <a href="{{url('/ormawa/'.$ormawa->id)}}" class="dropdown-item">
-                                    <i class="material-icons">call</i> {{$ormawa->nama_ormawa}}
+                                    <i class="material-icons">how_to_reg</i> {{$ormawa->nama_ormawa}}
                                 </a>
                             @endif
                             @endforeach
@@ -107,11 +107,19 @@
 
 
                     &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                    @auth
+                    <li class="button-container nav-item iframe-extern">
+                        <a href="/dashboard">
+                        Dashboard
+                        </a>
+                    </li>   
+                    @else
                     <li class="button-container nav-item iframe-extern">
                         <a href="/login">
                         Login Kalbiser
                         </a>
                     </li>   
+                    @endauth
 
                 </ul>
             </div>

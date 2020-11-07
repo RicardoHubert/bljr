@@ -28,6 +28,8 @@ class KegiatanController extends Controller
             // Untuk Relasi
             $data_ormawa = \App\Ormawa::all();
         }
+
+  
         return view('kegiatan.index',['data_kegiatan' => $data_kegiatan,'data_ormawa' => $data_ormawa]);
     }
 
@@ -35,14 +37,18 @@ class KegiatanController extends Controller
     {
         # code...
         $kegiatan=\App\Kegiatan::create($request->all());
-
+          // dd($kegiatan);
         if($request->hasfile('poster')){
-            $request->file('poster')->move('posterkegiatan/',$request->file('poster')->getClientOriginalName());
-            $kegiatan->poster = $request->file('poster')->getClientOriginalName();
-            $kegiatan->save();
+            $file = $request->file('poster');
+            $filename = $file->getClientOriginalName();
+            $file->move('posterkegiatan/', $filename);
 
+            $kegiatan->poster = 'posterkegiatan/' . $filename;
+            $kegiatan->save();
         }
 
+
+        
         return redirect('/kegiatan')->with('sukses','Data berhasil diinput');
     }
 
@@ -91,12 +97,12 @@ class KegiatanController extends Controller
     {
         # code...
 
-        $data_kegiatan = \App\Kegiatan::all();
+        $kegiatan = \App\Kegiatan::all();
         $paginate = \App\Kegiatan::paginate(3);
         // Untuk Relasi
         $data_ormawa = \App\Ormawa::all();
 
-        return view('approvekegiatan.index',['data_kegiatan' => $data_kegiatan,'data_ormawa' => $data_ormawa]);
+        return view('approvekegiatan.index',['kegiatan' => $kegiatan,'data_ormawa' => $data_ormawa]);
     }
 
     public function approvestatus($id)
@@ -104,8 +110,18 @@ class KegiatanController extends Controller
         $kegiatan = \App\Kegiatan::find($id);
         $kegiatan->status = '1';
         $kegiatan->save();
-
+        noty()->flash('Yay!', 'Your data has been approved');
         return redirect('/approvekegiatan');
+    }
+
+     public function approvestatus2($id)
+    {
+        $kegiatan = \App\Kegiatan::find($id);
+        $kegiatan->status = '0';
+        $kegiatan->save();
+
+        noty()->flash('Yay!', 'Your data has been disapproved');
+        return redirect()->back();
     }
 
     public function pendaftaran_kegiatan_index($id){
@@ -148,6 +164,7 @@ class KegiatanController extends Controller
         $kegiatan = \App\Kegiatan::find(request('kegiatan_id'));
         $kalbiser = \App\Kalbiser::find(request('kalbiser_id'));
         $ormawa = \App\Ormawa::find(request('ormawa_id'));
+        
 
         // Generate Serifikat
 
@@ -171,7 +188,7 @@ class KegiatanController extends Controller
 
         $jsonFile = Storage::disk("local")->get("template/mapping.json");
         $mappings = Sertifikat::MapText($data, $jsonFile);
-        $sertifikat = new Sertifikat(storage_path("app/template/template.jpg"));
+        $sertifikat = new Sertifikat(storage_path("app/template/file_sertif.jpg"));
         $sertifikat->json_mapping($mappings);
         $sertifikat->image()->save(public_path("sertifikat/$normalized.jpg"), 100);
 
@@ -184,7 +201,8 @@ class KegiatanController extends Controller
             'ormawa_id' => request('ormawa_id'),
             'penyelenggara' => request('penyelenggara'),
             'tahun' => request('tahun'),
-            'nomor_urut' => $no_terakhir
+            'nomor_urut' => $no_terakhir,
+            'nomor_file' => $nomor
         ]);
 
         $skpi->save();
@@ -225,5 +243,27 @@ class KegiatanController extends Controller
         // The Roman numeral should be built, return it
         return $result;
     }
+        public function approvestatusall()
+    {
+        $approveId = request('approveId');
+        $skpi = \App\Kegiatan::whereIn('id', $approveId)->get();
+
+        foreach ($skpi as $skpirow) {
+    // Code Here
+         $skpirow->status = '1';
+         $skpirow->save();
+        }
+        
+        noty()->flash('Yay!', 'Your data has been approved');
+        return redirect()->back();
+    }
+
+    public function tabelnosertif(Request $request){
+     $data_kalbiser = \App\kalbiser::all();
+     $data_kegiatan = \App\Kegiatan::all();
+     $data_ormawa = \App\Ormawa::all();
+     $data_skpi = \App\Skpi::all();
+      return view('kegiatan.nosertif',['data_kalbiser' => $data_kalbiser, 'data_kegiatan' => $data_kegiatan,  'data_ormawa' => $data_ormawa, 'data_skpi' => $data_skpi]);
+     }
 }
 

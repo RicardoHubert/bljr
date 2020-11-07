@@ -18,7 +18,7 @@
 									 <table class="table table-hover data">
 									 	<thead>
 												<tr>
-													<th>Nama</th>
+													<th>Background Frontend</th>
 													<th>NIM</th>
 													<th>Program Studi</th>
 													<th>Tahun Akademik</th>
@@ -33,7 +33,7 @@
 												<tr>				
 													<td><a href="/kalbiser/{{$kalbiser->id}}/profile">{{$kalbiser->nama}}</td></a>
 													<td>{{$kalbiser->nim}}</td>
-													<td>{{ $kalbiser->prodi->nama_prodi }}</td>
+													<td>{{$kalbiser->prodi}}</td>
 													<td>{{$kalbiser->tahun_akademik}}</td>
 													<td>{{$kalbiser->nohp}}</td>
 													<td>{{$kalbiser->email}}</td>
@@ -55,16 +55,7 @@
 												
 												@endforeach
 										</tbody>
-										<tfoot>
-													<td></td>
-													<th></th>
-													<th></th>
-													<th></th>
-													<th></th>
-													<th></th>
-													<th></th>													
-
-										</tfoot>
+									
 									</table>
 									<div>
 								</div>
@@ -75,30 +66,7 @@
 			</div>
 		</div>
 
-	<script type="text/javascript">
-	$(document).ready(function() {
-	    // Setup - add a text input to each footer cell
-    	$('.data tfoot th').each( function () {
-        var title = $(this).text();
-        $(this).html( '<input type="text" placeholder="Search '+title+'" />' );
-    
-		});
 
-		  var table = $('.data').DataTable( {
-         "lengthMenu": [[7, 25, 50, -1], [7, 25, 50, "All"]]
-    	} );
-
-		 $(".data tfoot input").on( 'keyup change', function () {
-        table
-            .column( $(this).parent().index()+':visible' )
-            .search( this.value )
-            .draw();
-    	});
-	});
-
-	
-
-	</script>
 
 <div class="modal fade" id="viewModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 	<div class="modal-dialog" role="document">
@@ -155,11 +123,14 @@
 				      		</x-form.wrapper>
 
 							<x-form.wrapper title="Prodi" required="true">
-				      			<select class="form-control" name="prodi_id" required>
+				      			<select class="form-control" name="prodi" required>
 							      <option value="">"------Pilih Prodi-------"</option>
-							      @foreach($prodi as $p)
-							      <option value="{{ $p->id }}">{{ $p->nama_prodi }}</option>
-							      @endforeach
+							      <option value="Manajemen">Manajemen</option>
+							      <option value="Akuntansi">Akuntansi</option>
+							      <option value="Ilmu Komunikasi">Ilmu Komunikasi</option>
+							      <option value="Informatika">Informatika</option>
+							      <option value="SI">Sistem Informasi</option>
+							      <option value="DKV">Desain Komunikasi Visual</option>
 							    </select>
 				      		</x-form.wrapper>
 

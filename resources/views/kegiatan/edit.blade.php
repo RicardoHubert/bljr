@@ -14,36 +14,36 @@
 							<form action="/kegiatan/{{$kegiatan->id}}/update" method="POST" enctype="multipart/form-data">
 						{{csrf_field()}}
 
-						<div class="form-group">
-						<label for="exampleInputEmail1">Poster</label>
-						<input type="file" name="poster" value="{{$kegiatan->poster}}" class="form-control">
-						</div>
+						<x-form.wrapper title="Poster" required="true">
+				      			<x-form.file name="poster" value="{{$kegiatan->poster}}" />	
+				      	</x-form.wrapper>
 
-						<div class="form-group">
-						<label for="exampleInputEmail1">Nama Kegiatan</label>
-						<input type="text" name="nama_kegiatan" value="{{$kegiatan->nama_kegiatan}}" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-						</div>
+							  <x-form.wrapper title="Nama/Tema Kegiatan" required="true">
+				      			<x-form.input name="nama_kegiatan" required placeholder="Nama Kompetisi"  value="{{$kegiatan->nama_kegiatan}}"/>
+				      		</x-form.wrapper>
 
-						<div class="form-group">
-							<label for="exampleInputEmail1">Tanggal Kegiatan</label>
-							<input type="date" name="tanggal_kegiatan" class="form-control" id="exampleInputEmail1" value="{{$kegiatan->tanggal_kegiatan}}" aria-describedby="emailHelp">
-						</div>
+				      		<x-form.wrapper title="Tanggal Kegiatan" required="true">
+				      			<x-form.input name="tanggal_kegiatan" required placeholder="Tanggal Kegiatan"  value="{{$kegiatan->tanggal_kegiatan}}"/>
+				      		</x-form.wrapper>
 
 
-					   <div class="form-group">
-					    <label for="exampleInputEmail1">Deskripsi Kegiatan</label>
-					    <textarea id="konten" class="form-control" name="deskripsi_kegiatan"rows="10" cols="50"> {{$kegiatan->deskripsi_kegiatan}} </textarea>
+						<x-form.wrapper title="Deskripsi Kegiatan" required="true">
+				      		<x-form.input name="deskripsi_kegiatan" required placeholder="Deskripsi Kegiatan"  value="{{$kegiatan->deskripsi_kegiatan}}"/>
+				      	</x-form.wrapper>
+
+
+				      	<div class="form-group">
+							    <label for="exampleInputEmail1">Jenis Dokumen</label>
+							    <select class="form-control" id="exampleFormControlSelect1" name="sertifikat" required>
+							      <option value="">"------Pilih-------"</option>
+							      <option value="SK" {{ $kegiatan->jenis_dokumen == 'SK' ? 'selected' : null }}>Surat Keputusan (SK)</option>
+							      <option value="SERTIFIKAT" {{ $kegiatan->jenis_dokumen == 'SERTIFIKAT' ? 'selected' : null }}>Sertifikat</option>
+							      <option value="STU" {{ $kegiatan->jenis_dokumen == 'STU' ? 'selected' : null }}>Surat Tugas (STU)</option>
+							      <option value="PIAGAM" {{ $kegiatan->jenis_dokumen == 'PIAGAM' ? 'selected' : null }}>Piagam</option>
+							    </select>
 						</div>
 
-						<div class="form-group">
-						<label for="exampleInputEmail1">Judul Sertifikat </label>
-						<input type="text" name="sertifikat" value="{{$kegiatan->sertifikat}}" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-						</div>
 
-						<div class="form-group">
-						<label for="exampleInputEmail1">File Unggah</label>
-						<input type="file" name="file_sertifikat" value="{{$kegiatan->file_sertifikat}}" class="form-control">
-						</div>
 
 
 

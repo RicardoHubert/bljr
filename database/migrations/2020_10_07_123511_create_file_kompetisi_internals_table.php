@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddColumnPenyelenggaraToTableSkpi extends Migration
+class CreateFileKompetisiInternalsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,11 @@ class AddColumnPenyelenggaraToTableSkpi extends Migration
      */
     public function up()
     {
-        Schema::table('skpi', function (Blueprint $table) {
-            // $table->string("penyelenggara", 125);
+        Schema::create('file_kompetisi_internals', function (Blueprint $table) {
+            $table->id();
+            $table->integer('kompetisiinternal_id');
+            $table->string('file');
+            $table->timestamps();
         });
     }
 
@@ -25,8 +28,6 @@ class AddColumnPenyelenggaraToTableSkpi extends Migration
      */
     public function down()
     {
-        Schema::table('skpi', function (Blueprint $table) {
-            // $table->dropColumn("penyelenggara");
-        });
+        Schema::dropIfExists('file_kompetisi_internals');
     }
 }

@@ -19,58 +19,47 @@
 							
 				      		  <div class="form-group">
 							   <label for="exampleInputEmail1">Nama Mahasiswa</label>
-							    <select class="form-control select2" id="exampleFormControlSelect1" name="user_id">
+							    <select class="form-control select2" id="exampleFormControlSelect1" name="user_id" required>
 							      <option value="">"------Pilih-------"</option>
+									@foreach($data_kalbiser as $item)
+							      	<option value="{{$item->user_id}}" {{ $data_skpi->user_id == $item->user_id ? 'selected' : null }}><span>{{ $item->nim }} - {{$item->nama}}</span></option>
 
-									@foreach($data_kalbiser as $kalbiser)
-									@if($kalbiser->user_id == auth()->user()->id|| auth()->user()->role == 'admin')
-							      <option value="{{$kalbiser->user_id}}">{{$kalbiser->nama}} <span>{{$kalbiser->nim}}</span></option>
-
-							      	@endif
 							     	@endforeach
 							     </select>
 							 </div>
+			      		
 
-
-
-							 
-						 <div class="form-group">
-							    <label for="exampleInputEmail1">Jenis Dokumen</label>
-							    <select class="form-control" id="exampleFormControlSelect1" name="jenis_dokumen">
+						 <x-form.wrapper title="Jenis Dokumen" required="true">
+							    <select class="form-control" id="exampleFormControlSelect1" name="jenis_dokumen" required>
 							      <option value="">"------Pilih-------"</option>
-							      <option value="jkk">JKK</option>
-							      <option value="seminar">Seminar</option>
-							      <option value="piagam">Piagam</option>
-							      <option value="kompetisi eksternal">Kompetisi Eksternal</option>
+							      <option value="SK" {{ $data_skpi->jenis_dokumen == 'SK' ? 'selected' : null }}>Surat Keputusan (SK)</option>
+							      <option value="SERTIFIKAT" {{ $data_skpi->jenis_dokumen == 'SERTIFIKAT' ? 'selected' : null }}>Sertifikat</option>
+							      <option value="STU" {{ $data_skpi->jenis_dokumen == 'STU' ? 'selected' : null }}>Surat Tugas (STU)</option>
+							      <option value="PIAGAM" {{ $data_skpi->jenis_dokumen == 'PIAGAM' ? 'selected' : null }}>Piagam</option>
 							    </select>
-						</div>
+						</x-form.wrapper>
 
-						<div class="form-group">
-								<label for="exampleInputEmail1">Tanggal Dokumen</label>
-								<input readonly type="text" name="tanggal_dokumen" class="form-control datepicker date" id="tanggaldokumen" aria-describedby="emailHelp" placeholder="dd/mm/yyyy" />
-						</div>
+						<x-form.wrapper title="Tanggal Dokumen" required="true">
+								<input readonly type="text" name="tanggal_dokumen" class="form-control datepicker date" aria-describedby="emailHelp" placeholder="dd/mm/yyyy" value="{{$data_skpi->tanggal_dokumen}}" id="tanggaldokumen">
+				      	</x-form.wrapper>
 
-						<div class="form-group">
-							    <label for="exampleInputEmail1">Tahun Dokumen</label>
-							    <input type="text" name="tahun" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Tahun Dokumen">
-							    Sesuai dengan tanggal dokumen
-						</div>
+				      	<x-form.wrapper title="Tahun Dokumen" required="true">
+								<input readonly type="text" name="tanggal_dokumen" class="form-control" aria-describedby="emailHelp" placeholder="dd/mm/yyyy" value="{{$data_skpi->tahun}}">
+				      	</x-form.wrapper>
 
-						<div class="form-group">
-							    <label for="exampleInputEmail1">Judul Sertifikat</label>
-							    <input type="text" name="judul_sertifikat" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="" value="{{$data_skpi->judul_sertifikat}}">
-							  </div>
+				      	<x-form.wrapper title="Judul Sertifikat" required="true">
+				      			<x-form.input name="judul_sertifikat" required placeholder="Judul Sertifikat" value="{{$data_skpi->judul_sertifikat}}" />
+				      	</x-form.wrapper>
 
-						<div class="form-group">
-							    <label for="exampleInputEmail1">Penyelenggara</label>
-							    <input type="text" name="penyelenggara" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="" value="{{$data_skpi->penyelenggara}}">
-						</div>
+
+				      	<x-form.wrapper title="Penyelenggara" required="true">
+				      			<x-form.input name="penyelenggara" required placeholder="Penyelenggara" value="{{$data_skpi->penyelenggara}}" />
+				      	</x-form.wrapper>
 
 					
 
 					 <input type="hidden" name="status" value="0">
 				      <div class="modal-footer">
-				        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
 						<button type="submit" class="btn btn-primary">Submit</button>
 						</form>
 				      </div>

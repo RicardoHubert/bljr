@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Carbon\Carbon;
-
 use Exception;
 
 class SkpiController extends Controller
@@ -16,13 +15,16 @@ class SkpiController extends Controller
             $data_kalbiser = \App\kalbiser::where('Prodi','LIKE','%'.$request->cari. '%')->get();
                 $data_skpi = \App\Skpi::all();
                $paginate = \App\Skpi::paginate(3);
+               $users = \App\User::all();
         }else{
                 # code...
             $data_skpi = \App\Skpi::all();
             $data_kalbiser = \App\kalbiser::all();
-        }
+            $users = \App\User::all();
 
-	    return view('skpi.index',['data_skpi' => $data_skpi,'data_kalbiser' => $data_kalbiser]);
+        }
+        
+	    return view('skpi.index',['data_skpi' => $data_skpi,'data_kalbiser' => $data_kalbiser, 'users' => $users]);
     }
 
     public function create(Request $request)
@@ -39,14 +41,6 @@ class SkpiController extends Controller
 
             $Skpi->file_skpi = 'fileskpi/' . $filename;
             $Skpi->save();
-
-         // Insert ke table Dokumen Kalbiuser
-        
-       $request->request->add(['skpi_id' => $Skpi->id]);
-       $request->request->add(['kalbiser_id' => $Skpi->user_id]);
-       $dokumenkalbiser=\App\dokumenkalbiser::create($request->all());
-       $dokumenkalbiser->save();
-
         }
         return redirect('/skpi')->with('sukses','Data berhasil diinput');
     }
@@ -92,6 +86,8 @@ class SkpiController extends Controller
 
             $data_skpi->jenis_dokumen = $request->jenis_dokumen;
             $data_skpi->ormawa_id = $request->ormawa_id;
+            $data_skpi->judul_sertifikat = $request->judul_sertifikat;
+            $data_skpi->penyelenggara = $request->penyelenggara;
 
         $data_skpi->save();
 
@@ -126,11 +122,24 @@ class SkpiController extends Controller
     {
         $skpi = \App\Skpi::find($id);
         $skpi->status = '1';
+        $skpi->approvedby = auth()->user()->id;
         $skpi->save();
 
         noty()->flash('Yay!', 'Your data has been approved');
         return redirect()->back();
     }
+
+
+    public function approvestatus2($id)
+    {
+        $skpi = \App\Skpi::find($id);
+        $skpi->status = '0';
+        $skpi->save();
+
+        noty()->flash('Yay!', 'Your data has been disapproved');
+        return redirect()->back();
+    }
+
 
     public function approvestatusall()
     {

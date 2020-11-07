@@ -19,32 +19,51 @@
 						<input type="file" name="foto" value="{{$kalbiser->foto}}" class="form-control">
 						</div>
 
-						<div class="form-group">
-						<label for="exampleInputEmail1">Nama</label>
-						<input type="text" name="nama" value="{{$kalbiser->nama}}" class="form-control">
-						</div>
+						@if(auth()->user()->role == 'admin')
 
-						<div class="form-group">
-						<label for="exampleInputEmail1">NIM</label>
-						<input type="text" name="nim" value="{{$kalbiser->nim}}" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-						</div>
+						<x-form.wrapper title="Nama" required="true">
+			      			<x-form.input value="{{ $kalbiser->nama }}" name="nama_ormawa" required placeholder="Nama Kalbiser" />
+			      		</x-form.wrapper>
 
-						<div class="form-group">
-							<label for="exampleInputEmail1">Prodi</label>
-							<input type="text" name="prodi" class="form-control" id="exampleInputEmail1" value="{{$kalbiser->prodi}}" aria-describedby="emailHelp">
-						</div>
 
-						<div class="form-group">
-							<label for="exampleInputEmail1">No.Handphone</label>
-							<input type="text" name="nohp" class="form-control" id="exampleInputEmail1" value="{{$kalbiser->nohp}}" aria-describedby="emailHelp">
-						</div>
+						<x-form.wrapper title="NIM" required="true">
+			      			<x-form.input value="{{ $kalbiser->nim }}" name="nim" required placeholder="NIM" />
+			      		</x-form.wrapper>
 
-						<div class="form-group">
-							<label for="exampleInputEmail1">Email</label>
-							<input type="text" name="email" class="form-control" id="exampleInputEmail1" value="{{$kalbiser->email}}" aria-describedby="emailHelp">
-						</div>
+							<x-form.wrapper title="Program Studi" required="true">
+				      			<select class="form-control" name="prodi_id" required>
+							      <option value="">"------Pilih Prodi-------"</option>
+							      @foreach($prodi as $p)
+							      <option value="{{ $p->id }}" {{ $kalbiser->prodi_id == $p->id ? 'selected' : null }}>{{ $p->nama_prodi }}</option>
+							      @endforeach
 
-							<button type="submit" class="btn btn-warning">Edit</button>
+							    </select>
+				      		</x-form.wrapper>
+
+						<x-form.wrapper title="No.Handphone" required="true">
+			      			<x-form.input value="{{ $kalbiser->nohp }}" name="nohp" required placeholder="No.Handphone" />
+			      		</x-form.wrapper>
+
+			      		<x-form.wrapper title="Student Email" required="true">
+			      			<x-form.input value="{{ $kalbiser->email }}" name="email" required placeholder="Email" />
+			      		</x-form.wrapper>
+
+
+<!-- 						<x-form.wrapper title="Email" required="true">
+				      			<x-form.input type="email" name="email" required placeholder="Email" value="{{$kalbiser->email}}" />
+				      	</x-form.wrapper> -->
+
+						<button type="submit" class="btn btn-warning">Edit</button>
+
+						@elseif(auth()->user()->role == 'student')
+
+						<x-form.wrapper title="No.Handphone" required="true">
+			      			<x-form.input value="{{ $kalbiser->nohp }}" name="nohp" required placeholder="No.Handphone" />
+			      		</x-form.wrapper>
+
+			      		<button type="submit" class="btn btn-warning">Edit</button>
+			      		@endif
+
 							</form>
 						</div>
 					</div>

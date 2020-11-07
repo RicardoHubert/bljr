@@ -3,9 +3,6 @@
 				<a href="/siswa"><img src="{{asset('admin/assets/img/logokalbis.png')}}" alt="Klorofil Logo" class="img-responsive logo" style="width: 100px"></a>
 			</div>
 			<div class="container-fluid">
-				<div class="navbar-btn">
-					<button type="button" class="btn-toggle-fullwidth"><i class="lnr lnr-arrow-left-circle"></i></button>
-				</div>
 <!-- 				<form class="navbar-form navbar-left">
 					<div class="input-group">
 						<input type="text" value="" name="cari" class="form-control" placeholder="Search dashboard...">

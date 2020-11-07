@@ -19,26 +19,21 @@
 						<input type="file" name="logo_ormawa" value="{{$ormawa->logo_ormawa}}" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Nama Depan">
 						</div>
 
-						<div class="form-group">
-						<label for="exampleInputEmail1">Nama Ormawa</label>
-						<input type="text" name="nama_ormawa" value="{{$ormawa->nama_ormawa}}" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Nama Depan">
-						</div>
-
-						<div class="form-group">
-							<label for="exampleInputEmail1">Kategori Ormawa</label>
-							<input type="text" name="kategori_ormawa" value="{{$ormawa->kategori_ormawa}}" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Kategori Ormawa">
-						</div>
-
-
-						<div class="form-group">
-							<label for="exampleInputEmail1">Visi</label>
-							<input type="text" name="visi" class="form-control" id="exampleInputEmail1" value="{{$ormawa->visi}}" aria-describedby="emailHelp" placeholder="Visi">
-						</div>
-
-						<div class="form-group">
-							<label for="exampleInputEmail1">Misi</label>
-							<input type="text" name="misi" class="form-control" id="exampleInputEmail1" value="{{$ormawa->misi}}" aria-describedby="emailHelp" placeholder="Misi">
-						</div>
+			      		<x-form.wrapper title="Nama Ormawa" required="true">
+			      			<x-form.input value="{{ $ormawa->nama_ormawa }}" name="nama_ormawa" required placeholder="Nama Ormawa" />
+			      		</x-form.wrapper>
+			
+			      		<x-form.wrapper title="Kategori Ormawa" required="true">
+			      			<x-form.input value="{{ $ormawa->kategori_ormawa }}" name="kategori_ormawa" required placeholder="Kategori Ormawa" />
+			      		</x-form.wrapper>
+			
+			      		<x-form.wrapper title="Visi" required="true">
+			      			<x-form.input value="{{ $ormawa->visi }}" name="visi" required placeholder="Visi" />
+			      		</x-form.wrapper>
+			
+			      		<x-form.wrapper title="Misi" required="true">
+			      			<x-form.input value="{{ $ormawa->misi }}" name="misi" required placeholder="Misi" />
+			      		</x-form.wrapper>
 
 						<div class="form-group">
 							<input type="hidden" name="email" class="form-control" id="exampleInputEmail1" value="{{$ormawa->email}}" aria-describedby="emailHelp" placeholder="Email">

@@ -4,7 +4,7 @@
 @section('content')
 		<div class="main">
 			<div class="main-control">
-				<div class="container-fluid">
+				<div class="container-fluid" style="margin-top: 50px !important;">
 					<div class="row">
 						<div class="col-md-12">
 							<div class="panel">
@@ -17,23 +17,24 @@
 												<button type="submit" class="button btn-xl" style="background-color: yellow;" value="Approve All">Approve All</button>
 										</form>
 									</div>
-									<div class="right">
+<!-- 									<div class="right">
 									<button type="button" class="btn" data-toggle="modal" data-target="#exampleModal"><i class="lnr lnr-plus-circle"></i></button>
-									</div>
+									</div> -->
 								</div>
 							<div class="panel-body">
+								<div class="table-responsive">
 									 <table class="table table-hover data">
 									 	<thead>
 												<tr>
 													<th></th>
-													<th>Gambar</th>
-													<th>Nim</th>
+													<th>NIM</th>
 													<th>Nama Mahasiswa</th>	
-													<th>Prodi</th>					
+													<th>Program Studi</th>					
 													<th>Jenis Dokumen</th>
 													<th>Tanggal Dokumen</th>
 													<th>Judul Sertifikat</th>
-													<th>Status</th>		
+													<th>Status</th>
+													<th>Aksi</th>		
 											</tr>
 										</thead>
 										<tbody>
@@ -46,22 +47,32 @@
 															<td>
 																<input form="form" type="checkbox" name="approveId[]" value="{{ $skpi->id }}">
 															</td>
-															<td><img style="height: 50px;" src="{{$skpi->file_skpi}}" /></td>
 														
 															<td>{{$kalbiser->nim}}</td>
 															<td>{{$kalbiser->nama}}</td>
-															<td>{{$kalbiser->prodi}}</td>
+															<td>{{$kalbiser->prodi->nama_prodi}}</td>
 														
 
 
 															<td>{{$skpi->jenis_dokumen}}</td>
-															<td>{{$skpi->tanggal_dokumen}}</th>
-															<th>{{$skpi->judul_sertifikat}}</th>
+															<td>{{$skpi->tanggal_dokumen}}</td>
+															<td>{{$skpi->judul_sertifikat}}</td>
+															<td>@if($skpi->status == '0' && $skpi->user_id == auth()->user()->id || $skpi->status == null && $skpi->user_id == auth()->user()->id || $skpi->status == '0' && auth()->user()->role == 'admin' || $skpi->status == null && auth()->user()->role == 'admin')
+															<span class="badge badge-danger">Belum Di Approve</span>
+														@elseif($skpi->status == '1' && $skpi->user_id == auth()->user()->id || $skpi->status == null && $skpi->user_id == auth()->user()->id || $skpi->status == '1' && auth()->user()->role == 'admin')
+															<span class="badge badge-success">Sudah Di Approve</span>
+														@endif
+
+
+													</td>
 															<td>
+															<button id="buttonViewModal" type="button" class="btn btn-primary" data-toggle="modal" data-id="{{ asset($skpi->file_skpi) }}" data-target="#viewModal">
+																View File
+															</button>
 															@if($skpi->status != '1')
 																<a href="/approveskpi/{{$skpi->id}}" class="btn btn-sm btn-warning">approve</a>
 															@else
-																<span>Sudah di approve</span>
+																<a href="/approveskpi2/{{$skpi->id}}" class="btn btn-sm btn-danger">disapprove</a>
 															@endif
 															</td>
 													</tr>
@@ -71,7 +82,20 @@
 
 												@endforeach
 										</tbody>
+										<tfoot>
+													
+													<td></td>
+													<th></th>
+													<th></th>
+													<th></th>
+													<th></th>
+													<th></th>
+													<th></th>
+													<th></th>
+													
+										</tfoot>
 									</table>
+								</div>
 								</div>
 								</div>
 							</div>
@@ -82,16 +106,43 @@
 	
 	<script type="text/javascript">
 	$(document).ready(function() {
-	$('.data').DataTable();
+	    // Setup - add a text input to each footer cell
+    	$('.data tfoot th').each( function () {
+        var title = $(this).text();
+        $(this).html( '<input type="text" placeholder="Search '+title+'" />' );
+    
+		});
+
+		  var table = $('.data').DataTable( {
+         "lengthMenu": [[7, 25, 30, -1], [7, 25, 30, "All"]]
+
+    	} );
+
+		 $(".data tfoot input").on( 'keyup change', function () {
+        table
+            .column( $(this).parent().index()+':visible' )
+            .search( this.value )
+            .draw();
+    	});
 	});
 	</script>
 
 
+<!-- Button View Modal untuk vie files gambar -->
+<div class="modal fade" id="viewModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	  <div class="modal-dialog" role="document">
+	    <div class="modal-content">
+	      <div class="modal-body-view-file" style="width: 250%"></div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+	      </div>
+	    </div>
+	  </div>
+</div>
 
 
 
-
-	<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<!-- <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 				  <div class="modal-dialog">
 				    <div class="modal-content">
 				      <div class="modal-header">
@@ -145,7 +196,7 @@
 							  <div class="form-group">
 							    <label for="exampleInputEmail1">Judul Sertifikat</label>
 							    <input type="text" name="judul_sertifikat" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="">
-							  </div>
+							  </div> -->
 <!-- 					  <br>
 					  	<div class="form-check form-check-inline">
 						  <input class="form-check-input " type="radio" name="kegiatan_id" id="kegiatan_radio" value="kegiatan">
@@ -224,6 +275,16 @@
 				});
 			}
 		});
+
+		$(document).on("click", "#buttonViewModal", function(){
+		var skpiId = $(this).data('id');
+		var bodyElement = $('.modal-body-view-file');
+		bodyElement.html('');
+		var domImage = `<img src="${skpiId}" style="width:80%" />`
+
+		bodyElement.append(domImage)
+	})
+	
 	});
 </script>
 @stop

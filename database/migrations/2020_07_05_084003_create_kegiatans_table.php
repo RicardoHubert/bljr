@@ -15,12 +15,13 @@ class CreateKegiatansTable extends Migration
     {
         Schema::create('kegiatan', function (Blueprint $table) {
             $table->id();
-            $table->string('poster');
-            $table->string('nama_kegiatan');
-            $table->string('ormawa_id');
-            $table->string('deskripsi_kegiatan');
-            $table->string('tanggal_kegiatan');
+            $table->string('poster')->nullable();
+            $table->string('nama_kegiatan')->nullable();
+            $table->string('ormawa_id')->nullable();
+            $table->string('deskripsi_kegiatan')->nullable();
+            $table->string('tanggal_kegiatan')->nullable();
             $table->string('sertifikat')->nullable();
+            $table->string('status')->nullable();
             $table->timestamps();
         });
     }

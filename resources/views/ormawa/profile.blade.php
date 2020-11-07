@@ -13,25 +13,19 @@
 								<!-- PROFILE HEADER -->
 								<div class="profile-header">
 									<div class="overlay"></div>
-									<div class="profile-main">
-										<img class="img-circle" alt="logo_ormawa" src="{{$ormawa->getAvatar()}}" style="max-height: 150px; max-width: 150px;">
-										<h3 class="name">{{$ormawa->nama_ormawa}}</h3>
-										<span class="online-status status-available">Available</span>
+									<div class="profile-main" style="background-image: url('{{$ormawa->getAvatar()}}'); height: 200px; width: 100%">
 									</div>
 									<div class="profile-stat">
 										<div class="row">
-											<div class="col-md-6 stat-item">
-												45 <span>Jumnlah Aktivitas</span>
-											</div>
-											<div class="col-md-6 stat-item">
-												15 <span>Penghargaan</span>
+											<div class="col-md-12 stat-item">
+												{{$ormawa->nama_ormawa}}
 											</div>
 										</div>
 									</div>
 								</div>
 								<!-- END PROFILE HEADER -->
 								<!-- PROFILE DETAIL -->
-								<div class="profile-detail">
+								<div class="profile-detail" style="background-color: white;">
 									<div class="profile-info">
 										<h4 class="heading">Data Ormawa</h4>
 										<ul class="list-unstyled list-justify">
@@ -59,24 +53,18 @@
 								<div class="tab-content">
 									<div class="tab-pane fade in active" id="tab-bottom-left1">
 										<ul class="list-unstyled activity-timeline">
+											@php
+												$kegiatans = \App\Kegiatan::where('ormawa_id', request()->segment(2))->get();
+											@endphp
+											
+                                			@foreach($kegiatans as $kegiatan)   
 											<li>
 												<i class="fa fa-comment activity-icon"></i>
-												<p>Commented on post <a href="#">Prototyping</a> <span class="timestamp">2 minutes ago</span></p>
+												<p>{{ $kegiatan->nama_kegiatan }} <a href="/ormawa/{{ request()->segment(2) }}">{{ $kegiatan->deskripsi_kegiatan }}</a> <span class="timestamp">{{ $kegiatan->tanggal_kegiatan }}</span></p>
 											</li>
-											<li>
-												<i class="fa fa-cloud-upload activity-icon"></i>
-												<p>Uploaded new file <a href="#">Proposal.docx</a> to project <a href="#">New Year Campaign</a> <span class="timestamp">7 hours ago</span></p>
-											</li>
-											<li>
-												<i class="fa fa-plus activity-icon"></i>
-												<p>Added <a href="#">Martin</a> and <a href="#">3 others colleagues</a> to project repository <span class="timestamp">Yesterday</span></p>
-											</li>
-											<li>
-												<i class="fa fa-check activity-icon"></i>
-												<p>Finished 80% of all <a href="#">assigned tasks</a> <span class="timestamp">1 day ago</span></p>
-											</li>
+											@endforeach
 										</ul>
-										<div class="margin-top-30 text-center"><a class="btn btn-default" href="#">See all activity</a></div>
+									
 									</div>
 								</div>
 								<!-- END TABBED CONTENT -->

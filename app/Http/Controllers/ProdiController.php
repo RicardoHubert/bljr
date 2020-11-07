@@ -72,7 +72,7 @@ class ProdiController extends Controller
     public function approve()
     {
         $prodi = prodi::where('user_id', auth()->user()->id)->first();
-        $kalbisers = kalbiser::where('prodi', $prodi->nama_prodi)->get()->pluck('user_id');
+        $kalbisers = kalbiser::where('prodi_id', $prodi->id)->get()->pluck('user_id');
         $data = skpi::whereIn('user_id', $kalbisers)->get();
         return view('approveprodi.index', compact('data'));
     }

@@ -3,14 +3,14 @@
 @section('content')
 		<div class="main">
 			<div class="main-control">
-				<div class="container-fluid">
+				<div class="container-fluid" style="margin-top: 50px !important;">
 					<div class="row">
 						<div class="col-md-12">
 							<div class="panel">
 								<div class="panel-heading">
 									<h3 class="panel-title">Data Prodi</h3>
 									<div class="right">
-									<button type="button" class="btn" data-toggle="modal" data-target="#exampleModal"><i class="lnr lnr-plus-circle"></i></button>
+									<button type="button" class="btn" data-toggle="modal" data-target="#exampleModal"><i class="lnr lnr-plus-circle"></i>Create New Prodi</button>
 									</div>
 								</div>
 							<div class="panel-body">
@@ -63,15 +63,13 @@
 				      		<form action="/prodi/create" method="POST" enctype="multipart/form-data">
 				      			{{csrf_field()}}
 
-							  <div class="form-group">
-							    <label for="exampleInputEmail1">Nama Prodi</label>
-							    <input type="text" name="nama_prodi" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Nama Prodi">
-							  </div>
+							<x-form.wrapper title="Nama Prodi" required="true">
+				      			<x-form.input name="nama_prodi" required placeholder="Nama Prodi" />
+				      		</x-form.wrapper>
 
-							  <div class="form-group">
-							    <label for="exampleInputEmail1">Email</label>
-							    <input type="text" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Email">
-							  </div>
+							 <x-form.wrapper title="Email" required="true">
+				      			<x-form.input name="email" required placeholder="Email" />
+				      		</x-form.wrapper>
 
 				      </div>
 				      <div class="modal-footer">

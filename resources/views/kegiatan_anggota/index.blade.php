@@ -20,56 +20,49 @@
                                 <div class="card-header"><h3>Tambah Data Angota</h3></div>
                                 <div class="card-body">
                                     @csrf
-                                    <div class="form-group">
-                                        <label for="exampleInputEmail1">Nama Ormawa</label>
-                                        <select class="form-control" id="ormawa_id" name="ormawa_id">
-                                            <option value="">"------Pilih-------"</option>
-                                            @foreach($ormawas as $ormawa)
-                                            <option value="{{$ormawa->id}}" {{ request('ormawa_id') == $ormawa->id ? 'selected' : null }}>{{$ormawa->nama_ormawa}}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
 
-                                    <div class="form-group">
-                                        <label for="exampleInputEmail1">Nama Kegiatan</label>
+                                    <x-form.wrapper title="Nama Ormawa" required="true">
+                                        <select class="form-control" id="exampleFormControlSelect1" name="ormawa_id" required>
+                                        <option value="">"------Pilih-------"</option>
+                                          @foreach($ormawas as $ormawa)
+                                          <option value="{{$ormawa->id}}">{{$ormawa->nama_ormawa}}</option>
+                                          @endforeach
+                                         </select>
+                                    </x-form.wrapper>
+
+                                    <x-form.wrapper title="Nama/Tema Kegiatan" required="true">
                                         <select class="form-control select2" ajax="kegiatan" id="kegiatan_id" name="kegiatan_id" style="width:100%" />
-
                                         </select>
-                                    </div>
+                                    </x-form.wrapper>
 
-                                    <div class="form-group">
-                                        <label for="exampleInputEmail1">Nama Mahasiswa</label>
+
+                                    <x-form.wrapper title="Nama Mahasiswa" required="true">
                                         <select class="form-control select2" ajax="kalbiser" id="kalbiser_id" name="kalbiser_id" style="width:100%" />
-
                                         </select>
-                                    </div>
+                                     </x-form.wrapper>
 
-                                    <div class="form-group">
-                                        <label for="exampleInputEmail1">Jenis Dokumen</label>
-                                        <select class="form-control" id="jenis_dokumen" name="jenis_dokumen">
-                                            <option value="">"------Pilih-------"</option>
-                                            <option value="jkk">JKK</option>
-                                            <option value="seminar">Seminar</option>
-                                            <option value="piagam">Piagam</option>
-                                            <option value="kompetisi eksternal">Kompetisi Eksternal</option>
+                                    <x-form.wrapper title="Jenis Dokumen" required="true">
+                                        <select class="form-control" name="jenis_dokumen" required>
+                                        <option value="">"------Pilih-------"</option>
+                                        <option value="SK">SK(Surat Keputusan)</option>
+                                        <option value="SERTIFIKAT">Sertifikat</option>
+                                        <option value="STU">Surat Tugas</option>
+                                        <option value="PIAGAM">Piagam</option>
                                         </select>
-                                    </div>
+                                    </x-form.wrapper>
 
-                                    <div class="form-group">
-                                        <label for="exampleInputEmail1">Penyelenggara</label>
-                                        <input type="text" name="penyelenggara" class="form-control" />
-                                    </div>
+                                    <x-form.wrapper title="Penyelenggara" required="true">
+                                        <x-form.input name="penyelenggara" required placeholder="penyelenggara" />
+                                    </x-form.wrapper>
 
-                                    <div class="form-group">
-                                        <label for="exampleInputEmail1">Tanggal Dokumen</label>
-                                        <input readonly type="text" name="tanggal_dokumen" class="form-control datepicker date" aria-describedby="emailHelp" placeholder="dd/mm/yyyy" />
-                                    </div>
+                                    <x-form.wrapper title="Tanggal Dokumen" required="true">
+                                            <input readonly type="text" name="tanggal_dokumen" class="form-control datepicker date" aria-describedby="emailHelp" placeholder="dd/mm/yyyy">
+                                    </x-form.wrapper>
 
-                                    <div class="form-group">
-                                        <label for="exampleInputEmail1">Tahun Dokumen</label>
+                                    <x-form.wrapper title="Tahun Dokumen" required="true">
                                         <input type="number" min="2000" max="{{Carbon\Carbon::now()->isoFormat("YYYY")}}" value="{{Carbon\Carbon::now()->isoFormat("YYYY")}}" name="tahun" class="form-control" aria-describedby="emailHelp" placeholder="Tahun Dokumen" />
                                         Sesuai dengan tanggal dokumen
-                                    </div>
+                                    </x-form.wrapper>
                                 </div>
                                 <div class="card-footer">
                                     <button name="submit" value="submit" type="submit" class="btn btn-primary">Submit</button>
@@ -132,7 +125,7 @@
             kegiatans: (data) => {
                 return {
                     results: data.map(k => {
-                        return {id: k.id, text: k.sertifikat};
+                        return {id: k.id, text: k.nama_kegiatan};
                     })
                 };
             }

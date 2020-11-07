@@ -108,7 +108,7 @@
                                  
                                   </ul>
 
-                                <a href="/" class="btn btn-warning btn-round">
+                                <button class="btn btn-warning btn-round"></button>
                                     <i class="material-icons">subject</i> Kalbis Point
                                 </a>
                                 <a href="/" class="btn btn-white btn-just-icon btn-link" title="" rel="tooltip" data-original-title="Save to Pocket">

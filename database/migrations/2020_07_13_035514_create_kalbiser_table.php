@@ -15,14 +15,14 @@ class CreateKalbiserTable extends Migration
     {
         Schema::create('kalbiser', function (Blueprint $table) {
             $table->id();
-            $table->string('user_id');
-            $table->string('nama');
-            $table->string('nim');
-            $table->string('foto');
-            $table->string('prodi');
-            $table->string('tahun_akademik');
-            $table->string('nohp');
-            $table->string('email');
+            $table->string('user_id')->nullable();
+            $table->string('nama')->nullable();
+            $table->string('nim')->nullable();
+            $table->string('foto')->nullable();
+            $table->string('prodi')->nullable();
+            $table->string('tahun_akademik')->nullable();
+            $table->string('nohp')->nullable();
+            $table->string('email')->nullable();
             $table->timestamps();
         });
     }

@@ -9,18 +9,25 @@ use Jenssegers\Date\Date;
 use App\User;
 use MCGalih\Serti\Sertifikat;
 use Carbon\Carbon;
+use App\Prodi;
 
 class KalbiserController extends Controller
 {
     //
      public function index(Request $request){
      $data_kalbiser = \App\kalbiser::all();
-      return view('kalbiser.index',['data_kalbiser' => $data_kalbiser]);
+     $prodi = \App\Prodi::all();
+      return view('kalbiser.index',['data_kalbiser' => $data_kalbiser, 'prodi' => $prodi]);
      }
 
       public function create(Request $request)
     {
         # code...
+        $exist = User::where('email', request('email'))->first();
+        if($exist) {
+          noty()->danger('Whops', 'Email already exist');
+          return redirect()->back();
+        }
            # Insert Ke table user
         $user = new \App\User;
         $user->name = $request->nama;
@@ -38,6 +45,8 @@ class KalbiserController extends Controller
        $kalbiser->foto = $request->file('foto')->getClientOriginalName();
        $kalbiser->save();
    		}
+
+      
        return redirect('/kalbiser')->with('sukses','Data berhasil diinput');
         }
 
@@ -45,7 +54,8 @@ class KalbiserController extends Controller
     {
         # code...
         $kalbiser = \App\kalbiser::find($id);
-        return view('kalbiser/edit',['kalbiser' => $kalbiser]);
+         $prodi = \App\Prodi::all();
+        return view('kalbiser/edit',['kalbiser' => $kalbiser, 'prodi' => $prodi]);
     }
     public function update(Request $request,$id)
     {
@@ -73,7 +83,8 @@ class KalbiserController extends Controller
 
     public function profile($id){
         $kalbiser = \App\kalbiser::find($id);
-        return view('kalbiser.profile', ['kalbiser' => $kalbiser]);
+        $users = \App\User::all();
+        return view('kalbiser.profile', ['kalbiser' => $kalbiser, 'users' => $users]);
     }
 
 
@@ -88,7 +99,7 @@ class KalbiserController extends Controller
 
         foreach($data as $index => $skpi) {
           $dateFormat = Date::parse($skpi->tanggal_dokumen)->format('d F Y');
-            $glue = $index + 1 . '.'. ' '. $skpi->user->name . ' - ' . $skpi->judul_sertifikat . ', '. $dateFormat. ', ' . $skpi->penyelenggara;
+            $glue = $index + 1 . '.'. ' '. $skpi->user->name . ' - ' . $skpi->judul_sertifikat . ', '. $dateFormat. ', ' . $skpi->penyelenggara . ',' . $skpi->nomor_file;
             $section->addText($glue);
     }
 
@@ -121,8 +132,14 @@ class KalbiserController extends Controller
     public function print_skpi_list($id){
         $skpis = \App\kalbiser::find($id)
                     ->skpi()
-                    ->where("status", "<>", null)
+                    ->where("status", "<>", 0)
                     ->get();
+
+        if($skpis->count() == 0) {
+          noty()->danger('Whops', 'File is empty');
+          return back();
+        }
+
         $sertifikat = new Sertifikat(storage_path("app/template/blangko.jpg"));
         $initialYLoc = 500; // X Location
         $xLoc = 1240/5; // Y Location

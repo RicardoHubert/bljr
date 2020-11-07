@@ -15,7 +15,8 @@ class CreateKompetisiTable extends Migration
     {
         Schema::create('kompetisiinternal', function (Blueprint $table) {
             $table->id();
-            $table->string('poster');
+            $table->string('user_id')->nullable;
+            $table->string('poster')->nullable;
             $table->string('nama_kompetisi');
             $table->string('jenis_kompetisi');
             $table->string('ormawa_id')->nullable();
@@ -27,7 +28,7 @@ class CreateKompetisiTable extends Migration
             $table->string('nama_kegiatan')->nullable();
             $table->string('tanggal_kegiatan')->nullable();
             $table->string('penyelenggara')->nullable();
-           
+            $table->string('status')->nullable();
             $table->timestamps();
         });
     }

@@ -18,7 +18,9 @@
                               <ul class="nav">
                                 <li><a href="/ormawa" class="">Ormawa</a></li>
                                 <li><a href="/kegiatan" class="">Kegiatan</a></li>
-                                <li><a href="/kegiatan_anggota" class="">Input Data Kegiatan</a></li>                              </ul>
+                                <li><a href="/kegiatan_anggota" class="">Input Data Kegiatan</a></li>
+                                <li><a href="/k-internal" class="">Kompetisi</a></li>
+                              </ul>
                             </div>
                         </li>
             @elseif(auth()->user()->role == 'student')
@@ -27,7 +29,7 @@
                 <div id="subPages2" class="collapse ">
                   <ul class="nav">
                     <li><a href="/kalbiser" class="">Data Saya</a></li>
-                    <li><a href="/kompetisiinternal" class="">Kompetisi</a></li>
+                    <li><a href="/k-internal" class="">Kompetisi</a></li>
                     <li><a href="/skpi" class="">SKPI</a></li>
                   </ul>
                 </div>
@@ -38,13 +40,12 @@
                   <div id="subPages" class="collapse ">
                     <ul class="nav">
                       <li><a href="/ormawa" class="">Data Ormawa</a></li>
-                    
                       <li><a href="/kegiatan" class="">Data Kegiatan</a></li>
                       <li><a href="/kegiatan_anggota" class="">Input Data Kegiatan</a></li>
+                      <li><a href="/kegiatan/nosertif" class="">Nomor E-Sertif</a></li>
                     </ul>
                   </div>
               </li>
-
 
 
               <li>
@@ -52,7 +53,7 @@
                 <div id="subPages2" class="collapse ">
                   <ul class="nav">
                     <li><a href="/kalbiser" class="">Data Kalbiser</a></li>
-                    <li><a href="/kompetisiinternal" class="">Kompetisi</a></li>
+                    <li><a href="/k-internal" class="">Kompetisi</a></li>
                     <li><a href="/skpi" class="">SKPI</a></li>
                   </ul>
                 </div>
@@ -78,17 +79,31 @@
                 </div>
             </li>
 
+            <li>
+              <a href="#subPages5" data-toggle="collapse" class="collapsed">
+                <i class="lnr lnr-users"></i> <span>Custom</span> 
+                <i class="icon-submenu lnr lnr-chevron-left"></i></a>
+                <div id="subPages5" class="collapse ">
+                  <ul class="nav">
+                    <li><a href="{{ route('background_images.index') }}" class="">Custom Background Frontend</a></li>
+                  </ul>
+                </div>
+              </li>
+
              @elseif(auth()->user()->role == 'Prodi')
              <li>
-                <a href="#subPages3" data-toggle="collapse" class="collapsed"><i class="lnr lnr-users"></i> <span>Approval CSD</span> <i class="icon-submenu lnr lnr-chevron-left"></i></a>
+                <a href="#subPages3" data-toggle="collapse" class="collapsed"><i class="lnr lnr-users"></i> <span>Approval Prodi</span> <i class="icon-submenu lnr lnr-chevron-left"></i></a>
                 <div id="subPages3" class="collapse ">
                   <ul class="nav">
                     
                     <li><a href="/approveprodi" class="">Approval SKPI</a></li>
-
+                    
                   </ul>
                 </div>
             </li>
+            @elseif(auth()->user()->role == 'ao')
+            <li><a href="/kalbiser" class="">Data Kalbiser</a></li>
+            <li><a href="/skpi" class="">SKPI</a></li>
             @endif
 
 						<!-- <li><a href="/kalbiser" class=""><i class="lnr lnr-user"></i> <span>Data Kalbiser</span></a></li> -->
