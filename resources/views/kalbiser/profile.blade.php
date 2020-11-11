@@ -11,7 +11,7 @@
 							<!-- LEFT COLUMN -->
 							<div class="profile-left">
 								<!-- PROFILE HEADER -->
-		
+
 
 								<div class="profile-header">
 									<div class="overlay"></div>
@@ -33,7 +33,7 @@
 										<ul class="list-unstyled list-justify">
 											<li>Nama <span>{{$kalbiser->nama}}</span></li>
 											<li>NIM <span>{{$kalbiser->nim}}</span></li>
-											<li>Program Studi <span>{{$kalbiser->prodi->nama_prodi}}</span></li>
+											<li>Program Studi <span>{{$kalbiser->prodi}}</span></li>
 											<li>Student Email <span>{{$kalbiser->email}}</a></span></li>
 										</ul>
 									</div>
@@ -73,7 +73,7 @@
                                                         <tr>
                                                             <td>{{$skpi->judul_sertifikat}}</td>
                                                             <td>{{$skpi->tanggal_dokumen}}</td>
-                                                            
+
                                                             <td>
 
                                                                 <span class="alert-{{$skpi->status == null || $skpi->status == 0 ? 'warning' : 'success'}}">
@@ -131,7 +131,7 @@
     	$('.data tfoot th').each( function () {
         var title = $(this).text();
         $(this).html( '<input type="text" placeholder="Search '+title+'" />' );
-    
+
 		});
 
 		  var table = $('.data').DataTable( {

@@ -28,30 +28,30 @@
 												<tr>
 													<th></th>
 													<th>NIM</th>
-													<th>Nama Mahasiswa</th>	
-													<th>Program Studi</th>					
+													<th>Nama Mahasiswa</th>
+													<th>Program Studi</th>
 													<th>Jenis Dokumen</th>
 													<th>Tanggal Dokumen</th>
 													<th>Judul Sertifikat</th>
 													<th>Status</th>
-													<th>Aksi</th>		
+													<th>Aksi</th>
 											</tr>
 										</thead>
 										<tbody>
 
 
-												<tr>										
+												<tr>
 												@foreach($data_skpi as $skpi)
 													@foreach($data_kalbiser as $kalbiser)
-														@if($kalbiser->user_id == $skpi->user_id && $skpi->user_id == auth()->user()->id || auth()->user()->role == 'admin' && $kalbiser->user_id == $skpi->user_id)	
+														@if($kalbiser->user_id == $skpi->user_id && $skpi->user_id == auth()->user()->id || auth()->user()->role == 'admin' && $kalbiser->user_id == $skpi->user_id)
 															<td>
 																<input form="form" type="checkbox" name="approveId[]" value="{{ $skpi->id }}">
 															</td>
-														
+
 															<td>{{$kalbiser->nim}}</td>
 															<td>{{$kalbiser->nama}}</td>
-															<td>{{$kalbiser->prodi->nama_prodi}}</td>
-														
+															<td>{{$kalbiser->prodi}}</td>
+
 
 
 															<td>{{$skpi->jenis_dokumen}}</td>
@@ -76,14 +76,14 @@
 															@endif
 															</td>
 													</tr>
-													
+
 														@endif
 													@endforeach
 
 												@endforeach
 										</tbody>
 										<tfoot>
-													
+
 													<td></td>
 													<th></th>
 													<th></th>
@@ -92,7 +92,7 @@
 													<th></th>
 													<th></th>
 													<th></th>
-													
+
 										</tfoot>
 									</table>
 								</div>
@@ -103,14 +103,14 @@
 					</div>
 				</div>
 			</div>
-	
+
 	<script type="text/javascript">
 	$(document).ready(function() {
 	    // Setup - add a text input to each footer cell
     	$('.data tfoot th').each( function () {
         var title = $(this).text();
         $(this).html( '<input type="text" placeholder="Search '+title+'" />' );
-    
+
 		});
 
 		  var table = $('.data').DataTable( {
@@ -160,15 +160,15 @@
 							    <input type="file" name="file_skpi" class="form-control" >
 							  </div>
 
-				      		  <div class="form-group">									   	
+				      		  <div class="form-group">
 							   <label for="exampleInputEmail1">Nama Mahasiswa</label>
 							    <select class="form-control" id="exampleFormControlSelect1" name="user_id">
 							      <option value="">"------Pilih-------"</option>
-				  					
+
 									@foreach($data_kalbiser as $kalbiser)
-									@if($kalbiser->user_id == auth()->user()->id|| auth()->user()->role == 'admin')	
+									@if($kalbiser->user_id == auth()->user()->id|| auth()->user()->role == 'admin')
 							      <option value="{{$kalbiser->user_id}}">{{$kalbiser->nama}} <span>{{$kalbiser->nim}}</span></option>
-	
+
 							      	@endif
 							     	@endforeach
 							     </select>
@@ -176,7 +176,7 @@
 
 
 
-					  
+
 						 	<div class="form-group">
 							    <label for="exampleInputEmail1">Jenis Dokumen</label>
 							    <select class="form-control" id="exampleFormControlSelect1" name="jenis_dokumen">
@@ -207,30 +207,30 @@
 						</div>
 						<br> -->
 
-						
-<!-- 
+
+<!--
 					  <div class="form-group kegiatan_radio_hasil">
-				
+
 					    	<label for="exampleInputEmail1">Kegiatan</label>
 							     <select class="form-control" id="exampleFormControlSelect1" name="kegiatan_id">
 							      <option value="">"------Pilih-------"</option>
 							      <option value="">tess</option>
 							    </select>
-					    
+
 					  </div>
 
   					  <div class="form-group kompetisi_radio_hasil">
-				
+
 					    	<label for="exampleInputEmail1">Kompetisi</label>
 							     <select class="form-control" id="exampleFormControlSelect1" name="kompetisi_id">
 							      <option value="">"------Pilih-------"</option>
 							      <option value="">tes</option>
 							    </select>
-					    
-					  </div> -->
-					
 
-				
+					  </div> -->
+
+
+
 					  <input type="hidden" name="status" value="0">
 				      <div class="modal-footer">
 				        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -243,7 +243,7 @@
 
 
 
-			
+
 
 
 <script>
@@ -284,7 +284,7 @@
 
 		bodyElement.append(domImage)
 	})
-	
+
 	});
 </script>
 @stop

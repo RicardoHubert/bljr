@@ -9,6 +9,7 @@ class prodi extends Model
     protected $guarded = [];
 
     protected $table = 'prodi';
+    protected $fillable = ['user_id', 'nama_prodi'];
 
     public function user()
     {

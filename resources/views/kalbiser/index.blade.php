@@ -28,19 +28,19 @@
 												</tr>
 										</thead>
 										<tbody>
-												@foreach($data_kalbiser as $kalbiser)	
+												@foreach($data_kalbiser as $kalbiser)
 							      				@if($kalbiser->user_id == auth()->user()->id || auth()->user()->role == 'admin' || auth()->user()->role == 'ao')
-												<tr>				
+												<tr>
 													<td><a href="/kalbiser/{{$kalbiser->id}}/profile">{{$kalbiser->nama}}</td></a>
 													<td>{{$kalbiser->nim}}</td>
-													<td>{{ $kalbiser->prodi->nama_prodi }}</td>
+													<td>{{ $kalbiser->prodi }}</td>
 													<td>{{$kalbiser->tahun_akademik}}</td>
 													<td>{{$kalbiser->nohp}}</td>
 													<td>{{$kalbiser->email}}</td>
-												
 
-													
-													
+
+
+
 													<td>
 														<a href="/kalbiser/{{$kalbiser->id}}/edit" class="btn btn-sm btn-warning">Edit</a>
 														<a href="/kalbiser/{{$kalbiser->id}}/delete" class="btn btn-sm btn-danger" onclick="return confirm('Jika data ini dihapus maka dapat menghilangkan seluruh kegiatan didalamnya, Apakah anda yakin ingin menghapus data ini??')">Delete</a>
@@ -49,10 +49,10 @@
 														  View file
 														</button>
 													</td>
-												
+
 												</tr>
 												@endif
-												
+
 												@endforeach
 										</tbody>
 										<tfoot>
@@ -62,7 +62,7 @@
 													<th></th>
 													<th></th>
 													<th></th>
-													<th></th>													
+													<th></th>
 
 										</tfoot>
 									</table>
@@ -81,7 +81,7 @@
     	$('.data tfoot th').each( function () {
         var title = $(this).text();
         $(this).html( '<input type="text" placeholder="Search '+title+'" />' );
-    
+
 		});
 
 		  var table = $('.data').DataTable( {
@@ -96,7 +96,7 @@
     	});
 	});
 
-	
+
 
 	</script>
 
@@ -143,7 +143,7 @@
 				      			{{csrf_field()}}
 
 				      		<x-form.wrapper title="Foto" required="true">
-				      			<x-form.file name="foto" required />	
+				      			<x-form.file name="foto" required />
 				      		</x-form.wrapper>
 
 							<x-form.wrapper title="Nama Kalbiser" required="true">
@@ -173,7 +173,7 @@
 							      <option value="2021">2021</option>
 							    </select>
 				      		</x-form.wrapper>
-  
+
 							<x-form.wrapper title="NO.Handphone" required="true">
 				      			<x-form.input name="nohp" required placeholder="NO.Handphone" />
 				      		</x-form.wrapper>
@@ -190,5 +190,5 @@
 				      </div>
 				    </div>
 				  </div>
-				</div>		
+				</div>
 	@stop

@@ -10,6 +10,7 @@ use App\User;
 use MCGalih\Serti\Sertifikat;
 use Carbon\Carbon;
 use App\Prodi;
+use Illuminate\Support\Facades\Storage;
 
 class KalbiserController extends Controller
 {
@@ -46,7 +47,7 @@ class KalbiserController extends Controller
        $kalbiser->save();
    		}
 
-      
+
        return redirect('/kalbiser')->with('sukses','Data berhasil diinput');
         }
 
@@ -141,8 +142,16 @@ class KalbiserController extends Controller
         }
 
         $sertifikat = new Sertifikat(storage_path("app/template/blangko.jpg"));
-        $initialYLoc = 500; // X Location
-        $xLoc = 1240/5; // Y Location
+        $data = [
+            "bab" => "V. Informasi Tambahan",
+            "bab_english" => "Additional Information",
+            "halaman" => "5/5"
+        ];
+        $jsonMap = Storage::disk("local")->get("template/blangko-mapping.json");
+        $mappings = Sertifikat::MapText($data, $jsonMap);
+        $sertifikat->json_mapping($mappings);
+        $initialYLoc = 550;
+        $xLoc = 437;
         $idx = 1;
         foreach($skpis as $skpi){
             $sertifikat->text($idx++.". ".$skpi->judul_sertifikat.", ". Carbon::make($skpi->tanggal_dokumen)->locale("id")->isoFormat("DD MMMM YYYY"), [$xLoc, $initialYLoc], [
@@ -152,6 +161,10 @@ class KalbiserController extends Controller
             ]);
             $initialYLoc += 60; // Increment per lists
         }
+
+        $sertifikat->image()->rectangle(2000, 3300, 2250, 3430, function ($draw) {
+            $draw->border(2, "#000000");
+        });
 
         return response($sertifikat->image()->encode("jpg"))
                     ->header("Content-Type", "image/jpg");

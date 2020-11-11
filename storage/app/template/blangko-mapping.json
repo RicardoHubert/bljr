@@ -1,0 +1,33 @@
+[
+    {
+        "name": "bab",
+        "text": "",
+        "location": [380, 300],
+        "font_prop": {
+            "file": "@app/fonts/calibri.ttf",
+            "size": 50,
+            "align": "left"
+        }
+    },
+    {
+        "name": "bab_english",
+        "text": "",
+        "location": [437, 360],
+        "font_prop": {
+            "file": "@app/fonts/calibrii.ttf",
+            "size": 46,
+            "align": "left"
+        }
+    },
+    {
+        "name": "halaman",
+        "text": "",
+        "location": [1240, 3350],
+        "font_prop": {
+            "file": "@app/fonts/calibri.ttf",
+            "size": 46,
+            "align": "center"
+        }
+    }
+]
+
