@@ -43,8 +43,8 @@
 								<input readonly type="text" name="tanggal_dokumen" class="form-control datepicker date" aria-describedby="emailHelp" placeholder="dd/mm/yyyy" value="{{$data_skpi->tanggal_dokumen}}" id="tanggaldokumen">
 				      	</x-form.wrapper>
 
-				      	<x-form.wrapper title="Tahun Dokumen" required="true">
-								<input readonly type="text" name="tanggal_dokumen" class="form-control" aria-describedby="emailHelp" placeholder="dd/mm/yyyy" value="{{$data_skpi->tahun}}">
+				      	<x-form.wrapper title="Tahun" required="true">
+								<input readonly type="text" name="tahun" class="form-control" aria-describedby="emailHelp" placeholder="dd/mm/yyyy" value="{{$data_skpi->tahun}}">
 				      	</x-form.wrapper>
 
 				      	<x-form.wrapper title="Judul Sertifikat" required="true">
@@ -72,8 +72,11 @@
 		});
 
 		$(".datepicker.date").datepicker({
-			dateFormat: "yy-mm-dd"
+			dateFormat: "yy-mm-dd",
+			changeMonth: true,
+      		changeYear: true
 		});
+
 
 </script>
 @stop

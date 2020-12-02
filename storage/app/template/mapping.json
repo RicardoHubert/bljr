@@ -12,7 +12,7 @@
     {
         "name": "nama",
         "text": "",
-        "location": [1754, 1020],
+        "location": [1754, 1070],
         "font_prop": {
             "file": "@app/fonts/edwardian-script-itc-bold.ttf",
             "size": 190,
@@ -96,7 +96,7 @@
         "text": "SERTIFIKAT",
         "location": [1754, 640],
         "font_prop": {
-            "file": "@app/fonts/arialbd.ttf",
+            "file": "@app/fonts/calibrib.ttf",
             "size": 220,
             "align": "center"
         }

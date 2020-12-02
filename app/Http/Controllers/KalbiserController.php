@@ -10,6 +10,7 @@ use App\User;
 use MCGalih\Serti\Sertifikat;
 use Carbon\Carbon;
 use App\Prodi;
+use Storage;
 
 class KalbiserController extends Controller
 {
@@ -55,14 +56,21 @@ class KalbiserController extends Controller
         # code...
         $kalbiser = \App\kalbiser::find($id);
          $prodi = \App\Prodi::all();
-        return view('kalbiser/edit',['kalbiser' => $kalbiser, 'prodi' => $prodi]);
+         $user = \App\User::all();
+        return view('kalbiser/edit',['kalbiser' => $kalbiser, 'prodi' => $prodi, 'user' => $user]);
     }
     public function update(Request $request,$id)
     {
         # code...
         //dd($request->all());
+
         $kalbiser = \App\kalbiser::find($id);
+        $user = \App\User::find($id);
         $kalbiser->update($request->all());
+
+        // Edit table user
+      
+
       	if($request->hasfile('foto')){
             $request->file('foto')->move('fotokalbiser/',$request->file('foto')->getClientOriginalName());
             $kalbiser->foto = $request->file('foto')->getClientOriginalName();
@@ -140,9 +148,11 @@ class KalbiserController extends Controller
           return back();
         }
 
+        $jsonFile = Storage::disk("local")->get("template/tempat.json");
+        $mappings = Sertifikat::MapText($data, $jsonFile);
         $sertifikat = new Sertifikat(storage_path("app/template/blangko.jpg"));
-        $initialYLoc = 500; // X Location
-        $xLoc = 1240/5; // Y Location
+        // $initialYLoc = 500; // X Location
+        // $xLoc = 1240/5; // Y Location
         $idx = 1;
         foreach($skpis as $skpi){
             $sertifikat->text($idx++.". ".$skpi->judul_sertifikat.", ". Carbon::make($skpi->tanggal_dokumen)->locale("id")->isoFormat("DD MMMM YYYY"), [$xLoc, $initialYLoc], [
@@ -150,7 +160,7 @@ class KalbiserController extends Controller
                 "size" => 46,
                 "align" => "left"
             ]);
-            $initialYLoc += 60; // Increment per lists
+            // $initialYLoc += 60; // Increment per lists
         }
 
         return response($sertifikat->image()->encode("jpg"))

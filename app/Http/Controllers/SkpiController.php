@@ -88,6 +88,8 @@ class SkpiController extends Controller
             $data_skpi->ormawa_id = $request->ormawa_id;
             $data_skpi->judul_sertifikat = $request->judul_sertifikat;
             $data_skpi->penyelenggara = $request->penyelenggara;
+            $data_skpi->tanggal_dokumen = $request->tanggal_dokumen;
+            $data_skpi->tahun = $request->tahun;
 
         $data_skpi->save();
 
