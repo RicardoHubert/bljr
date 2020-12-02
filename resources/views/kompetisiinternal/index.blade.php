@@ -210,9 +210,9 @@
 							    </select>
 							 </div>
 
-							 <x-form.wrapper title="URL" required="true">
+							 <x-form.wrapper title="URL">
 				      			<x-form.input name="url" required placeholder="Url" />
-				      			Nama Kegiatan sesuaoi dengan judul di proposal
+				      			Nama Kegiatan sesuai dengan judul di proposal
 				      		</x-form.wrapper>
 
 							 <x-form.wrapper title="Judul Sertifikat" required="true">

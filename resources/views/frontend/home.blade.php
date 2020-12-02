@@ -15,7 +15,7 @@
           <div class="carousel-inner">
             <div class="carousel-item active">
               <div class="card-header card-header-image">
-                <img class="img" src="{{ asset('background_image/' . $backgrounds->first()->file) }}" alt="First slide" style="height: 650px;object-fit:cover;opacity: 0.8;" width="100%">
+                <img class="img" src="{{ asset('background_image/' . $backgrounds->first()->file) }}" alt="First slide" style="height: 720px;object-fit:cover;opacity: 0.8;" width="100%">
                 <div class="carousel-caption d-none d-md-block">
                </div>
              </div>
@@ -26,7 +26,7 @@
 
             <div class="carousel-item">
               <div class="card-header card-header-image">
-                <img class="img" src="{{asset('background_image/'. $image->file)}}" alt="{{ $loop->index + 1}} slide" style="height: 650px;object-fit:cover; opacity: 0.8;" width="100%">
+                <img class="img" src="{{asset('background_image/'. $image->file)}}" alt="{{ $loop->index + 1}} slide" style="height: 720px;object-fit:cover; opacity: 0.8;" width="100%">
              
               <div class="carousel-caption d-none d-md-block">
                   <!-- <h3>Kalbis Institute </h3> -->

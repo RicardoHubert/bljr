@@ -32,7 +32,7 @@ class ProdiController extends Controller
         $user->name = $request->nama_prodi;
         $user->role = 'Prodi';
         $user->email = $request->email;
-        $user->password = bcrypt('12345');
+        $user->password = bcrypt('admprodi');
         $user->remember_token = str::random(60);
         $user->save();
 
@@ -54,7 +54,7 @@ class ProdiController extends Controller
     }
     public function update(Request $request,$id)
     {
-        $prodi = \App\Ormawa::find($id);
+        $prodi = \App\prodi::find($id);
         $prodi->update($request->all());
         return redirect('/prodi')->with('sukses','Data berhasil di updates');
     }
@@ -62,7 +62,7 @@ class ProdiController extends Controller
     public function delete(Request $request,$id)
     {
         # code..
-
+        // Delete data dari prodi dan user
         $prodi = Prodi::find($id);
         User::find($prodi->user_id)->delete();
         $prodi->delete();

@@ -9,9 +9,11 @@
 							<div class="panel">
 								<div class="panel-heading">
 									<h3 class="panel-title">Data Kalbiser</h3>
+									@if(auth()->user()->role != 'student')
 									<div class="right">
 									<button type="button" class="btn" data-toggle="modal" data-target="#exampleModal"><i class="lnr lnr-plus-circle"></i>Create New Kalbiser</button>
 									</div>
+									@endif
 								</div>
 							<div class="panel-body">
 								<div class="table-responsive">
@@ -163,15 +165,8 @@
 							    </select>
 				      		</x-form.wrapper>
 
-							<x-form.wrapper title="Tahun Akademi" required="true">
-							    <select class="form-control" name="tahun_akademik" required>
-							      <option value="">"------Pilih Tahun Akademik-------"</option>
-							      <option value="2017">2017</option>
-							      <option value="2018">2018</option>
-							      <option value="2019">2019</option>
-							      <option value="2020">2020</option>
-							      <option value="2021">2021</option>
-							    </select>
+							<x-form.wrapper title="Tahun Akademik" required="true">
+								<x-form.input name="tahun_akademik" required placeholder="Tahun Akademik" />
 				      		</x-form.wrapper>
 
 							<x-form.wrapper title="NO.Handphone" required="true">

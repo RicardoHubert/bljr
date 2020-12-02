@@ -30,8 +30,8 @@
 					    </select>
 		      		</x-form.wrapper>
 
-						<x-form.wrapper title="URL" required="true">
-			      			<x-form.input value="{{ $kompetisiinternal->url }}" name="url" required placeholder="URL " />
+						<x-form.wrapper title="URL">
+			      			<x-form.input value="{{ $kompetisiinternal->url }}" name="url" placeholder="URL " />
 			      		</x-form.wrapper>
 
 						<x-form.wrapper title="Judul Sertifikat" required="true">

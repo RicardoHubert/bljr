@@ -19,4 +19,5 @@ class kalbiser extends Model
     {
     	return $this->belongsTo(prodi::class);
     }
+
 }

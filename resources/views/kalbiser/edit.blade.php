@@ -48,11 +48,6 @@
 			      			<x-form.input value="{{ $kalbiser->email }}" name="email" required placeholder="Email" />
 			      		</x-form.wrapper>
 
-
-<!-- 						<x-form.wrapper title="Email" required="true">
-				      			<x-form.input type="email" name="email" required placeholder="Email" value="{{$kalbiser->email}}" />
-				      	</x-form.wrapper> -->
-
 						<button type="submit" class="btn btn-warning">Edit</button>
 
 						@elseif(auth()->user()->role == 'student')

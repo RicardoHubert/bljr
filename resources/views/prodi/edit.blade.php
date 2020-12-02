@@ -17,10 +17,9 @@
 						<x-form.wrapper title="Nama Prodi" required="true">
 			      			<x-form.input value="{{ $prodi->nama_prodi }}" name="nama_prodi" required placeholder="Nama Prodi" />
 			      		</x-form.wrapper>
-
-						<div class="form-group">
+<!--<div class="form-group">
 							<input type="hidden" name="email" class="form-control" id="exampleInputEmail1" value="{{$prodi->user->email}}" aria-describedby="emailHelp" placeholder="Email">
-						</div>
+						</div> -->
 
 							<button type="submit" class="btn btn-warning">Update</button>
 							</form>

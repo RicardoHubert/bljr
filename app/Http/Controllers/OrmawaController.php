@@ -29,7 +29,7 @@ class OrmawaController extends Controller
         $user->name = $request->nama_ormawa;
         $user->role = 'Ormawa';
         $user->email = $request->email;
-        $user->password = bcrypt('12345');
+        $user->password = bcrypt('admormawa');
         $user->remember_token = str::random(60);
         $user->save();
 
