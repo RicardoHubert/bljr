@@ -24,7 +24,7 @@
 									 <table class="table table-hover data" id="tableexcel">
 									 	<thead>
 												<tr>
-												
+
 													<th>NIM</th>
 													<th>Nama Mahasiswa</th>
 													<th>Program Studi</th>
@@ -36,8 +36,8 @@
 													<th>File</th>
 													<th>Aksi</th>
 													<th>Status</th>
-													<th>Approved / Disapproved By</th>	
-															
+													<th>Approved / Disapproved By</th>
+
 												</tr>
 
 										</thead>
@@ -48,10 +48,10 @@
 												@foreach($data_skpi as $skpi)
 												@foreach($data_kalbiser as $kalbiser)
 														@if($kalbiser->user_id == $skpi->user_id && $skpi->user_id == auth()->user()->id || auth()->user()->role == 'admin' && $kalbiser->user_id == $skpi->user_id ||  auth()->user()->role == 'ao' && $kalbiser->user_id == $skpi->user_id)
-														
+
 															<td>{{$kalbiser->nim}}</td>
 															<td>{{$kalbiser->nama}}</td>
-															<td>{{$kalbiser->prodi->nama_prodi}}</td>
+															<td>{{$kalbiser->prodi}}</td>
 
 
 
@@ -62,7 +62,7 @@
 													<th>{{$skpi->penyelenggara}}</th>
 
 													@if(auth()->user()->role == 'admin' && $skpi->user_id == auth()->user()->id|| auth()->user()->role == 'student'&& $skpi->user_id == auth()->user()->id || auth()->user()->role == 'admin' || auth()->user()->role == 'ao' )
-													
+
 													<td>
 														<button id="buttonViewModal" type="button" class="btn btn-primary" data-toggle="modal" data-id="{{ asset($skpi->file_skpi) }}" data-target="#viewModal">
 														  View file
@@ -72,7 +72,7 @@
 															@csrf
 															<input type="hidden" name="file" value="{{$skpi->file_skpi}}">
 															<button type="submit">Download Sertifikat</button>
-														</form>	
+														</form>
 													</td>
 
 													<td>
@@ -104,9 +104,9 @@
 															@csrf
 															<input type="hidden" name="file" value="{{$skpi->file_skpi}}">
 															<button type="submit">Download Sertifikat</button>
-														</form>	
+														</form>
 													</td>
-													
+
 													@endif
 
 													</tr>
@@ -115,7 +115,7 @@
 													@endforeach
 												@endforeach
 										</tbody>
-										
+
 										<tfoot>
 													<th></th>
 													<th></th>
@@ -169,7 +169,7 @@
 
 
 
-	
+
 	$(document).ready(function() {
     // Setup - add a text input to each footer cell
     $('.data tfoot th').each( function () {
@@ -182,7 +182,7 @@
     	"lengthMenu": [[4, 7, 100, -1], [4,7, 100, "all"]],
     	"dom" :'Bfrtip',
     	"buttons" : [
-            'excel'	
+            'excel'
         ],
         initComplete: function () {
             // Apply the search
@@ -275,7 +275,7 @@
 
 							 <x-form.wrapper title="File Unggah" required="true">
 				      			<x-form.file name="file_skpi" required />
-				      			Sertifikat, Piagam, dsb	
+				      			Sertifikat, Piagam, dsb
 				      		</x-form.wrapper>
 
 
@@ -300,7 +300,7 @@
 							      <option value="SK">Surat Keputusan (SK)</option>
 							      <option value="SERTIFIKAT">Sertifikat</option>
 							      <option value="STU">Surat Tugas (STU)</option>
-							      <option value="PIAGAM">Piagam</option>			      
+							      <option value="PIAGAM">Piagam</option>
 							    </select>
 				      		</x-form.wrapper>
 
@@ -360,7 +360,7 @@
 				});
 			}
 		});
-		
+
 		$('#mySelect2').select2({
         dropdownParent: $('#exampleModal')
     });

@@ -2,39 +2,54 @@
 
 namespace App\Http\Controllers;
 
+use App\DataTables\SkpiDataTable;
+use App\skpi as Skpi;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Exception;
+use Illuminate\Support\Facades\Validator;
+use SingleQuote\DataTables\DataTable;
 
 class SkpiController extends Controller
 {
     //
-    public function index(Request $request)
+    public function index(Request $request, SkpiDataTable $dataTable)
     {
-        if($request->has('cari')){
-            $data_kalbiser = \App\kalbiser::where('Prodi','LIKE','%'.$request->cari. '%')->get();
-                $data_skpi = \App\Skpi::all();
-               $paginate = \App\Skpi::paginate(3);
-               $users = \App\User::all();
-        }else{
-                # code...
-            $data_skpi = \App\Skpi::all();
-            $data_kalbiser = \App\kalbiser::all();
-            $users = \App\User::all();
+        // if ($request->has('cari')) {
+        //     $data_kalbiser = \App\kalbiser::where('Prodi', 'LIKE', '%' . $request->cari . '%')->get();
+        //     $data_skpi = \App\Skpi::all();
+        //     $paginate = \App\Skpi::paginate(3);
+        //     $users = \App\User::all();
+        // } else {
+        //     # code...
+        //     $data_skpi = \App\Skpi::all();
+        //     $data_kalbiser = \App\kalbiser::all();
+        //     $users = \App\User::all();
+        // }
 
-        }
-        
-	    return view('skpi.index',['data_skpi' => $data_skpi,'data_kalbiser' => $data_kalbiser, 'users' => $users]);
+        // return view('skpi.index', ['data_skpi' => $data_skpi, 'data_kalbiser' => $data_kalbiser, 'users' => $users]);
+
+        return $dataTable->render("skpi.datatable");
     }
 
     public function create(Request $request)
     {
         # code...
         // Insert ke table Skpi
+        $validator = Validator::make($request->all(), [
+            "file_skpi" => "size:5000"
+        ]);
+
+        if ($validator->fails()) {
+            return redirect('/skpi')
+                ->withErrors($validator)
+                ->withInput();
+        }
+
         $carbon = Carbon::parse($request->tanggal_dokumen);
         $Skpi = \App\Skpi::create(array_merge($request->all(), ['nomor_urut' => 0, 'tanggal_dokumen' => $carbon->isoFormat('Y/MM/DD')]));
-        
-        if($request->hasfile('file_skpi')){
+
+        if ($request->hasfile('file_skpi')) {
             $file = $request->file('file_skpi');
             $filename = $file->getClientOriginalName();
             $file->move('fileskpi/', $filename);
@@ -42,7 +57,7 @@ class SkpiController extends Controller
             $Skpi->file_skpi = 'fileskpi/' . $filename;
             $Skpi->save();
         }
-        return redirect('/skpi')->with('sukses','Data berhasil diinput');
+        return redirect('/skpi')->with('sukses', 'Data berhasil diinput');
     }
 
 
@@ -51,12 +66,12 @@ class SkpiController extends Controller
     {
         # code...
 
-        $data_skpi= \App\Skpi::find($id);
-            $data_kalbiser = \App\kalbiser::all();
-         return view('skpi/edit',['data_skpi' => $data_skpi,'data_kalbiser' => $data_kalbiser]);
+        $data_skpi = \App\Skpi::find($id);
+        $data_kalbiser = \App\kalbiser::all();
+        return view('skpi/edit', ['data_skpi' => $data_skpi, 'data_kalbiser' => $data_kalbiser]);
     }
 
-    public function update(Request $request,$id)
+    public function update(Request $request, $id)
     {
         # code...
         //dd($request->all());
@@ -80,36 +95,35 @@ class SkpiController extends Controller
             'ormawa_id' => 'nullable',
         ]);
 
-            $data_skpi->user_id = $request->user_id;
-            // $data_skpi->kompetisi_id = $request->kompetisi_id;
-            // $data_skpi->kegiatan_id = $request->kegiatan_id;
+        $data_skpi->user_id = $request->user_id;
+        // $data_skpi->kompetisi_id = $request->kompetisi_id;
+        // $data_skpi->kegiatan_id = $request->kegiatan_id;
 
-            $data_skpi->jenis_dokumen = $request->jenis_dokumen;
-            $data_skpi->ormawa_id = $request->ormawa_id;
-            $data_skpi->judul_sertifikat = $request->judul_sertifikat;
-            $data_skpi->penyelenggara = $request->penyelenggara;
-            $data_skpi->tanggal_dokumen = $request->tanggal_dokumen;
-            $data_skpi->tahun = $request->tahun;
+        $data_skpi->jenis_dokumen = $request->jenis_dokumen;
+        $data_skpi->ormawa_id = $request->ormawa_id;
+        $data_skpi->judul_sertifikat = $request->judul_sertifikat;
+        $data_skpi->penyelenggara = $request->penyelenggara;
+        $data_skpi->tanggal_dokumen = $request->tanggal_dokumen;
+        $data_skpi->tahun = $request->tahun;
 
         $data_skpi->save();
 
-        return redirect('/skpi')->with('sukses','Data berhasil di updates');
-
+        return redirect('/skpi')->with('sukses', 'Data berhasil di updates');
     }
 
 
 
-    public function delete(Request $request,$id)
+    public function delete(Request $request, $id)
     {
         # code..
         $Skpi = \App\Skpi::find($id);
         $Skpi->delete($Skpi);
-        return redirect('/skpi')->with('sukses','Data berhasil di Hapus');
+        return redirect('/skpi')->with('sukses', 'Data berhasil di Hapus');
     }
 
     public function approveindex(Request $request)
     {
-            # code...
+        # code...
         $data_skpi = \App\Skpi::all();
         $data_kalbiser = \App\kalbiser::all();
         $data_kompetisi = \App\kompetisiinternal::all();
@@ -117,7 +131,7 @@ class SkpiController extends Controller
         $data_kegiatan = \App\Kegiatan::all();
 
 
-        return view('approveskpi.index',['data_skpi' => $data_skpi,'data_kalbiser' => $data_kalbiser,'data_kompetisi' => $data_kompetisi,'data_kegiatan' => $data_kegiatan, 'data_ormawa' => $data_ormawa]);
+        return view('approveskpi.index', ['data_skpi' => $data_skpi, 'data_kalbiser' => $data_kalbiser, 'data_kompetisi' => $data_kompetisi, 'data_kegiatan' => $data_kegiatan, 'data_ormawa' => $data_ormawa]);
     }
 
     public function approvestatus($id)
@@ -149,15 +163,12 @@ class SkpiController extends Controller
         $skpi = \App\Skpi::whereIn('id', $approveId)->get();
 
         foreach ($skpi as $skpirow) {
-    // Code Here
-         $skpirow->status = '1';
-         $skpirow->save();
+            // Code Here
+            $skpirow->status = '1';
+            $skpirow->save();
         }
-        
+
         noty()->flash('Yay!', 'Your data has been approved');
         return redirect()->back();
     }
-    
-
 }
-
