@@ -37,7 +37,7 @@ class SkpiDataTable extends DataTable
                 return $html;
             })
             ->addColumn("approvedBy", function ($skpi) {
-                return $skpi->approvedBy->name;
+                return (is_null($skpi->approvedby) ? "-" : $skpi->approvedBy->name);
             })
             ->addColumn("status", function ($skpi) {
                 return '<div class="p-1 alert alert-' . ($skpi->status == 0 ? "warning" : "success") . '">' . ($skpi->status == 0 ? "Belum diapproved" : "Sudah diapproved") . "</div>";
@@ -59,7 +59,7 @@ class SkpiDataTable extends DataTable
                 Carbon::setLocale("id");
                 return Carbon::parse($skpi->tanggal_dokumen)->locale("id")->isoFormat("D MMMM YYYY");
             })
-			->addColumn("prodi", function ($skpi) {
+            ->addColumn("prodi", function ($skpi) {
                 return $skpi->user->user->prodi->nama_prodi;
             })
             ->rawColumns(["status", "aksi", "file_skpi"]);

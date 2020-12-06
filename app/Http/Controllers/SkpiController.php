@@ -37,7 +37,7 @@ class SkpiController extends Controller
         # code...
         // Insert ke table Skpi
         $validator = Validator::make($request->all(), [
-            "file_skpi" => "size:5000"
+            "file_skpi" => "file|max:5000"
         ]);
 
         if ($validator->fails()) {

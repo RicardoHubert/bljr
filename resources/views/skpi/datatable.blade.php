@@ -9,7 +9,12 @@
 							<div class="panel">
 								<div class="panel-heading">
                                     @if ($errors->has("file_skpi"))
-                                        <div class="alert alert-danger col-md-5">Ukuran gambar lebih besar dari 5MB</div>
+                                        <div style="position: absolute;top: 20%;left: 30%" class="alert alert-danger alert-dismissible col-md-5" role="alert">
+                                            Ukuran file lebih dari <strong>5MB</strong>
+                                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                <span aria-hidden="true">×</span>
+                                            </button>
+                                        </div>
                                     @endif
 									<h3 class="panel-title">SKPI</h3>
 <!-- 									<div class="left">
