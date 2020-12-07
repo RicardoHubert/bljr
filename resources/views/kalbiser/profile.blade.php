@@ -82,9 +82,9 @@
 	                                                            </td>
 	                                                           @if(auth()->user()->role == 'admin' || auth()->user()->role == 'Prodi' || auth()->user()->role == 'Ormawa')
 	                                                         <td>@if($skpi->status != '1')
-																<a href="/approveskpi/{{$skpi->id}}" class="btn btn-sm btn-warning">approve</a>
+																<a href="{{action('SkpiController@approvestatus',$skpi->id)}}" class="btn btn-sm btn-warning">approve</a>
 															@else
-																<a href="/approveskpi2/{{$skpi->id}}" class="btn btn-sm btn-danger">disapprove</a>
+																<a href="{{action('SkpiController@approvestatus2',$skpi->id)}}" class="btn btn-sm btn-danger">disapprove</a>
 															@endif
 															@endif
 															</td>

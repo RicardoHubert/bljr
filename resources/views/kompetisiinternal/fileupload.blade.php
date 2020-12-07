@@ -11,7 +11,7 @@
 						<h3 class="panel-title">File Upload</h3>
 						</div>
 						<div class="panel-body">
-							<form action="/kompetisiinternal/fileupload/{{$kompetisiinternal->id}}" method="POST" enctype="multipart/form-data">
+							<form action="{{action('KompetisiinternalController@fileUpload', $kompetisiinternal->id)}}"method="POST" enctype="multipart/form-data">
 						{{csrf_field()}}
 
 							<div class="col">

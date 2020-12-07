@@ -11,7 +11,7 @@
 						<h3 class="panel-title">Edit Data Kalbiser</h3>
 						</div>
 						<div class="panel-body">
-							<form action="/kalbiser/{{$kalbiser->id}}/update" method="POST" enctype="multipart/form-data">
+							<form action="{{action('KalbiserController@update', $kalbiser->id)}}" method="POST" enctype="multipart/form-data">
 						{{csrf_field()}}
 
 						<div class="form-group">

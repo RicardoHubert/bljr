@@ -33,7 +33,7 @@
 												@foreach($data_kalbiser as $kalbiser)
 							      				@if($kalbiser->user_id == auth()->user()->id || auth()->user()->role == 'admin' || auth()->user()->role == 'ao')
 												<tr>
-													<td><a href="/kalbiser/{{$kalbiser->id}}/profile">{{$kalbiser->nama}}</td></a>
+													<td><a href="{{action('KalbiserController@profile',$kalbiser->id)}}">{{$kalbiser->nama}}</td></a>
 													<td>{{$kalbiser->nim}}</td>
 													<td>{{ $kalbiser->prodi }}</td>
 													<td>{{$kalbiser->tahun_akademik}}</td>
@@ -44,8 +44,8 @@
 
 
 													<td>
-														<a href="/kalbiser/{{$kalbiser->id}}/edit" class="btn btn-sm btn-warning">Edit</a>
-														<a href="/kalbiser/{{$kalbiser->id}}/delete" class="btn btn-sm btn-danger" onclick="return confirm('Jika data ini dihapus maka dapat menghilangkan seluruh kegiatan didalamnya, Apakah anda yakin ingin menghapus data ini??')">Delete</a>
+														<a href="{{action('KalbiserController@edit',$kalbiser->id)}}" class="btn btn-sm btn-warning">Edit</a>
+														<a href="{{action('KalbiserController@delete', $kalbiser->id)}}" class="btn btn-sm btn-danger" onclick="return confirm('Jika data ini dihapus maka dapat menghilangkan seluruh kegiatan didalamnya, Apakah anda yakin ingin menghapus data ini??')">Delete</a>
 
 														<button id="buttonViewModal" type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-id="fotokalbiser/{{$kalbiser->foto}}" data-target="#viewModal">
 														  View file
@@ -141,7 +141,7 @@
 				        </button>
 				      </div>
 				      <div class="modal-body">
-				      		<form action="/kalbiser/create" method="POST" enctype="multipart/form-data">
+				      		<form action="{{action('KalbiserController@create')}}" method="POST" enctype="multipart/form-data">
 				      			{{csrf_field()}}
 
 				      		<x-form.wrapper title="Foto" required="true">
