@@ -11,7 +11,7 @@
 						<h3 class="panel-title">Edit Data Prodi</h3>
 						</div>
 						<div class="panel-body">
-							<form action="/prodi/{{$prodi->id}}/update" method="POST" enctype="multipart/form-data">
+							<form action="{{action('ProdiController@update', $prodi->id)}}" method="POST" enctype="multipart/form-data">
 						{{csrf_field()}}
 
 						<x-form.wrapper title="Nama Prodi" required="true">

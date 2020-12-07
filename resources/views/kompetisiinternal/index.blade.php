@@ -50,7 +50,7 @@
 													
 												<tr>
 													<td>
-														<a href="{{$kompetisiinternal->poster}}"><img style="height: 50px;" src="{{$kompetisiinternal->poster}}" /></a>
+														<a href="{{($kompetisiinternal->poster)}}"><img style="height: 50px;" src="{{$kompetisiinternal->poster}}" /></a>
 													</td>
 													<td>{{$ormawa->nama_ormawa}}</td>
 													<td>{{$kalbiser->prodi->nama_prodi}}</td>
@@ -84,14 +84,14 @@
 
 													<td>
 													@if(auth()->user()->role == 'admin'|| auth()->user()->role == 'student' && $kalbiser->user_id == auth()->user()->id)
-														<a href="/kompetisiinternal/fileupload/{{$kompetisiinternal->id}}" class="btn btn-sm btn-primary">Upload File Pendukung</a>
+														<a href="{{action('KompetisiinternalController@fileUpload', $kompetisiinternal->id)}}" class="btn btn-sm btn-primary">Upload File Pendukung</a>
 														<form action="{{ route('file.download') }}" method="POST">
 															@csrf
 															<input type="hidden" name="file" value="{{$kompetisiinternal->file_sertifikat}}">
 															<button type="submit">Download Sertifikat</button>
 														</form>	
-														<a href="/kompetisiinternal/{{$kompetisiinternal->id}}/edit" class="btn btn-sm btn-warning">Edit</a>
-														<a href="/kompetisiinternal/{{$kompetisiinternal->id}}/delete" class="btn btn-sm btn-danger" onclick="return confirm('Jika data ini dihapus maka dapat menghilangkan seluruh kompetisiinternal didalamnya, Apakah anda yakin ingin menghapus data ini??')">Delete</a>
+														<a href="{{action('KompetisiinternalController@edit', $kompetisiinternal->id)}}" class="btn btn-sm btn-warning">Edit</a>
+														<a href="{{action('KompetisiinternalController@delete', $kompetisiinternal->id)}}" class="btn btn-sm btn-danger" onclick="return confirm('Jika data ini dihapus maka dapat menghilangkan seluruh kompetisiinternal didalamnya, Apakah anda yakin ingin menghapus data ini??')">Delete</a>
 													@endif
 													</td>
 												</tr>
@@ -164,7 +164,7 @@
 				        </button>
 				      </div>
 				      <div class="modal-body">
-				      		<form action="/kompetisiinternal/create" method="POST" enctype="multipart/form-data">
+				      		<form action="{{action('KompetisiinternalController@create')}}"  method="POST" enctype="multipart/form-data">
 				      			{{csrf_field()}}
 
 							  <x-form.wrapper title="Bukti Pendukung" required="true">

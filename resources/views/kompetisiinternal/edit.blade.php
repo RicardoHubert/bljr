@@ -11,7 +11,7 @@
 						<h3 class="panel-title">Edit Data Kompetisi Internal</h3>
 						</div>
 						<div class="panel-body">
-							<form action="/kompetisiinternal/{{$kompetisiinternal->id}}/update" method="POST" enctype="multipart/form-data">
+							<form action="{{action('KompetisiinternalController@update', $kompetisiinternal->id)}}" method="POST" enctype="multipart/form-data">
 						{{csrf_field()}}	
 
 						<x-form.wrapper title="Poster" required="true">

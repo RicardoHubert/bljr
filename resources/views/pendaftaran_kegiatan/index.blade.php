@@ -6,7 +6,7 @@
 				<div class="card m6" style="margin-top: 80px;">
 					
 					<div class="card-body" style="margin-bottom: 10px">
-						<form action="/pendaftaran_kegiatan/create" method="POST" enctype="multipart/form-data">
+						<form action="{{action('KegiatanController@pendaftaran_kegiatan_create')}}" method="POST" enctype="multipart/form-data">
 							{{ csrf_field() }}
 
 						<div class="main" style="margin-bottom:40px;">
@@ -52,7 +52,7 @@
 						</div>
 
 							<button type="submit" class="waves-effect waves-light btn">Simpan</button>
-							<a href="/pendaftaran_kegiatan/create" class="waves-effect waves-light btn light-blue"><i class="material-icons">arrow_back</i></a>
+							<a href="{{action('KegiatanController@pendaftaran_kegiatan_create')}}"  class="waves-effect waves-light btn light-blue"><i class="material-icons">arrow_back</i></a>
 						</form>
 					</div>
 				</div>

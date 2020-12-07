@@ -36,7 +36,7 @@
 										</ul>
 									</div>
 									
-									<div class="text-center"><a class="btn btn-warningf" href="/ormawa/{{$ormawa->id}}/edit">Edit Profile</a></div>
+									<div class="text-center"><a class="btn btn-warningf" href="{{action('OrmawaController@edit', $ormawa->id)}}" >Edit Profile</a></div>
 								</div>
 								<!-- END PROFILE DETAIL -->
 							</div>

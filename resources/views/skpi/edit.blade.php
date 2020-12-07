@@ -13,7 +13,7 @@
 
 						</div>
 						<div class="panel-body">
-							<form action="/skpi/{{$data_skpi->id}}/update" method="POST" enctype="multipart/form-data">
+							<form action="{{action('SkpiController@update', $data_skpi->id)}}" method="POST" enctype="multipart/form-data">
 						{{csrf_field()}}
 
 							

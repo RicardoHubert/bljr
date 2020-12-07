@@ -28,8 +28,8 @@
 													<td>{{$prodi->user->email}}</td>
 													@if(auth()->user()->role == 'admin')
 													<td>
-														<a href="/prodi/{{$prodi->id}}/edit" class="btn btn-sm btn-warning">Edit</a>
-														<a href="/prodi/{{$prodi->id}}/delete" class="btn btn-sm btn-danger" onclick="return confirm('Jika data ini dihapus maka dapat menghilangkan seluruh kegiatan didalamnya, Apakah anda yakin ingin menghapus data ini??')">Delete</a>
+														<a href="{{action('ProdiController@edit', $prodi->id)}}"class="btn btn-sm btn-warning">Edit</a>
+														<a href="{{action('ProdiController@delete', $prodi->id)}}" class="btn btn-sm btn-danger" onclick="return confirm('Jika data ini dihapus maka dapat menghilangkan seluruh kegiatan didalamnya, Apakah anda yakin ingin menghapus data ini??')">Delete</a>
 													</td>
 													@endif
 												</tr>
@@ -60,7 +60,7 @@
 				        </button>
 				      </div>
 				      <div class="modal-body">
-				      		<form action="/prodi/create" method="POST" enctype="multipart/form-data">
+				      		<form action="{{action('ProdiController@create')}}"method="POST" enctype="multipart/form-data">
 				      			{{csrf_field()}}
 
 							<x-form.wrapper title="Nama Prodi" required="true">

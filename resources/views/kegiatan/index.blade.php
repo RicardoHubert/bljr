@@ -61,8 +61,8 @@
 														  View file
 														</button>
 														@if(auth()->user()->role == 'admin')
-															<a href="/kegiatan/{{$kegiatan->id}}/edit" class="btn btn-sm btn-warning">Edit</a>
-															<a href="/kegiatan/{{$kegiatan->id}}/delete" class="btn btn-sm btn-danger" onclick="return confirm('Jika data ini dihapus maka dapat menghilangkan seluruh kegiatan didalamnya, Apakah anda yakin ingin menghapus data ini??')">Delete</a>
+															<a href="{{action('KegiatanController@edit', $kegiatan->id)}}" class="btn btn-sm btn-warning">Edit</a>
+															<a href="{{action('KegiatanController@delete', $kegiatan->id)}}" class="btn btn-sm btn-danger" onclick="return confirm('Jika data ini dihapus maka dapat menghilangkan seluruh kegiatan didalamnya, Apakah anda yakin ingin menghapus data ini??')">Delete</a>
 														@endif
 														</td>
 													</tr>
@@ -122,7 +122,7 @@
 				      </div>
 
 				      <div class="modal-body">
-				      		<form action="/kegiatan/create" method="POST" enctype="multipart/form-data">
+				      		<form action="{{action('KegiatanController@create')}}"  method="POST" enctype="multipart/form-data">
 				      			{{csrf_field()}}
 
 							<x-form.wrapper title="Nama Ormawa" required="true">

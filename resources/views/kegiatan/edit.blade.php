@@ -11,7 +11,7 @@
 						<h3 class="panel-title">Edit Data Kegiatan</h3>
 						</div>
 						<div class="panel-body">
-							<form action="/kegiatan/{{$kegiatan->id}}/update" method="POST" enctype="multipart/form-data">
+							<form action="{{action('KegiatanController@update', $kegiatan->id)}}" method="POST" enctype="multipart/form-data">
 						{{csrf_field()}}
 
 						<x-form.wrapper title="Poster" required="true">

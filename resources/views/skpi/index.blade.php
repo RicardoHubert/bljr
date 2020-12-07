@@ -76,8 +76,8 @@
 													</td>
 
 													<td>
-														<a href="/skpi/{{$skpi->id}}/edit" class="btn btn-sm btn-warning">Edit</a>
-														<a href="/skpi/{{$skpi->id}}/delete" class="btn btn-sm btn-danger" onclick="return confirm('Jika data ini dihapus maka dapat menghilangkan seluruh kegiatan didalamnya, Apakah anda yakin ingin menghapus data ini??')">Delete</a>
+														<a href="{{action('SkpiController@edit', $skpi->id)}}" class="btn btn-sm btn-warning">Edit</a>
+														<a href="{{action('SkpiController@delete', $skpi->id)}}"  class="btn btn-sm btn-danger" onclick="return confirm('Jika data ini dihapus maka dapat menghilangkan seluruh kegiatan didalamnya, Apakah anda yakin ingin menghapus data ini??')">Delete</a>
 													</td>
 
 														<td>@if($skpi->status == '0' && $skpi->user_id == auth()->user()->id || $skpi->status == null && $skpi->user_id == auth()->user()->id || $skpi->status == '0' && auth()->user()->role == 'admin' || $skpi->status == null && auth()->user()->role == 'admin' || $skpi->status == '0' && auth()->user()->role == 'ao' || $skpi->status == null && auth()->user()->role == 'ao')
