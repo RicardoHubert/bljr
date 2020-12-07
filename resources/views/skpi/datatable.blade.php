@@ -95,7 +95,7 @@
             </button>
             </div>
             <div class="modal-body">
-                <form action="/skpi/create" method="POST" enctype="multipart/form-data">
+                <form action="{{route('skpi.create')}}" method="POST" enctype="multipart/form-data">
                     {{csrf_field()}}
                     <x-form.wrapper title="File Unggah" required="true">
                     <x-form.file name="file_skpi" required />

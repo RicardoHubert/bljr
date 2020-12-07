@@ -29,11 +29,11 @@ class SkpiDataTable extends DataTable
                 return $skpi->user->user->nama;
             })
             ->addColumn("prodi", function ($skpi) {
-                return $skpi->user->user->prodi;
+                return $skpi->user->user->prodi->nama_prodi;
             })
             ->addColumn("aksi", function ($skpi) {
-                $html = '<a href="/skpi/' . $skpi->id . '/edit" class="btn btn-sm btn-warning col-md-12">Edit</a>
-                <a href="/skpi/' . $skpi->id . '/delete" class="btn btn-sm btn-danger" onclick="return confirm(\'Jika data ini dihapus maka dapat menghilangkan seluruh kegiatan didalamnya, Apakah anda yakin ingin menghapus data ini??\')">Delete</a>';
+                $html = '<a href="' . route("skpi.edit", $skpi->id) . '" class="btn btn-sm btn-warning col-md-12">Edit</a>
+                <a href="' . route("skpi.destroy", $skpi->id) . '" class="btn btn-sm btn-danger" onclick="return confirm(\'Jika data ini dihapus maka dapat menghilangkan seluruh kegiatan didalamnya, Apakah anda yakin ingin menghapus data ini??\')">Delete</a>';
                 return $html;
             })
             ->addColumn("approvedBy", function ($skpi) {
