@@ -26,10 +26,10 @@
 								</thead>
 								<tbody>
 									@foreach($rows as $row)
-									<tr>						
+									<tr>
 										<td>{{ $row->title }}</td>
 										<td>
-											<img src="{{ asset('background_image/' . $row->file) }}" alt="{{ $row->title }}" style="height: 200px; widows: 200px;">
+											<img src="{{ url('/background_image/' . $row->file) }}" alt="{{ $row->title }}" style="height: 200px; widows: 200px;">
 										</td>
 										@if(auth()->user()->role == 'admin')
 										<td>

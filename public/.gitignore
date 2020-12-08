@@ -3,3 +3,5 @@ admin/
 !robots.txt
 !favicon.ico
 !index.php
+!js
+!css

@@ -30,7 +30,7 @@
 													<th>Nama Mahasiswa</th>
 													<th>NIM</th>
 													<th>Nama kompetisi</th>
-													<th>Jenis Kompetisi</th>		
+													<th>Jenis Kompetisi</th>
 													<th>URL</th>
 													<th>Judul Sertifikat</th>
 													<th>File Unggah</th>
@@ -41,21 +41,21 @@
 													<th>Penyelenggara</th>
 													<th>status</th>
 													<th>Aksi</th>
-												
+
 												</tr>
 										</thead>
 										<tbody>
 											<tr>
-												@foreach($kompetisiinternals as $kompetisiinternal)	
+												@foreach($kompetisiinternals as $kompetisiinternal)
 												@foreach($kalbisers as $kalbiser)
 												@foreach($ormawas as $ormawa)
 													@if($kalbiser->user_id == auth()->user()->id && $kompetisiinternal->user_id == $kalbiser->user_id && $kompetisiinternal->ormawa_id == $ormawa->id || auth()->user()->role == 'admin' && $kompetisiinternal->user_id == $kalbiser->user_id && $kompetisiinternal->ormawa_id == $ormawa->id )
 
-												
+
 													<td>
 													<input form="form" type="checkbox" name="approveId[]" value="{{ $kompetisiinternal->id }}">
 													</td>
-													<td><a href="{{$kompetisiinternal->poster}}"><img style="height: 50px;" src="{{$kompetisiinternal->poster}}" /></a></td>
+													<td><a href="{{$kompetisiinternal->poster}}"><img style="height: 50px;" src="{{url('/'.$kompetisiinternal->poster)}}" /></a></td>
 													<td>{{$ormawa->nama_ormawa}}</td>
 													<td>{{$kalbiser->nama}}</td>
 													<td>{{$kalbiser->nim}}</td>
@@ -63,28 +63,28 @@
 													<td>{{$kompetisiinternal->jenis_kompetisi}}</td>
 													<td>{{$kompetisiinternal->url}}</td>
 													<td>{{$kompetisiinternal->sertifikat}}</td>
-													<td><a href="{{$kompetisiinternal->file_sertifikat}}"><img style="height: 50px;" src="{{$kompetisiinternal->file_sertifikat}}" /></a></td>
+													<td><a href="{{$kompetisiinternal->file_sertifikat}}"><img style="height: 50px;" src="{{url('/'.$kompetisiinternal->file_sertifikat) }}" /></a></td>
 													<td>{{$kompetisiinternal->skala}}</td>
 													<td>{{$kompetisiinternal->pencapaian}}</td>
 													<td>{{$kompetisiinternal->nama_kegiatan}}</td>
 													<td>{{$kompetisiinternal->tanggal_kegiatan}}</td>
 													<td>{{$kompetisiinternal->penyelenggara}}</td>
 													<td>
-													
+
 														@if($kompetisiinternal->status == '0' || $kompetisiinternal->status == null)
 															<span class="badge badge-danger">belum di approve</span>
 														@else
 															<span class="badge badge-success">sudah di approve</span>
 														@endif
-														
+
 													</td>
 
 
 													<td>
 													@if($kompetisiinternal->status != '1')
-														<a href="/approvekompetisi/{{$kompetisiinternal->id}}" class="btn btn-sm btn-warning">approve</a>
+														<a href="{{action('KompetisiinternalController@approvestatus', $kompetisiinternal->id)}}" class="btn btn-sm btn-warning">approve</a>
 													@else
-														<a href="/approvekompetisi2/{{$kompetisiinternal->id}}" class="btn btn-sm btn-danger">disapprove</a>
+														<a href="{{action('KompetisiinternalController@approvestatus2', $kompetisiinternal->id)}}" class="btn btn-sm btn-danger">disapprove</a>
 														@endif
 													</td>
 												</tr>
@@ -115,7 +115,7 @@ $(document).ready(function() {
 	<!-- <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 				  <div class="modal-dialog">
 				    <div class="modal-content">
-				      <div class="modal-header">	
+				      <div class="modal-header">
 				        <h5 class="modal-title" id="exampleModalLabel">Input Data kompetisi</h5>
 				        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
 				          <span aria-hidden="true">&times;</span>
@@ -128,7 +128,7 @@ $(document).ready(function() {
 				      		 <div class="form-group">
 							    <label for="exampleInputEmail1">Poster Kompetisi</label>
 							    <input type="file" name="poster" class="form-control" >
-							  </div>	
+							  </div>
 
 							  <div class="form-group">
 							    <label for="exampleInputEmail1">Nama kompetisi</label>
@@ -157,7 +157,7 @@ $(document).ready(function() {
 
 							   <div class="form-group">
 							    <label for="exampleInputEmail1">URL</label>
-							    <textarea id="konten" class="form-control" name="url" rows="10" cols="50"></textarea>		  
+							    <textarea id="konten" class="form-control" name="url" rows="10" cols="50"></textarea>
 							</div>
 
 							<div class="form-group">
