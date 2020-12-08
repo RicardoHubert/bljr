@@ -63,7 +63,7 @@
 														  View file
 														</button>
 													@if($kegiatan->status != '1')
-														<a href="/approvekegiatan/{{$kegiatan->id}}" class="btn btn-sm btn-warning">approve</a>
+														<a href="{{action('KegiatanController@approvestatus', $kegiatan->id)}}" class="btn btn-sm btn-warning">approve</a>
 													@else
 														<a href="/approvekegiatan2/{{$kegiatan->id}}" class="btn btn-sm btn-danger">disapprove</a>
 													@endif
