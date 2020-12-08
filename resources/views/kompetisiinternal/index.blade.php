@@ -9,7 +9,7 @@
 							<div class="panel">
 								<div class="panel-heading">
 									<h3 class="panel-title">Kompetisi</h3>
-								
+
 									<div class="right">
 									<button type="button" class="btn" data-toggle="modal" data-target="#exampleModal"><i class="lnr lnr-plus-circle"></i> Create New Kompetisi 	</button>
 									</div>
@@ -19,14 +19,14 @@
 									<table class="table table-hover data">
 
 											<thead>
-												<tr>	
+												<tr>
 													<th>Poster Kompetisi</th>
 													<th>Ormawa</th>
 													<th>Program Studi</th>
 													<th>Nama Mahasiswa</th>
 													<th>NIM</th>
 													<th>Nama kompetisi</th>
-													<th>Jenis Kompetisi</th>		
+													<th>Jenis Kompetisi</th>
 													<th>URL</th>
 													<th>Judul Sertifikat</th>
 													<th>Sertifikat Peserta</th>
@@ -37,17 +37,17 @@
 													<th>Penyelenggara</th>
 													<th>status</th>
 													<th>Aksi</th>
-												
+
 												</tr>
 										</thead>
 										<tbody>
-											
-												@foreach($kompetisiinternals as $kompetisiinternal)	
+
+												@foreach($kompetisiinternals as $kompetisiinternal)
 												@foreach($kalbisers as $kalbiser)
 												@foreach($ormawas as $ormawa)
 													@if($kalbiser->user_id == auth()->user()->id && $kompetisiinternal->user_id == $kalbiser->user_id && $kompetisiinternal->ormawa_id == $ormawa->id || auth()->user()->role == 'admin' && $kompetisiinternal->user_id == $kalbiser->user_id && $kompetisiinternal->ormawa_id == $ormawa->id || $ormawa->user_id == auth()->user()->id && $kompetisiinternal->user_id == $kalbiser->user_id && $kalbiser->user_id && $kompetisiinternal->ormawa_id == $ormawa->id)
 
-													
+
 												<tr>
 													<td>
 														<a href="{{($kompetisiinternal->poster)}}"><img style="height: 50px;" src="{{$kompetisiinternal->poster}}" /></a>
@@ -62,7 +62,7 @@
 													<td>{{$kompetisiinternal->sertifikat}}</td>
 													<td>
 														<a href="{{$kompetisiinternal->file_sertifikat}}">
-														<img style="height: 50px;" src="{{$kompetisiinternal->file_sertifikat}}" />
+                                                        <img style="height: 50px;" src="{{$kompetisiinternal->file_sertifikat}}" onerror="this.src={{url('/fallback.png')}}" />
 														</a>
 														 (bukti ikut serta melalui sertifikat)
 													</td>
@@ -78,7 +78,7 @@
 														<br>
 															<span class="alert alert-success">Sudah Di Approved</span>
 														@endif
-														
+
 													</td>
 
 
@@ -89,7 +89,7 @@
 															@csrf
 															<input type="hidden" name="file" value="{{$kompetisiinternal->file_sertifikat}}">
 															<button type="submit">Download Sertifikat</button>
-														</form>	
+														</form>
 														<a href="{{action('KompetisiinternalController@edit', $kompetisiinternal->id)}}" class="btn btn-sm btn-warning">Edit</a>
 														<a href="{{action('KompetisiinternalController@delete', $kompetisiinternal->id)}}" class="btn btn-sm btn-danger" onclick="return confirm('Jika data ini dihapus maka dapat menghilangkan seluruh kompetisiinternal didalamnya, Apakah anda yakin ingin menghapus data ini??')">Delete</a>
 													@endif
@@ -99,7 +99,7 @@
 													@endforeach
 											@endforeach
 											@endforeach
-										
+
 										</tbody>
 										<tfoot>
 													<td></td>
@@ -117,7 +117,7 @@
 													<th></th>
 													<th></th>
 													<th></th>
-													<th></th>													
+													<th></th>
 
 										</tfoot>
 									</table>
@@ -136,7 +136,7 @@
 	    $('.data tfoot th').each( function () {
         var title = $(this).text();
         $(this).html( '<input type="text" placeholder="Search '+title+'" />' );
-    
+
 		});
 
 	    var table = $('.data').DataTable( {
@@ -157,7 +157,7 @@
 	<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 				  <div class="modal-dialog">
 				    <div class="modal-content">
-				      <div class="modal-header">	
+				      <div class="modal-header">
 				        <h5 class="modal-title" id="exampleModalLabel">Input Data kompetisi</h5>
 				        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
 				          <span aria-hidden="true">&times;</span>
@@ -169,8 +169,8 @@
 
 							  <x-form.wrapper title="Bukti Pendukung" required="true">
 				      			<x-form.file name="poster" required />
-				      			Bukti mengikuti kompetisi	
-				      		</x-form.wrapper>	
+				      			Bukti mengikuti kompetisi
+				      		</x-form.wrapper>
 
 
 							  <x-form.wrapper title="Nama Kompetisi" required="true">
@@ -220,9 +220,9 @@
 				      		</x-form.wrapper>
 
 				      		<x-form.wrapper title="File Unggah Sertifikat" required="true">
-				      			<x-form.file name="file_sertifikat" required />	
+				      			<x-form.file name="file_sertifikat" required />
 				      			Piagam, Sertifikat, dsb
-				      		</x-form.wrapper>	
+				      		</x-form.wrapper>
 
 							   <x-form.wrapper title="Skala" required="true">
 							    <select class="form-control" id="exampleFormControl mySelect2" name="skala" required>
@@ -249,7 +249,7 @@
 							  <x-form.wrapper title="Tanggal Kegiatan" required="true">
 							    <input type="date" name="tanggal_kegiatan" class="form-control" aria-describedby="emailHelp">
 							   </x-form.wrapper>
-							    
+
 							 <x-form.wrapper title="Penyelenggara" required="true">
 				      			<x-form.input name="penyelenggara" required placeholder="Penyelenggara" />
 				      		</x-form.wrapper>
@@ -258,13 +258,13 @@
 				      <div class="modal-footer">
 				        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
 						<button type="submit" class="btn btn-primary">Submit</button>
-						
+
 						</form>
 				      </div>
 				    </div>
 				  </div>
 				</div>
-					
+
 
 					<script>
  	$(document).ready(function() {
@@ -273,5 +273,5 @@
     });
 });
 
- 					</script>		
+ 					</script>
 @stop
