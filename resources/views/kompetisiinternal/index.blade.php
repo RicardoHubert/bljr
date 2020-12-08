@@ -50,7 +50,7 @@
 
 												<tr>
 													<td>
-														<a href="{{($kompetisiinternal->poster)}}"><img style="height: 50px;" src="{{$kompetisiinternal->poster}}" /></a>
+														<a href="{{($kompetisiinternal->poster)}}"><img style="height: 50px;" src="{{$kompetisiinternal->poster}}" onerror="this.src='{{url('/fallback.png')}}'" /></a>
 													</td>
 													<td>{{$ormawa->nama_ormawa}}</td>
 													<td>{{$kalbiser->prodi->nama_prodi}}</td>
@@ -62,7 +62,7 @@
 													<td>{{$kompetisiinternal->sertifikat}}</td>
 													<td>
 														<a href="{{$kompetisiinternal->file_sertifikat}}">
-                                                        <img style="height: 50px;" src="{{$kompetisiinternal->file_sertifikat}}" onerror="this.src={{url('/fallback.png')}}" />
+                                                        <img style="height: 50px;" src="{{$kompetisiinternal->file_sertifikat}}" onerror="this.src='{{url('/fallback.png')}}'" />
 														</a>
 														 (bukti ikut serta melalui sertifikat)
 													</td>

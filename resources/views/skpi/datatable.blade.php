@@ -10,7 +10,7 @@
 								<div class="panel-heading">
                                     @if ($errors->has("file_skpi"))
                                         <div style="position: absolute;top: 20%;left: 30%" class="alert alert-danger alert-dismissible col-md-5" role="alert">
-                                            Ukuran file lebih dari <strong>5MB</strong>
+                                            Ukuran file lebih dari <strong>2MB</strong>
                                             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                                 <span aria-hidden="true">×</span>
                                             </button>
