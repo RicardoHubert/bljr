@@ -14,7 +14,7 @@ class AddColumnNomorUrutOnSkpiTable extends Migration
     public function up()
     {
         Schema::table("skpi", function(Blueprint $table){
-            $table->bigInteger("nomor_urut")->after("id");
+            // $table->bigInteger("nomor_urut")->after("id");
         });
     }
 

@@ -25,7 +25,7 @@
 													<th>Visi</th>
 													<th>Misi</th>
 													<th>Email</th>
-													@if(auth()->user()->role == 'admin')		
+													@if(auth()->user()->role == 'admin')
 													<th>Aksi</th>
 													@endif
 												</tr>
@@ -93,11 +93,11 @@
 				        </button>
 				      </div>
 				      <div class="modal-body">
-				      		<form action="/ormawa/create" method="POST" enctype="multipart/form-data">
+                        <form action="{{action('OrmawaController@create')}}" method="POST" enctype="multipart/form-data">
 				      			{{csrf_field()}}
 
 				      		<x-form.wrapper title="Logo Ormawa" required="true">
-				      			<x-form.file name="logo_ormawa" required />	
+				      			<x-form.file name="logo_ormawa" required />
 				      		</x-form.wrapper>
 
 				      		<x-form.wrapper title="Background Ormawa" required="true">
@@ -107,7 +107,7 @@
 
 
 							  <div class="form-group">
-							  
+
 							    <input type="hidden" name="user_id" value="Ormawa" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
 							  </div>
 
@@ -139,7 +139,7 @@
 				      </div>
 				    </div>
 				  </div>
-				</div>		
+				</div>
 
 <!-- <div class="modal fade" id="viewModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 	  <div class="modal-dialog" role="document">

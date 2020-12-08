@@ -14,7 +14,7 @@ class AddColumnApprovedbyToSkpi extends Migration
     public function up()
     {
         Schema::table('skpi', function (Blueprint $table) {
-            $table->integer("approvedby");
+            // $table->integer("approvedby");
         });
     }
 

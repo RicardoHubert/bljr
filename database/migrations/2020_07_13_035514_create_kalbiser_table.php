@@ -19,7 +19,7 @@ class CreateKalbiserTable extends Migration
             $table->string('nama')->nullable();
             $table->string('nim')->nullable();
             $table->string('foto')->nullable();
-            $table->string('prodi')->nullable();
+            $table->string('prodi_id')->nullable();
             $table->string('tahun_akademik')->nullable();
             $table->string('nohp')->nullable();
             $table->string('email')->nullable();

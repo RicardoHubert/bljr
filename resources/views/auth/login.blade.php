@@ -34,7 +34,7 @@
 								<p class="lead">Login</p>
 
 							</div>
-							<form class="form-auth-small" action="/postlogin" method="POST">
+                            <form class="form-auth-small" action="{{action('AuthController@postlogin')}}" method="POST">
 							{{csrf_field()}}
 								<div class="form-group">
 									<label for="signin-email" class="control-label sr-only">Email</label>
@@ -43,10 +43,10 @@
 								<div class="form-group">
 									<label for="signin-password" class="control-label sr-only">Password</label>
 									<input type="password" name="password" class="form-control" id="signin-password" placeholder="Password">
-								</div> 
-								
+								</div>
+
 								<button type="submit" class="btn btn-primary btn-lg btn-block">LOGIN</button>
-								
+
 							</form>
 						</div>
 					</div>

@@ -32,7 +32,7 @@ class SkpiSeed extends Seeder
                 "created_at" => "2020-10-06 14:07:53",
                 "updated_at" => "2020-11-09 16:55:17",
                 "penyelenggara" => $faker->company(),
-                "approvedby" => 6
+                "approvedby" => 2
             ]);
         }
     }

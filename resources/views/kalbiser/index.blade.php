@@ -35,7 +35,7 @@
 												<tr>
 													<td><a href="{{action('KalbiserController@profile',$kalbiser->id)}}">{{$kalbiser->nama}}</td></a>
 													<td>{{$kalbiser->nim}}</td>
-													<td>{{ $kalbiser->prodi }}</td>
+													<td>{{ $kalbiser->prodi->nama_prodi }}</td>
 													<td>{{$kalbiser->tahun_akademik}}</td>
 													<td>{{$kalbiser->nohp}}</td>
 													<td>{{$kalbiser->email}}</td>

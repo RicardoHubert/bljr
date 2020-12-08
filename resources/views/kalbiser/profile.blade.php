@@ -33,7 +33,7 @@
 										<ul class="list-unstyled list-justify">
 											<li>Nama <span>{{$kalbiser->nama}}</span></li>
 											<li>NIM <span>{{$kalbiser->nim}}</span></li>
-											<li>Program Studi <span>{{$kalbiser->prodi}}</span></li>
+											<li>Program Studi <span>{{$kalbiser->prodi->nama_prodi}}</span></li>
 											<li>Student Email <span>{{$kalbiser->email}}</a></span></li>
 										</ul>
 									</div>

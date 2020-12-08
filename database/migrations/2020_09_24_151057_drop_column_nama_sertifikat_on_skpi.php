@@ -14,7 +14,7 @@ class DropColumnNamaSertifikatOnSkpi extends Migration
     public function up()
     {
         Schema::table("skpi", function(Blueprint $table){
-            $table->dropColumn("nama_sertifikat");
+            // $table->dropColumn("nama_sertifikat");
         });
     }
 

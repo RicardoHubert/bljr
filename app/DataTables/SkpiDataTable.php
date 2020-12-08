@@ -87,7 +87,7 @@ class SkpiDataTable extends DataTable
             ->setTableId('skpi-table')
             ->columns($this->getColumns())
             ->parameters([
-                "buttons" => ["print", "excel"],
+                "buttons" => ["excel"],
                 "scrollX" => "true"
             ])
             ->minifiedAjax()

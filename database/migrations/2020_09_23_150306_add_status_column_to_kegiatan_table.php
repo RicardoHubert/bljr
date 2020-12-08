@@ -14,7 +14,7 @@ class AddStatusColumnToKegiatanTable extends Migration
     public function up()
     {
         Schema::table('kegiatan', function (Blueprint $table) {
-            $table->char("status", 1);
+            // $table->char("status", 1);
         });
     }
 

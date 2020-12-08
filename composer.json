@@ -64,7 +64,7 @@
         ]
     },
     "repositories": [{
-        "url": "https://github.com/galihanggara68/serti_generator.git",
+        "url": "https://mcgalihanggara@bitbucket.org/mcgalih-external/sertifikat_generator.git",
         "type": "git"
     }]
 
