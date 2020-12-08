@@ -38,7 +38,7 @@
                         <a href="/" >
                             <i class="material-icons">apps</i> Home
                         </a>
-                      &nbsp  &nbsp 
+                      &nbsp  &nbsp
                 <!--     <a href="/frontend/visimisi" >
                             <i class="material-icons">apps</i> Visi & Misi
                         </a> -->
@@ -50,11 +50,11 @@
                             <i class="material-icons">apps</i> Himpunan Mahasiswa
                         </a>
                         <div class="dropdown-menu dropdown-with-icons">
-                          
+
                             <a href="#" class="dropdown-item">
                                 <i class="material-icons">content_paste</i> HM
                             </a>
-                           
+
                             @foreach(App\ormawa::all() as $ormawa)
                             @if($ormawa->kategori_ormawa == 'HMJ')
                                 <a href="{{url('/ormawa/'.$ormawa->id)}}" class="dropdown-item">
@@ -70,11 +70,11 @@
                             <i class="material-icons">apps</i>  Unit Kegiatan Mahasiswa
                         </a>
                         <div class="dropdown-menu dropdown-with-icons">
-                          
+
                             <a href="#" class="dropdown-item">
                                 <i class="material-icons">content_paste</i> UKM
                             </a>
-                           
+
                             @foreach(App\ormawa::all() as $ormawa)
                             @if($ormawa->kategori_ormawa == 'UKM')
                                 <a href="{{url('/ormawa/'.$ormawa->id)}}" class="dropdown-item">
@@ -90,11 +90,11 @@
                             <i class="material-icons">apps</i> Unit Kegiatan Rohani
                         </a>
                         <div class="dropdown-menu dropdown-with-icons">
-                          
+
                             <a href="#" class="dropdown-item">
                                 <i class="material-icons">content_paste</i> UKR
                             </a>
-                           
+
                             @foreach(App\ormawa::all() as $ormawa)
                             @if($ormawa->kategori_ormawa == 'UKR')
                                 <a href="{{url('/ormawa/'.$ormawa->id)}}" class="dropdown-item">
@@ -109,23 +109,23 @@
                     &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
                     @auth
                     <li class="button-container nav-item iframe-extern">
-                        <a href="/dashboard">
+                        <a href="{{action('DashboardController@index')}}">
                         Dashboard
                         </a>
-                    </li>   
+                    </li>
                     @else
                     <li class="button-container nav-item iframe-extern">
-                        <a href="/login">
+                        <a href="{{action('AuthController@login')}}">
                         Login Kalbiser
                         </a>
-                    </li>   
+                    </li>
                     @endauth
 
                 </ul>
             </div>
         </div>
     </nav>
-   
+
 
     <!--  End Modal -->
   <footer class="page-footer font-small blue pt-4" style="background-color: black;">
@@ -142,7 +142,7 @@
               <!-- Content -->
               <img src="{{asset('logo/logoKalbis.png')}}" width="50%">
             <div class="container" style="margin-left: 100px;">
-                
+
                     <div class="col-md-8;">
               <p class="" style="color: white; font-size: 29px;">
                 <br>
@@ -162,9 +162,9 @@
                     Instagram : csd.kalbis
                 </p>
                 </div>
-        
+
                 </div>
-                    
+
             </div>
             <!-- Grid column -->
 
@@ -231,7 +231,7 @@
             materialKit.initSliders();
         });
     </script>
-    
+
 </body>
 
 </html>
