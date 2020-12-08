@@ -11,7 +11,7 @@
 									<h3 class="panel-title">Kegiatan Ormawa</h3>
 									<div class="left">
 										<input type="checkbox" onclick="toggle(this);" />Select All
-										<form action="/approvekegiatanall" id="form">
+										<form action="{{action('KegiatanController@approvestatusall')}}" id="form">
 												<button type="submit" class="button btn-xl" style="background-color: yellow;" value="Approve All">Approve All</button>
 										</form>
 									</div>
@@ -65,7 +65,7 @@
 													@if($kegiatan->status != '1')
 														<a href="{{action('KegiatanController@approvestatus', $kegiatan->id)}}" class="btn btn-sm btn-warning">approve</a>
 													@else
-														<a href="/approvekegiatan2/{{$kegiatan->id}}" class="btn btn-sm btn-danger">disapprove</a>
+														<a href="{{action('KegiatanController@approvestatus2', $kegiatan->id)}}" class="btn btn-sm btn-warning"class="btn btn-sm btn-danger">disapprove</a>
 													@endif
 													</td>
 													</tr>
