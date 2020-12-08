@@ -64,7 +64,7 @@
 													@if(auth()->user()->role == 'admin' && $skpi->user_id == auth()->user()->id|| auth()->user()->role == 'student'&& $skpi->user_id == auth()->user()->id || auth()->user()->role == 'admin' || auth()->user()->role == 'ao' )
 
 													<td>
-														<button id="buttonViewModal" type="button" class="btn btn-primary" data-toggle="modal" data-id="{{ asset($skpi->file_skpi) }}" data-target="#viewModal">
+														<button id="buttonViewModal" type="button" class="btn btn-primary" data-toggle="modal" data-id="{{ url('/'.$skpi->file_skpi) }}" data-target="#viewModal">
 														  View file
 														</button>
 

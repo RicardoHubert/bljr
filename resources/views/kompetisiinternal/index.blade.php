@@ -50,7 +50,7 @@
 													
 												<tr>
 													<td>
-														<a href="{{($kompetisiinternal->poster)}}"><img style="height: 50px;" src="{{$kompetisiinternal->poster}}" /></a>
+														<a href="{{$kompetisiinternal->poster}}"><img style="height: 50px;" src="{{$kompetisiinternal->poster}}" /></a>
 													</td>
 													<td>{{$ormawa->nama_ormawa}}</td>
 													<td>{{$kalbiser->prodi->nama_prodi}}</td>
