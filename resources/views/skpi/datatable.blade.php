@@ -57,15 +57,15 @@
 	</div>
 </div>
 <script type="text/javascript">
-
 	$(document).on("click", "#buttonViewModal", function(){
 		var skpiId = $(this).data('id');
 		var bodyElement = $('.modal-body-view-file');
-		let [sertifPath, fileName] = skpiId.split("/");
+        let [sertifPath, fileName] = skpiId.split("/");
+        var APP_URL = {!! json_encode(url('/')) !!}
 		bodyElement.html('');
-		var domImage = `<div class="col-md-12"><img src="${sertifPath}/thumb-${fileName}" style="width:100%" /></div>`
+		var domImage = `<div class="col-md-12"><img onerror="this.src='${APP_URL}/${sertifPath}/${fileName}'" src="${APP_URL}/${sertifPath}/thumb-${fileName}" style="width:100%" /></div>`
 
-		bodyElement.append(domImage)
+		bodyElement.append(domImage);
 	})
 
 
