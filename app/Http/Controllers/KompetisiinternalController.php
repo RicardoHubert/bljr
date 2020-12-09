@@ -17,28 +17,28 @@ class KompetisiinternalController extends Controller
         $kalbisers = kalbiser::all();
         $kompetisiinternals = kompetisiinternal::all();
         $ormawas = Ormawa::all();
-       
-      
+
+
 
         // return $kompetisiinternal;
-        
+
         return view('kompetisiinternal.index', compact('kalbisers','kompetisiinternals','ormawas'));
     }
 
       public function create(Request $request)
     {
          return view ('kompetisiinternal.index');
-      
+
      }
         # code...
 
 
           public function store(Request $request){
          $kompetisiinternal = new kompetisiinternal();
-       
+
              $request->validate([
 
-            'poster' => 'mimes:jpeg,jpg,png,docx,doc,ppt,pptx,pdf,txt', 
+            'poster' => 'mimes:jpeg,jpg,png',
             'ormawa_id' => 'nullable',
             'user_id' => 'nullable',
             'nama_kompetisi' => 'nullable',
@@ -50,7 +50,7 @@ class KompetisiinternalController extends Controller
             'nama_kegiatan' => 'nullable',
             'tanggal_kegiatan' => 'nullable',
             'penyelenggara' => 'nullable',
-            'status' => 'nullable', 
+            'status' => 'nullable',
 
             'file_sertifikat' => 'mimes:jpeg,jpg,png,docx,doc,ppt,pptx,pdf,txt'
 
@@ -83,11 +83,11 @@ class KompetisiinternalController extends Controller
         $kompetisiinternal->nama_kegiatan = $request->nama_kegiatan;
         $kompetisiinternal->tanggal_kegiatan = $request->tanggal_kegiatan;
         $kompetisiinternal->penyelenggara = $request->penyelenggara;
-       
+
         $kompetisiinternal->status = $request->status;
-       
+
         $kompetisiinternal->save();
-          
+
         return redirect('k-internal')->with('sukses','Data berhasil diinput');
     }
          public function edit($id)
@@ -109,7 +109,7 @@ class KompetisiinternalController extends Controller
             $file2->move('posterkompetisi/', $filename2);
 
             $kompetisiinternal->poster = 'posterkompetisi/' . $filename2;
-            $kompetisiinternal->save();  
+            $kompetisiinternal->save();
 
         }
 
@@ -127,9 +127,9 @@ class KompetisiinternalController extends Controller
             $file->move('file_sertifikat/', $filename);
 
             $kompetisiinternal->file_sertifikat = 'file_sertifikat/' . $filename;
-            $kompetisiinternal->save();  
+            $kompetisiinternal->save();
 
-       
+
     }
      return redirect('/k-internal')->with('sukses','Data berhasil di updates');
  }
@@ -139,7 +139,7 @@ class KompetisiinternalController extends Controller
         $kompetisiinternal = \App\kompetisiinternal::find($id);
         $kompetisiinternal->delete($kompetisiinternal);
         return redirect('/k-internal')->with('sukses','Data berhasil di Hapus');
-    }   
+    }
 
     public function approveindex()
         {
@@ -147,9 +147,9 @@ class KompetisiinternalController extends Controller
         $kompetisiinternals = kompetisiinternal::all();
         $ormawas = Ormawa::all();
 
-        
+
         return view('approvekompetisi.index', compact('kalbisers','kompetisiinternals','ormawas'));
-    }   
+    }
 
     public function approvestatus($id)
     {
@@ -177,7 +177,7 @@ class KompetisiinternalController extends Controller
         $files = FileKompetisiInternal::where('kompetisiinternal_id', $id)->get();
 
         return view('/kompetisiinternal/fileupload', compact('files', 'kompetisiinternal'));
-    }   
+    }
 
     public function doUpload($id)
     {
@@ -199,7 +199,7 @@ class KompetisiinternalController extends Controller
 
         noty()->flash('Hey', 'Upload file success');
         return redirect()->back();
-    }   
+    }
 
     public function removeFile($id)
     {
@@ -207,7 +207,7 @@ class KompetisiinternalController extends Controller
 
         noty()->flash('Hey', 'Remove file success');
         return redirect()->back();
-    }   
+    }
         public function approvestatuskompetisiall()
     {
         $approveId = request('approveId');
@@ -218,7 +218,7 @@ class KompetisiinternalController extends Controller
          $kompetisiinternalrow->status = '1';
          $kompetisiinternalrow->save();
         }
-        
+
         noty()->flash('Yay!', 'All your data has been approved');
         return redirect()->back();
     }
