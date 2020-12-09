@@ -89,7 +89,6 @@ class SkpiDataTable extends DataTable
                     [
                         "extend" => 'excel',
                         "text" => "Export Current Page",
-                        "className" => "m-2",
                         "exportOptions" => [
                             "modifier" => [
                                 "page" => 'all',
@@ -102,7 +101,7 @@ class SkpiDataTable extends DataTable
                 "lengthMenu" => [[10, 25, 50, -1], [10, 25, 50, "All"]]
             ])
             ->buttons([
-                Button::make(["text" => "Export All"])->action("window.location = '".action('SkpiController@exportSkpi')."';")
+                Button::make(["text" => "Export All", "className" => "btn btn-primary ml-2"])->action("window.location = '".action('SkpiController@exportSkpi')."';")
             ])
             ->minifiedAjax()
             ->dom('Bflrtip')
