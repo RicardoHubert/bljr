@@ -112,6 +112,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/skpi/{skpi}/edit', 'SkpiController@edit')->name("skpi.edit");
     Route::post('/skpi/{id}/update', 'SkpiController@update')->name("skpi.update");;
     Route::post('/skpi/downloadword', 'DokumenController@worddownload');
+    Route::get('/skpi/exportexcel', 'SkpiController@exportSkpi');
 
     Route::resource('background_images', 'BackgroundImageController');
 
