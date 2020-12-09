@@ -11,6 +11,9 @@ use MCGalih\Serti\Sertifikat;
 use Carbon\Carbon;
 use App\Prodi;
 use Illuminate\Support\Facades\Storage;
+use PhpOffice\PhpWord\IOFactory;
+use PhpOffice\PhpWord\PhpWord;
+use PhpOffice\PhpWord\TemplateProcessor;
 
 class KalbiserController extends Controller
 {
@@ -149,34 +152,18 @@ class KalbiserController extends Controller
             return back();
         }
 
-        $jsonFile = Storage::disk("local")->get("template/tempat.json");
-        $mappings = Sertifikat::MapText($data, $jsonFile);
-        $sertifikat = new Sertifikat(storage_path("app/template/blangko.jpg"));
-        $data = [
-            "bab" => "V. Informasi Tambahan",
-            "bab_english" => "Additional Information",
-            "halaman" => "5/5"
-        ];
-        $jsonMap = Storage::disk("local")->get("template/blangko-mapping.json");
-        $mappings = Sertifikat::MapText($data, $jsonMap);
-        $sertifikat->json_mapping($mappings);
-        $initialYLoc = 550;
-        $xLoc = 437;
-        $idx = 1;
-        foreach ($skpis as $skpi) {
-            $sertifikat->text($idx++ . ". " . $skpi->judul_sertifikat . ", " . Carbon::make($skpi->tanggal_dokumen)->locale("id")->isoFormat("DD MMMM YYYY"), [$xLoc, $initialYLoc], [
-                "file" => "@app/fonts/arial.ttf",
-                "size" => 46,
-                "align" => "left"
-            ]);
-            // $initialYLoc += 60; // Increment per lists
-        }
+        $template = new TemplateProcessor(storage_path("app/template/Mapping.docx"));
+        $datas = array_map(function($skpi, $index){
+            return [
+                "num" => ((int)$index)+1,
+                "judul" => $skpi["judul_sertifikat"],
+                "tanggal" => Carbon::make($skpi["tanggal_dokumen"])->locale("id")->isoFormat("DD MMMM YYYY")
+            ];
+        }, $skpis->toArray(), array_keys($skpis->toArray()));
+        $template->cloneBlock("textblock", count($skpis), true, false, $datas);
+        $fileName = (string)Str::uuid().".docx";
+        $template->saveAs(public_path($fileName));
 
-        $sertifikat->image()->rectangle(2000, 3300, 2250, 3430, function ($draw) {
-            $draw->border(2, "#000000");
-        });
-
-        return response($sertifikat->image()->encode("jpg"))
-            ->header("Content-Type", "image/jpg");
+        return response()->download(public_path($fileName));
     }
 }

@@ -105,7 +105,7 @@ class SkpiDataTable extends DataTable
             ])
             ->minifiedAjax()
             ->dom('Bflrtip')
-            ->orderBy(1);
+            ->orderBy(0, "asc");
     }
 
     /**
