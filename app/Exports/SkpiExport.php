@@ -30,7 +30,7 @@ class SkpiExport implements FromQuery, WithHeadings, WithMapping
             $row->penyelenggara,
             end($fileSkpi),
             (((int)$row->status) == 1 ? "Sudah Approved" : "Belum Approved"),
-            $row->approvedBy->name,
+            (!is_null($row->approvedBy) ? $row->approvedBy->name : "-"),
         ];
     }
 
