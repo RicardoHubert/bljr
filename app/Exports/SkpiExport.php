@@ -20,9 +20,9 @@ class SkpiExport implements FromQuery, WithHeadings, WithMapping
     public function map($row): array{
         $fileSkpi = explode("/", $row->file_skpi);
         return [
-            $row->user->kalbiser->nim,
-            $row->user->kalbiser->nama,
-            $row->user->kalbiser->prodi->nama_prodi,
+            $row->user->kalbiser->nim ?? "-",
+            $row->user->kalbiser->nama ?? "-",
+            $row->user->kalbiser->prodi->nama_prodi ?? "-",
             $row->jenis_dokumen,
             $row->tanggal_dokumen,
             $row->tahun,
