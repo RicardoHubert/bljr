@@ -70,7 +70,7 @@ class SkpiDataTable extends DataTable
      */
     public function query(Skpi $model)
     {
-        $model = Skpi::with("user.kalbiser", "approvedBy", "user.kalbiser.prodi");
+        $model = Skpi::with("user.kalbiser", "approvedBy", "user.kalbiser.prodi")->select("skpi.*");
         return $model->newQuery();
     }
 
@@ -125,7 +125,7 @@ class SkpiDataTable extends DataTable
             Column::make('judul_sertifikat'),
             Column::make('penyelenggara'),
             Column::make('file_skpi'),
-            Column::make('aksi'),
+            Column::make('aksi')->searchable(false)->orderable(false),
             Column::make('status'),
             Column::make('approvedBy', "approvedBy.name")
         ];
