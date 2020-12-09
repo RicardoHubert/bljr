@@ -23,13 +23,13 @@ class SkpiDataTable extends DataTable
         return datatables()
             ->eloquent($query)
             ->addColumn("nim", function ($skpi) {
-                return $skpi->user->kalbiser->nim;
+                return $skpi->user->kalbiser->nim ?? "-";
             })
             ->addColumn("nama", function ($skpi) {
-                return $skpi->user->kalbiser->nama;
+                return $skpi->user->kalbiser->nama ?? "-";
             })
             ->addColumn("prodi", function ($skpi) {
-                return $skpi->user->kalbiser->prodi->nama_prodi;
+                return $skpi->user->kalbiser->prodi->nama_prodi ?? "-";
             })
             ->addColumn("aksi", function ($skpi) {
                 $html = '<a href="' . route("skpi.edit", $skpi->id) . '" class="btn btn-sm btn-warning col-md-12">Edit</a>
