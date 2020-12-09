@@ -14,15 +14,15 @@ class SkpiExport implements FromQuery, WithHeadings, WithMapping
     */
     public function query()
     {
-        return Skpi::with("user.user", "approvedBy", "user.user.prodi");
+        return Skpi::with("user.kalbiser", "approvedBy", "user.kalbiser.prodi");
     }
 
     public function map($row): array{
         $fileSkpi = explode("/", $row->file_skpi);
         return [
-            $row->user->user->nim,
-            $row->user->user->nama,
-            $row->user->user->prodi->nama_prodi,
+            $row->user->kalbiser->nim,
+            $row->user->kalbiser->nama,
+            $row->user->kalbiser->prodi->nama_prodi,
             $row->jenis_dokumen,
             $row->tanggal_dokumen,
             $row->tahun,
