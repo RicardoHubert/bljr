@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\kalbiser as Kalbiser;
 use App\Ormawa;
 use App\Kegiatan;
+use Illuminate\Support\Facades\Auth;
 
 class AjaxRequestController extends Controller
 {
@@ -18,12 +19,20 @@ class AjaxRequestController extends Controller
     }
 
     private function getKalbiser(Request $request){
-        return response()->json(
-            Kalbiser::where("nama", "LIKE", "%".$request->query("q")."%")
-                ->orWhere("id", "LIKE", "%".$request->query("q")."%")
-                ->orWhere("nim", "LIKE", "%".$request->query("q")."%")
-                ->get()
-        );
+        if(Auth::user()->role == "student"){
+            return response()->json(
+                [
+                    Auth::user()->kalbiser
+                ]
+            );
+        }else{
+            return response()->json(
+                Kalbiser::where("nama", "LIKE", "%".$request->query("q")."%")
+                    ->orWhere("id", "LIKE", "%".$request->query("q")."%")
+                    ->orWhere("nim", "LIKE", "%".$request->query("q")."%")
+                    ->get()
+            );
+        }
     }
 
     private function getKegiatan(Request $request){
