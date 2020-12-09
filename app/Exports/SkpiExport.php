@@ -18,6 +18,7 @@ class SkpiExport implements FromQuery, WithHeadings, WithMapping
     }
 
     public function map($row): array{
+        $fileSkpi = explode("/", $row->file_skpi);
         return [
             $row->user->user->nim,
             $row->user->user->nama,
@@ -27,7 +28,7 @@ class SkpiExport implements FromQuery, WithHeadings, WithMapping
             $row->tahun,
             $row->judul_sertifikat,
             $row->penyelenggara,
-            end(explode("/", $row->file_skpi)),
+            end($fileSkpi),
             (((int)$row->status) == 1 ? "Sudah Approved" : "Belum Approved"),
             $row->approvedBy->name,
         ];
