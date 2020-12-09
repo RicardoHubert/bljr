@@ -23,7 +23,7 @@ class SkpiDataTable extends DataTable
         return datatables()
             ->eloquent($query)
             ->addColumn("nim", function ($skpi) {
-                return $skpi->user->kalbiser->nim ?? "-";
+                return $skpi->user->kalbiser->nim ?? $skpi->user->email;
             })
             ->addColumn("nama", function ($skpi) {
                 return $skpi->user->kalbiser->nama ?? "-";
