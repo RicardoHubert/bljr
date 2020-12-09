@@ -73,6 +73,7 @@ class SkpiDataTable extends DataTable
      */
     public function query(Skpi $model)
     {
+        $model = Skpi::with("user.user", "approvedBy", "user.user.prodi");
         return $model->newQuery();
     }
 
@@ -87,8 +88,24 @@ class SkpiDataTable extends DataTable
             ->setTableId('skpi-table')
             ->columns($this->getColumns())
             ->parameters([
-                "buttons" => ["excel"],
-                "scrollX" => "true"
+                "buttons" => [
+                    [
+                        "extend" => 'excel',
+                        "text" => "Export Current Page",
+                        "className" => "m-2",
+                        "exportOptions" => [
+                            "modifier" => [
+                                "page" => 'all',
+                                "search" => 'none'
+                            ]
+                        ]
+                    ]
+                ],
+                "scrollX" => "true",
+                "lengthMenu" => [[10, 25, 50, -1], [10, 25, 50, "All"]]
+            ])
+            ->buttons([
+                Button::make(["text" => "Export All"])->action("window.location = '".action('SkpiController@exportSkpi')."';")
             ])
             ->minifiedAjax()
             ->dom('Bflrtip')
@@ -103,9 +120,9 @@ class SkpiDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            Column::make('nim'),
-            Column::make('nama'),
-            Column::make('prodi'),
+            Column::make('nim', "user.user.nim"),
+            Column::make('nama', "user.user.nama"),
+            Column::make('prodi', "user.user.prodi.nama_prodi"),
             Column::make('jenis_dokumen'),
             Column::make('tanggal_dokumen'),
             Column::make('tahun'),
@@ -114,7 +131,7 @@ class SkpiDataTable extends DataTable
             Column::make('file_skpi'),
             Column::make('aksi'),
             Column::make('status'),
-            Column::make('approvedBy')
+            Column::make('approvedBy', "approvedBy.name")
         ];
     }
 

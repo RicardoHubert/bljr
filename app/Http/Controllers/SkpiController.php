@@ -2,12 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\DataTables\Scopes\SkpiScope;
 use App\DataTables\SkpiDataTable;
+use App\Exports\SkpiExport;
 use App\skpi as Skpi;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Exception;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
+use Maatwebsite\Excel\Facades\Excel;
 use SingleQuote\DataTables\DataTable;
 
 class SkpiController extends Controller
@@ -29,7 +33,11 @@ class SkpiController extends Controller
 
         // return view('skpi.index', ['data_skpi' => $data_skpi, 'data_kalbiser' => $data_kalbiser, 'users' => $users]);
 
-        return $dataTable->render("skpi.datatable");
+        return $dataTable->addScope(new SkpiScope(Auth::user()->role, Auth::id()))->render("skpi.datatable");
+    }
+
+    public function exportSkpi(){
+        return Excel::download(new SkpiExport, "Data SKPI-".Carbon::now()->isoFormat("Y_M_D").".xlsx", \Maatwebsite\Excel\Excel::XLSX);
     }
 
     public function create(Request $request)
