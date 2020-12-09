@@ -41,4 +41,8 @@ class User extends Authenticatable
     {
         return $this->hasOne(kalbiser::class);
     }
+
+    public function kalbiser(){
+        return $this->hasOne(kalbiser::class);
+    }
 }

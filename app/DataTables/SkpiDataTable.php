@@ -23,13 +23,13 @@ class SkpiDataTable extends DataTable
         return datatables()
             ->eloquent($query)
             ->addColumn("nim", function ($skpi) {
-                return $skpi->user->user->nim;
+                return $skpi->user->kalbiser->nim;
             })
             ->addColumn("nama", function ($skpi) {
-                return $skpi->user->user->nama;
+                return $skpi->user->kalbiser->nama;
             })
             ->addColumn("prodi", function ($skpi) {
-                return $skpi->user->user->prodi->nama_prodi;
+                return $skpi->user->kalbiser->prodi->nama_prodi;
             })
             ->addColumn("aksi", function ($skpi) {
                 $html = '<a href="' . route("skpi.edit", $skpi->id) . '" class="btn btn-sm btn-warning col-md-12">Edit</a>
@@ -59,9 +59,6 @@ class SkpiDataTable extends DataTable
                 Carbon::setLocale("id");
                 return Carbon::parse($skpi->tanggal_dokumen)->locale("id")->isoFormat("D MMMM YYYY");
             })
-            ->addColumn("prodi", function ($skpi) {
-                return $skpi->user->user->prodi->nama_prodi;
-            })
             ->rawColumns(["status", "aksi", "file_skpi"]);
     }
 
@@ -73,7 +70,7 @@ class SkpiDataTable extends DataTable
      */
     public function query(Skpi $model)
     {
-        $model = Skpi::with("user.user", "approvedBy", "user.user.prodi");
+        $model = Skpi::with("user.kalbiser", "approvedBy", "user.kalbiser.prodi");
         return $model->newQuery();
     }
 
@@ -120,9 +117,9 @@ class SkpiDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            Column::make('nim', "user.user.nim"),
-            Column::make('nama', "user.user.nama"),
-            Column::make('prodi', "user.user.prodi.nama_prodi"),
+            Column::make('nim', "user.kalbiser.nim"),
+            Column::make('nama', "user.kalbiser.nama"),
+            Column::make('prodi', "user.kalbiser.prodi.nama_prodi"),
             Column::make('jenis_dokumen'),
             Column::make('tanggal_dokumen'),
             Column::make('tahun'),
