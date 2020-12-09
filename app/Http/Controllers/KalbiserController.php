@@ -10,6 +10,7 @@ use App\User;
 use MCGalih\Serti\Sertifikat;
 use Carbon\Carbon;
 use App\Prodi;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 use PhpOffice\PhpWord\IOFactory;
 use PhpOffice\PhpWord\PhpWord;
@@ -161,9 +162,8 @@ class KalbiserController extends Controller
             ];
         }, $skpis->toArray(), array_keys($skpis->toArray()));
         $template->cloneBlock("textblock", count($skpis), true, false, $datas);
-        $fileName = (string)Str::uuid().".docx";
-        $template->saveAs(public_path($fileName));
-
-        return response()->download(public_path($fileName));
+        $fileName = (string)Str::uuid();
+        $template->saveAs(public_path($fileName.".docx"));
+        return response()->download($fileName.".docx", "List SKPI.docx");
     }
 }
