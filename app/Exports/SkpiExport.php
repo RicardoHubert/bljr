@@ -27,7 +27,7 @@ class SkpiExport implements FromQuery, WithHeadings, WithMapping
             $row->tahun,
             $row->judul_sertifikat,
             $row->penyelenggara,
-            explode("sertifikat/", $row->file_skpi)[1],
+            end(explode("/", $row->file_skpi)),
             (((int)$row->status) == 1 ? "Sudah Approved" : "Belum Approved"),
             $row->approvedBy->name,
         ];
