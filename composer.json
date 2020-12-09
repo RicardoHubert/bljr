@@ -21,7 +21,8 @@
         "mcgalihanggara/sertigenerator": "1.1",
         "fzaninotto/faker": "^1.9",
         "yajra/laravel-datatables-oracle": "~9.0",
-        "yajra/laravel-datatables": "^1.5"
+        "yajra/laravel-datatables": "^1.5",
+        "doctrine/dbal": "^2.0"
     },
     "require-dev": {
         "facade/ignition": "^2.0",
