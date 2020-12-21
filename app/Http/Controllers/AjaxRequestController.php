@@ -14,7 +14,8 @@ class AjaxRequestController extends Controller
         return response()->json(
             Ormawa::where("nama_ormawa", "LIKE", "%".$request->query("q")."%")
                 ->orWhere("ormawa_id", "LIKE", "%".$request->query("q")."%")
-                ->get()
+				->paginate(10)
+                ->all()
         );
     }
 
@@ -30,7 +31,8 @@ class AjaxRequestController extends Controller
                 Kalbiser::where("nama", "LIKE", "%".$request->query("q")."%")
                     ->orWhere("id", "LIKE", "%".$request->query("q")."%")
                     ->orWhere("nim", "LIKE", "%".$request->query("q")."%")
-                    ->get()
+					->paginate(10)
+                    ->all()
             );
         }
     }
@@ -39,7 +41,8 @@ class AjaxRequestController extends Controller
         return response()->json(
             Kegiatan::where("nama_kegiatan", "LIKE", "%".$request->query("q")."%")
                 ->orWhere("id", "LIKE", "%".$request->query("q")."%")
-                ->get()
+				->paginate(10)
+                ->all()
         );
     }
 

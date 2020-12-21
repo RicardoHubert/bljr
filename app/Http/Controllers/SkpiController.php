@@ -75,8 +75,8 @@ class SkpiController extends Controller
         # code...
 
         $data_skpi = \App\Skpi::find($id);
-        $data_kalbiser = \App\kalbiser::all();
-        return view('skpi/edit', ['data_skpi' => $data_skpi, 'data_kalbiser' => $data_kalbiser]);
+		$kalbiser = $data_skpi->user->kalbiser;
+        return view('skpi/edit', ['data_skpi' => $data_skpi, 'kalbiser' => $kalbiser]);
     }
 
     public function update(Request $request, $id)

@@ -17,16 +17,12 @@
 						{{csrf_field()}}
 
 							
-				      		  <div class="form-group">
-							   <label for="exampleInputEmail1">Nama Mahasiswa</label>
-							    <select class="form-control select2" id="exampleFormControlSelect1" name="user_id" required>
-							      <option value="">"------Pilih-------"</option>
-									@foreach($data_kalbiser as $item)
-							      	<option value="{{$item->user_id}}" {{ $data_skpi->user_id == $item->user_id ? 'selected' : null }}><span>{{ $item->nim }} - {{$item->nama}}</span></option>
-
-							     	@endforeach
-							     </select>
-							 </div>
+							<div class="form-group">
+								<label for="exampleInputEmail1">Nama Mahasiswa</label>
+								<select class="form-control select2" id="exampleFormControlSelect1" name="user_id" required>
+									<option value="{{$kalbiser->user_id}}">{{$kalbiser->nama}} - {{$kalbiser->nim}}</option>
+								</select>
+							</div>
 			      		
 
 						 <x-form.wrapper title="Jenis Dokumen" required="true">
@@ -68,8 +64,6 @@
 				</div>
 <script>
 		$(document).ready(function() {
-    	$('.select2').select2();
-		});
 
 		$(".datepicker.date").datepicker({
 			dateFormat: "yy-mm-dd",
@@ -77,6 +71,40 @@
       		changeYear: true
 		});
 
+		        //UNTUK SELECT 2
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
 
+        $('.select2').select2({
+            ajax: {
+                url: `{{route("ajax.datas")}}`,
+                dataType: 'json',
+                data: function(params){
+                    return {
+                        type: "kalbiser",
+                        q: params.term
+                    }
+                },
+                processResults: function (data) {
+					return processResults.users(data);
+                }
+            },
+            minimumInputLength: 1
+        });
+
+        const processResults = {
+            users: (data) => {
+                return {
+                    results: data.map(u => {
+                        return {id: u.user_id, text: u.nama + " - " + u.nim};
+                    })
+                };
+            }
+        }
+		
+		});
 </script>
 @stop

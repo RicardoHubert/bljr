@@ -163,6 +163,7 @@ class KalbiserController extends Controller
         }, $skpis->toArray(), array_keys($skpis->toArray()));
         $template->cloneBlock("textblock", count($skpis), true, false, $datas);
         $fileName = (string)Str::uuid();
+        ob_clean();
         $template->saveAs(public_path($fileName.".docx"));
         return response()->download($fileName.".docx", "List SKPI.docx");
     }
