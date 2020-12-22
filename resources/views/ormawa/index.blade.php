@@ -35,7 +35,7 @@
 												@if($ormawa->user_id == auth()->user()->id || auth()->user()->role == 'admin')
 												<tr>
 
-													<td><img style="height: 50px;" src="logo/{{$ormawa->logo_ormawa}}"/><a href="/ormawa/{{$ormawa->id}}/profile"></a></td>
+													<td><img style="height: 50px;" src="{{url('/'.$ormawa->logo_ormawa)}}"/><a href="/ormawa/{{$ormawa->id}}/profile"></a></td>
 													<td><a href="/ormawa/{{$ormawa->id}}/profile">{{$ormawa->nama_ormawa}}</td></a>
 													<td>{{$ormawa->kategori_ormawa}}</td>
 													<td>{{$ormawa->visi}}</td>
