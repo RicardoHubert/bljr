@@ -57,20 +57,23 @@
 	</div>
 </div>
 <script type="text/javascript">
-    var attempt = false;
 	$(document).on("click", "#buttonViewModal", function(){
 		var skpiId = $(this).data('id');
 		var bodyElement = $('.modal-body-view-file');
         let [sertifPath, fileName] = skpiId.split("/");
         var APP_URL = {!! json_encode(url('/')) !!}
-		bodyElement.html('');
-		var domImage = `<div class="col-md-12"><img onerror="attempt = !attempt;this.src= (attempt ? '${APP_URL}/${sertifPath}/${fileName}' : '{{url('/fallback.png')}}')" src="${APP_URL}/${sertifPath}/thumb-${fileName}" style="width:100%" /></div>`
+        bodyElement.html('');
+
+        var isThumbExists = true;
+        let thumbImg = document.createElement("img");
+        thumbImg.onerror = () => (isThumbExists = false);
+        thumbImg.src = `${APP_URL}/${sertifPath}/thumb-${fileName}`;
+        let src = isThumbExists ? thumbImg.src : `${APP_URL}/${sertifPath}/${fileName}` ;
+
+		var domImage = `<div class="col-md-12"><img onerror="this.src='{{url('/fallback.png')}}'" src="${src}" style="width:100%" /></div>`
 
 		bodyElement.append(domImage);
-	})
-
-
-
+	});
 
 	// $(document).ready(function() {
     // // Setup - add a text input to each footer cell

@@ -16,14 +16,14 @@
 							<form action="{{action('SkpiController@update', $data_skpi->id)}}" method="POST" enctype="multipart/form-data">
 						{{csrf_field()}}
 
-							
+
 							<div class="form-group">
 								<label for="exampleInputEmail1">Nama Mahasiswa</label>
 								<select class="form-control select2" id="exampleFormControlSelect1" name="user_id" required>
 									<option value="{{$kalbiser->user_id}}">{{$kalbiser->nama}} - {{$kalbiser->nim}}</option>
 								</select>
 							</div>
-			      		
+
 
 						 <x-form.wrapper title="Jenis Dokumen" required="true">
 							    <select class="form-control" id="exampleFormControlSelect1" name="jenis_dokumen" required>
@@ -52,7 +52,7 @@
 				      			<x-form.input name="penyelenggara" required placeholder="Penyelenggara" value="{{$data_skpi->penyelenggara}}" />
 				      	</x-form.wrapper>
 
-					
+
 
 					 <input type="hidden" name="status" value="0">
 				      <div class="modal-footer">
@@ -68,7 +68,10 @@
 		$(".datepicker.date").datepicker({
 			dateFormat: "yy-mm-dd",
 			changeMonth: true,
-      		changeYear: true
+              changeYear: true,
+              onSelect: (dateText, inst) => {
+                  console.log(inst);
+              }
 		});
 
 		        //UNTUK SELECT 2
@@ -104,7 +107,7 @@
                 };
             }
         }
-		
+
 		});
 </script>
 @stop
