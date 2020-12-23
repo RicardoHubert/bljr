@@ -13,7 +13,7 @@
 									<div class="left">
 										<input type="checkbox" onclick="toggle(this);" />Select All
 
-										<form action="/approveskpiall" id="form">
+										<form action="{{action('SkpiController@approvestatusall')}}" id="form">
 												<button type="submit" class="button btn-xl" style="background-color: yellow;" value="Approve All">Approve All</button>
 										</form>
 									</div>
@@ -49,7 +49,7 @@
 														$kalbiser = \App\kalbiser::where('user_id', $skpi->user_id)->first();
 													@endphp
 													<td>{{ $kalbiser->nim }}</td>
-													<td><a href="/kalbiser/{{$kalbiser->id}}/profile">{{$kalbiser->nama}}</td></a>
+													<td><a href="{{action('KalbiserController@profile',$kalbiser->id)}}">{{$kalbiser->nama}}</td></a>
 
 													<td>{{ $kalbiser->prodi->nama_prodi }}</td>
 												
@@ -68,9 +68,9 @@
 													View File
 													</button>
 													@if($skpi->status != '1')
-													<a href="/approveskpi/{{$skpi->id}}" class="btn btn-sm btn-warning">approve</a>
+													<a href="{{action('SkpiController@approvestatus',$skpi->id)}}" class="btn btn-sm btn-warning">approve</a>
 												@else
-													<a href="/approveskpi2/{{$skpi->id}}" class="btn btn-sm btn-danger">disapprove</a>
+													<a href="{{action('SkpiController@approvestatus2',$skpi->id)}}" class="btn btn-sm btn-danger">disapprove</a>
 												@endif
 												</td>
 

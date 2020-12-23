@@ -13,7 +13,7 @@
 									<div class="left">
 										<input type="checkbox" onclick="toggle(this);" />Select All
 
-										<form action="/approveskpiall" id="form">
+										<form action="{{action('SkpiController@approvestatusall')}}"id="form">
 												<button type="submit" class="button btn-xl" style="background-color: yellow;" value="Approve All">Approve All</button>
 										</form>
 									</div>
@@ -70,9 +70,9 @@
 																View File
 															</button>
 															@if($skpi->status != '1')
-																<a href="/approveskpi/{{$skpi->id}}" class="btn btn-sm btn-warning">approve</a>
+																<a href="{{action('SkpiController@approvestatus',$skpi->id)}}" class="btn btn-sm btn-warning">approve</a>
 															@else
-																<a href="/approveskpi2/{{$skpi->id}}" class="btn btn-sm btn-danger">disapprove</a>
+																<a href="{{action('SkpiController@approvestatus2',$skpi->id)}}" class="btn btn-sm btn-danger">disapprove</a>
 															@endif
 															</td>
 													</tr>

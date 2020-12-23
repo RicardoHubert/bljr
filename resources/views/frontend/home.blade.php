@@ -15,7 +15,7 @@
           <div class="carousel-inner">
             <div class="carousel-item active">
               <div class="card-header card-header-image">
-                <img class="img" src="{{ url('/background_image/' . $backgrounds->first()->file) }}" alt="First slide" style="height: 720px;object-fit:cover;opacity: 0.8;" width="100%">
+                <img class="img" src="{{ asset('background_image/' . $backgrounds->first()->file) }}" alt="First slide" style="height: 720px;object-fit:cover;opacity: 0.8;" width="100%">
                 <div class="carousel-caption d-none d-md-block">
                </div>
              </div>
@@ -27,7 +27,7 @@
             <div class="carousel-item">
               <div class="card-header card-header-image">
                 <img class="img" src="{{asset('background_image/'. $image->file)}}" alt="{{ $loop->index + 1}} slide" style="height: 720px;object-fit:cover; opacity: 0.8;" width="100%">
-
+             
               <div class="carousel-caption d-none d-md-block">
                   <!-- <h3>Kalbis Institute </h3> -->
                 <p>...</p>
@@ -46,11 +46,11 @@
             <span class="sr-only">Next</span>
           </a>
         </div>
-
+            
           </div>
            <div class="card">
                 <div class="container">
-
+    
               <div class="row">
                 <div class="col-md-10 ml-auto mr-auto">
                   <h2 class="title">Kegiatan Ormawa</h2>
@@ -59,9 +59,9 @@
                     <div class="col-md-4">
                       <div class="card card-plain card-blog">
                         <div class="card-header card-header-image">
-                          <img class="img img-raised" src="{{ url('/'.$kegiatans[0]->poster) }}">
+                          <img class="img img-raised" src="{{ asset($kegiatans[0]->poster) }}">
                           <div class="colored-shadow">
-                            <img src="{{ url('/'.$kegiatans[0]->poster) }}" alt="" style="opacity: 1">
+                            <img src="{{ asset($kegiatans[0]->poster) }}" alt="" style="opacity: 1">
                           </div></div>
                           <div class="card-body">
                             <h6 class="card-category text-info">{{ $kegiatans[0]->nama_kegiatan }}</h6>
@@ -75,9 +75,9 @@
                       <div class="col-md-4">
                         <div class="card card-plain card-blog">
                           <div class="card-header card-header-image">
-                            <img class="img img-raised" src="{{ url('/'.$kegiatans[1]->poster) }}">
+                            <img class="img img-raised" src="{{ asset($kegiatans[1]->poster) }}">
                           <div class="colored-shadow">
-                            <img src="{{ url('/'.$kegiatans[1]->poster) }}" alt="" style="opacity: 1">
+                            <img src="{{ asset($kegiatans[1]->poster) }}" alt="" style="opacity: 1">
                           </div></div>
                             <div class="card-body ">
                               <h6 class="card-category text-success">
@@ -93,17 +93,17 @@
                         <div class="col-md-4">
                           <div class="card card-plain card-blog">
                             <div class="card-header card-header-image">
-                              <img class="img img-raised" src="{{ url('/'.$kegiatans[2]->poster) }}">
+                              <img class="img img-raised" src="{{ asset($kegiatans[2]->poster) }}">
                               <div class="colored-shadow">
-                                <img src="{{ url('/'.$kegiatans[2]->poster) }}" alt="" style="opacity: 1">
+                                <img src="{{ asset($kegiatans[2]->poster) }}" alt="" style="opacity: 1">
                               </div></div>
                               <div class="card-body ">
                                 <h6 class="card-category text-danger">
                                 {{ $kegiatans[2]->nama_kegiatan }}
                                 </h6>
                                 <p class="card-description">
-                                {{ $kegiatans[2]->deskripsi_kegiatan }}
-
+                                {{ $kegiatans[2]->deskripsi_kegiatan }} 
+                               
                                 </p>
                               </div>
                             </div>
@@ -111,9 +111,9 @@
                         </div>
                       </div>
                     </div>
+         
 
-
-
+  
               <div class="row">
                 <div class="col-md-10 ml-auto mr-auto">
                   <h2 class="title">Prestasi</h2>
@@ -181,8 +181,8 @@
 
                   </div>
           </div>
+        
 
-
-
+    
 
 @endsection
