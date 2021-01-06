@@ -64,11 +64,11 @@
         var APP_URL = {!! json_encode(url('/')) !!}
         bodyElement.html('');
 
-        var isThumbExists = true;
-        let thumbImg = document.createElement("img");
-        thumbImg.onerror = () => (isThumbExists = false);
-        thumbImg.src = `${APP_URL}/${sertifPath}/thumb-${fileName}`;
-        let src = isThumbExists ? thumbImg.src : `${APP_URL}/${sertifPath}/${fileName}` ;
+        // var isThumbExists = true;
+        // let thumbImg = document.createElement("img");
+        // thumbImg.onerror = () => (isThumbExists = false);
+        // thumbImg.src = `${APP_URL}/${sertifPath}/thumb-${fileName}`;
+        let src = `${APP_URL}/${sertifPath}/${fileName}` ;
 
 		var domImage = `<div class="col-md-12"><img onerror="this.src='{{url('/fallback.png')}}'" src="${src}" style="width:100%" /></div>`
 
