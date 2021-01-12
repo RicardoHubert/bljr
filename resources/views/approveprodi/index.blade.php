@@ -28,20 +28,20 @@
 												<tr>
 													<th></th>
 													<th>NIM</th>
-													<th>Nama Mahasiswa</th>	
-													<th>Program Studi</th>					
+													<th>Nama Mahasiswa</th>
+													<th>Program Studi</th>
 													<th>Jenis Dokumen</th>
 													<th>Tanggal Dokumen</th>
 													<th>Judul Sertifikat</th>
 													<th>Status</th>
-													<th>Aksi</th>		
+													<th>Aksi</th>
 											</tr>
 										</thead>
 										<tbody>
 
 
 												@foreach($data as $skpi)
-												<tr>										
+												<tr>
 													<td>
 														<input form="form" type="checkbox" name="approveId[]" value="{{ $skpi->id }}">
 													</td>
@@ -52,7 +52,7 @@
 													<td><a href="{{action('KalbiserController@profile',$kalbiser->id)}}">{{$kalbiser->nama}}</td></a>
 
 													<td>{{ $kalbiser->prodi->nama_prodi }}</td>
-												
+
 
 
 													<td>{{$skpi->jenis_dokumen}}</td>
@@ -67,14 +67,14 @@
 													<button id="buttonViewModal" type="button" class="btn btn-primary" data-toggle="modal" data-id="{{ asset($skpi->file_skpi) }}" data-target="#viewModal">
 													View File
 													</button>
-													@if($skpi->status != '1')
-													<a href="{{action('SkpiController@approvestatus',$skpi->id)}}" class="btn btn-sm btn-warning">approve</a>
-												@else
-													<a href="{{action('SkpiController@approvestatus2',$skpi->id)}}" class="btn btn-sm btn-danger">disapprove</a>
-												@endif
+													@if(is_null($skpi->status) || $skpi->status == '0')
+                                                        <button data-id="{{$skpi->id}}" data-status="{{(is_null($skpi->status) ? 0 : $skpi->status)}}" class="btn btn-sm btn-success btn-approval"><span>Approve</span> &nbsp;<img width="24" class="spiner hidden" src="{{asset("spiner.svg")}}" /></button>
+                                                    @else
+                                                        <button data-id="{{$skpi->id}}" data-status="{{(is_null($skpi->status) ? 0 : $skpi->status)}}" class="btn btn-sm btn-warning btn-approval"><span>Disapprove</span> &nbsp;<img width="24" class="spiner hidden" src="{{asset("spiner.svg")}}" /></button>
+                                                    @endif
 												</td>
 
-												
+
 
 												</tr>
 												@endforeach
@@ -89,7 +89,7 @@
 													<th></th>
 													<th></th>
 													<th></th>
-												
+
 										</tfoot>
 									</table>
 								</div>
@@ -100,14 +100,14 @@
 					</div>
 				</div>
 			</div>
-	
+
 	<script type="text/javascript">
 		$(document).ready(function() {
 	    // Setup - add a text input to each footer cell
     	$('.data tfoot th').each( function () {
         var title = $(this).text();
         $(this).html( '<input type="text" placeholder="Search '+title+'" />' );
-    
+
 		});
 
 		  var table = $('.data').DataTable( {

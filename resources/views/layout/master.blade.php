@@ -4,7 +4,8 @@
 <head>
 	<title>Dashboard | Center Of Students Development
 </title>
-	<meta charset="utf-8">
+    <meta charset="utf-8">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
 	<!-- VENDOR CSS -->
@@ -102,6 +103,10 @@
     {{-- Datatables --}}
     <script src="{{ mix('js/app.js') }}"></script>
     <script src="{{asset('js/datatables.min.js')}}"></script>
+    <script type="text/javascript">
+        var BASE_URL = {!! json_encode(url('/')) !!}
+    </script>
+    <script src="{{asset('js/main.js')}}"></script>
 
     @stack('scripts')
 </body>

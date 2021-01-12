@@ -121,6 +121,7 @@ Route::group(['middleware' => 'auth'], function () {
 
 Route::group(["middleware" => "auth"], function () {
     Route::get("/ajax/datas", "AjaxRequestController@getDatas")->name("ajax.datas");
+    Route::put("/ajax/skpi/approval", "SkpiController@approve_skpi")->name("ajax.skpi.approval");
 });
 
 Route::get('/ormawa/{id}', 'hmjController@index');

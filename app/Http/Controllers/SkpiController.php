@@ -36,8 +36,9 @@ class SkpiController extends Controller
         return $dataTable->addScope(new SkpiScope(Auth::user()->role, Auth::id()))->render("skpi.datatable");
     }
 
-    public function exportSkpi(){
-        return Excel::download(new SkpiExport, "Data SKPI-".Carbon::now()->isoFormat("Y_M_D").".xlsx", \Maatwebsite\Excel\Excel::XLSX);
+    public function exportSkpi()
+    {
+        return Excel::download(new SkpiExport, "Data SKPI-" . Carbon::now()->isoFormat("Y_M_D") . ".xlsx", \Maatwebsite\Excel\Excel::XLSX);
     }
 
     public function create(Request $request)
@@ -75,7 +76,7 @@ class SkpiController extends Controller
         # code...
 
         $data_skpi = \App\Skpi::find($id);
-		$kalbiser = $data_skpi->user->kalbiser;
+        $kalbiser = $data_skpi->user->kalbiser;
         return view('skpi/edit', ['data_skpi' => $data_skpi, 'kalbiser' => $kalbiser]);
     }
 
@@ -153,6 +154,22 @@ class SkpiController extends Controller
         return redirect()->back();
     }
 
+    public function approve_skpi(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            "status" => "required|numeric|min:0|max:1",
+            "id" => "required|numeric"
+        ]);
+        if ($validator->fails()) {
+            return response()->json(["msg" => $validator->errors()], 400);
+        }
+        $skpi = \App\Skpi::Find($request->id);
+        $skpi->status = $request->status;
+        $skpi->approvedby = ($request->status == 1) ? auth()->user()->id : null;
+        $skpi->save();
+
+        return response()->json(["msg" => "success", "status" => $request->status]);
+    }
 
     public function approvestatus2($id)
     {
