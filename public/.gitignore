@@ -5,3 +5,5 @@ admin/
 !index.php
 !js
 !css
+!js/main.js
+!spiner.svg
