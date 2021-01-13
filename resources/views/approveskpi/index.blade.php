@@ -93,8 +93,8 @@
 													<th></th>
                                                     <th></th>
                                                 </tr>
-                                                <tr class="row">
-                                                    <td colspan="8">{{$data_skpi->links()}}</td>
+                                                <tr>
+                                                    <td align="center" colspan="8">{{$data_skpi->links()}}</td>
                                                 </tr>
 										</tfoot>
 									</table>
