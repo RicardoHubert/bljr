@@ -83,7 +83,7 @@
 												@endforeach
 										</tbody>
 										<tfoot>
-
+                                                <tr>
 													<td></td>
 													<th></th>
 													<th></th>
@@ -91,8 +91,11 @@
 													<th></th>
 													<th></th>
 													<th></th>
-													<th></th>
-
+                                                    <th></th>
+                                                </tr>
+                                                <tr class="row">
+                                                    <td colspan="8">{{$data_skpi->links()}}</td>
+                                                </tr>
 										</tfoot>
 									</table>
 								</div>
@@ -113,10 +116,11 @@
 
 		});
 
-		  var table = $('.data').DataTable( {
-         "lengthMenu": [[7, 25, 30, -1], [7, 25, 30, "All"]]
-
-    	} );
+		var table = $('.data').DataTable( {
+            "dom": "Bfrt",
+            "pageLength": 10,
+            "lengthMenu": [[7, 25, 30, -1], [7, 25, 30, "All"]]
+    	});
 
 		 $(".data tfoot input").on( 'keyup change', function () {
         table
