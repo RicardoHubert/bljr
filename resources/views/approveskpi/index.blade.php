@@ -50,7 +50,7 @@
 
 															<td>{{$kalbiser->nim}}</td>
 															<td>{{$kalbiser->nama}}</td>
-															<td>{{$kalbiser->prodi}}</td>
+															<td>{{$kalbiser->prodi->nama_prodi}}</td>
 
 
 
