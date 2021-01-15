@@ -1,6 +1,6 @@
 $(document).ready(() => {
     $(".btn-approval").on("click", e => {
-        let id = $(e.target).data("id");
+        let id = e.target.id || $(e.target).parent().find("button").attr("id");
         let status = parseInt($(e.target).data("status"));
         let spiner = $(e.target)
             .parent()

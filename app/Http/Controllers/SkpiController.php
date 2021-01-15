@@ -133,7 +133,7 @@ class SkpiController extends Controller
     public function approveindex(Request $request)
     {
         # code...
-        $data_skpi = \App\Skpi::paginate(10);
+        $data_skpi = \App\Skpi::paginate(500);
         $data_kalbiser = \App\kalbiser::all();
         $data_kompetisi = \App\kompetisiinternal::all();
         $data_ormawa = \App\Ormawa::all();

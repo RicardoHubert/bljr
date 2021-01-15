@@ -68,9 +68,9 @@
 													View File
 													</button>
 													@if(is_null($skpi->status) || $skpi->status == '0')
-                                                        <button data-id="{{$skpi->id}}" data-status="{{(is_null($skpi->status) ? 0 : $skpi->status)}}" class="btn btn-sm btn-success btn-approval"><span>Approve</span> &nbsp;<img width="24" class="spiner hidden" src="{{asset("spiner.svg")}}" /></button>
+                                                        <button id="{{$skpi->id}}" data-status="{{(is_null($skpi->status) ? 0 : $skpi->status)}}" class="btn btn-sm btn-success btn-approval"><span>Approve</span> &nbsp;<img width="24" class="spiner hidden" src="{{asset("spiner.svg")}}" /></button>
                                                     @else
-                                                        <button data-id="{{$skpi->id}}" data-status="{{(is_null($skpi->status) ? 0 : $skpi->status)}}" class="btn btn-sm btn-warning btn-approval"><span>Disapprove</span> &nbsp;<img width="24" class="spiner hidden" src="{{asset("spiner.svg")}}" /></button>
+                                                        <button id="{{$skpi->id}}" data-status="{{(is_null($skpi->status) ? 0 : $skpi->status)}}" class="btn btn-sm btn-warning btn-approval"><span>Disapprove</span> &nbsp;<img width="24" class="spiner hidden" src="{{asset("spiner.svg")}}" /></button>
                                                     @endif
 												</td>
 
