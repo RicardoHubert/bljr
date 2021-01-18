@@ -6,6 +6,7 @@ $(document).ready(() => {
             .parent()
             .find(".spiner");
         $(spiner).removeClass("hidden");
+		$(e.target).attr("disabled", "true");
 
         $.ajax({
             url: `${BASE_URL}/ajax/skpi/approval`,
@@ -31,10 +32,12 @@ $(document).ready(() => {
                 }
                 $(e.target).data("status", data.status);
                 $(spiner).addClass("hidden");
+				$(e.target).removeAttr("disabled");
             },
 			error: (jXhr, txtStatus, err) => {
 				alert("Approval Failed", txtStatus);
                 $(spiner).addClass("hidden");
+				$(e.target).removeAttr("disabled");
 			}
         });
     });
