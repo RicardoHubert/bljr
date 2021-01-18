@@ -31,7 +31,11 @@ $(document).ready(() => {
                 }
                 $(e.target).data("status", data.status);
                 $(spiner).addClass("hidden");
-            }
+            },
+			error: (jXhr, txtStatus, err) => {
+				alert("Approval Failed", txtStatus);
+                $(spiner).addClass("hidden");
+			}
         });
     });
 });
